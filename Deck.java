@@ -1,9 +1,9 @@
-import java.util.List;
+import java.util.*;
 
 public class Deck {
 	
-	private List<GameCard> listOfActiveCards;
-	private List<GameCard> listOfDiscardedCards;
+	private Stack<GameCard> listOfActiveCards;
+	private Stack<GameCard> listOfDiscardedCards;
 	private List<GameCard> listOfDisabledCards;
 	
 	public Deck() {
