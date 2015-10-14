@@ -17,7 +17,7 @@ public class GameView /*implements MouseListener, Runnable */ {
     private JFrame gameFrame;
     private String frameTitle;
     private String imageFileName;
-    private GameBoardLabel imageLabel;
+    private GameBoardLabel gameBoardLabel;
     private JPanel masterPanel;
     private ArrayList<Room> listOfRooms;
 
@@ -49,22 +49,34 @@ public class GameView /*implements MouseListener, Runnable */ {
         Dimension windowSize = gameFrame.getSize();
         int windowHeight = windowSize.height; // Save height of the window
         int windowWidth = windowSize.width;
-	     // The map takes 2/3 of the window height*
-        // widthMultiplier makes it look cleaner* 
-        // *needs to be tested
+	// The map takes 2/3 of the window height
         double heightMultiplier = (double) 2 / 3;
         double widthMultiplier = (double) 100 / 100;
 
-        ImageIcon image = new ImageIcon(imageFileName);
-        imageLabel = new ScrollablePicture(image, 3);    
+        ImageIcon gameBoardImage = new ImageIcon(imageFileName);
+        gameBoardLabel = new ScrollablePicture(gameBoardImage, 3);
+        JPanel gameBoardPanel = new JPanel();
         masterPanel = new JPanel();
-        BoxLayout layout = new BoxLayout(masterPanel, BoxLayout.Y_AXIS);
-        masterPanel.setLayout(layout);
-        JPanel controlPanel = new JPanel(new CardLayout());
-        JPanel moveButton = new JPanel();
+        BoxLayout masterLayout = new BoxLayout(masterPanel, BoxLayout.Y_AXIS);
+        masterPanel.setLayout(masterLayout);
+        JPanel controlPanel = new JPanel();
+
+        JPanel moveButtonPanel = new JPanel();
+        JButton moveButton = new JButton("Move");
+        moveButton.setHorizontalTextPosition(SwingConstants.LEFT);
+        moveButtonPanel.add(moveButton);
+
+        JPanel playCardPanel = new JPanel();
+        JButton playCardButton = new JButton("Play Card");
+        playCardButton.setHorizontalAlignment(SwingConstants.CENTER);
+        playCardPanel.add(playCardButton);
+
+        gameBoardPanel.add(gameBoardLabel);
+        controlPanel.add(moveButtonPanel);
+        controlPanel.add(playCardPanel);
 
         // Adds scroll bars
-        JScrollPane gameBoardScroller = new JScrollPane(imageLabel);
+        JScrollPane gameBoardScroller = new JScrollPane(gameBoardPanel);
         // Set the 2/3 size for the game map
         Dimension gameBoardSize = new Dimension((int) (windowWidth * widthMultiplier),
                 (int) (windowHeight * heightMultiplier));
@@ -79,11 +91,6 @@ public class GameView /*implements MouseListener, Runnable */ {
         masterPanel.add(controlPanel);
 
         gameFrame.add(masterPanel);
-
-        JButton move = new JButton("Move");
-        move.setHorizontalTextPosition(SwingConstants.LEFT);
-        controlPanel.add(moveButton);
-        moveButton.add(move);
 
         gameFrame.setVisible(true);
 
