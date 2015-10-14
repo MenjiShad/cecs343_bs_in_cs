@@ -18,7 +18,7 @@ public class GameView  /*implements MouseListener, Runnable */{
 	   private JFrame gameFrame;
 	   private String frameTitle;
 	   private String imageFileName;
-	   private ArrayList<Room> listOfRooms;
+	   private List<Room> listOfRooms = new ArrayList<Room>();
 	   
 	   //For finding the x, y of the rooms
 //	   JTextArea textArea;
@@ -126,31 +126,42 @@ public class GameView  /*implements MouseListener, Runnable */{
 	   List<Integer> listOfAdjecentRooms18 = Arrays.asList(15);
 	   List<Integer> listOfAdjecentRooms19 = Arrays.asList(15);
 	   List<Integer> listOfAdjecentRooms20 = Arrays.asList(15);
-
 	   
 	   listOfRooms.add(new Room("Geroge Allen Field", 0, 271, 56, listOfAdjecentRooms0));
-	   listOfRooms.add(new Room("Japanese Garden", 1, 698, 45, listOfAdjecentRooms1));
-	   listOfRooms.add(new Room("Student Parking", 2, 1284, 94, listOfAdjecentRooms2));
-	   listOfRooms.add(new Room("The Pyramid", 3, 669, 292, listOfAdjecentRooms3));
-	   listOfRooms.add(new Room("West Walkway", 4, 246, 666, listOfAdjecentRooms4));
-	   listOfRooms.add(new Room("Health/Rec Center", 5, 708, 576, listOfAdjecentRooms5));
-	   listOfRooms.add(new Room("Forbidden Parking", 6, 1287, 586, listOfAdjecentRooms6));
-	   listOfRooms.add(new Room("Library", 7, 283, 1729, listOfAdjecentRooms7));
-	   listOfRooms.add(new Room("LA 5", 8, 712, 1638, listOfAdjecentRooms8));
-	   listOfRooms.add(new Room("Bratwurst Hall", 9, 1252, 1646, listOfAdjecentRooms9));
-	   listOfRooms.add(new Room("East Walkway", 10, 1692, 975, listOfAdjecentRooms10));
-	   listOfRooms.add(new Room("Computer Lab", 11, 422, 897, listOfAdjecentRooms11));
-	   listOfRooms.add(new Room("North Hall", 12, 427, 1164, listOfAdjecentRooms12));
-	   listOfRooms.add(new Room("Room of Retirement", 13, 437, 1367, listOfAdjecentRooms13));
-	   listOfRooms.add(new Room("ECS 302", 14, 853, 869, listOfAdjecentRooms14));
-	   listOfRooms.add(new Room("South Hall", 15, 1068, 1172, listOfAdjecentRooms15));
-	   listOfRooms.add(new Room("Elevators", 16, 829, 1385, listOfAdjecentRooms16));
-	   listOfRooms.add(new Room("ECS 308", 17, 1127, 1399, listOfAdjecentRooms17));
-	   listOfRooms.add(new Room("EAT Club", 18, 1263, 888, listOfAdjecentRooms18));
-	   listOfRooms.add(new Room("CECS Conference Room", 19, 1481, 891, listOfAdjecentRooms19));
-	   listOfRooms.add(new Room("Lactation Lounge", 20, 1447, 1410, listOfAdjecentRooms20));
+//	   listOfRooms.add(new Room("Japanese Garden", 1, 698, 45, listOfAdjecentRooms1));
+//	   listOfRooms.add(new Room("Student Parking", 2, 1284, 94, listOfAdjecentRooms2));
+//	   listOfRooms.add(new Room("The Pyramid", 3, 669, 292, listOfAdjecentRooms3));
+//	   listOfRooms.add(new Room("West Walkway", 4, 246, 666, listOfAdjecentRooms4));
+//	   listOfRooms.add(new Room("Health/Rec Center", 5, 708, 576, listOfAdjecentRooms5));
+//	   listOfRooms.add(new Room("Forbidden Parking", 6, 1287, 586, listOfAdjecentRooms6));
+//	   listOfRooms.add(new Room("Library", 7, 283, 1729, listOfAdjecentRooms7));
+//	   listOfRooms.add(new Room("LA 5", 8, 712, 1638, listOfAdjecentRooms8));
+//	   listOfRooms.add(new Room("Bratwurst Hall", 9, 1252, 1646, listOfAdjecentRooms9));
+//	   listOfRooms.add(new Room("East Walkway", 10, 1692, 975, listOfAdjecentRooms10));
+//	   listOfRooms.add(new Room("Computer Lab", 11, 422, 897, listOfAdjecentRooms11));
+//	   listOfRooms.add(new Room("North Hall", 12, 427, 1164, listOfAdjecentRooms12));
+//	   listOfRooms.add(new Room("Room of Retirement", 13, 437, 1367, listOfAdjecentRooms13));
+//	   listOfRooms.add(new Room("ECS 302", 14, 853, 869, listOfAdjecentRooms14));
+//	   listOfRooms.add(new Room("South Hall", 15, 1068, 1172, listOfAdjecentRooms15));
+//	   listOfRooms.add(new Room("Elevators", 16, 829, 1385, listOfAdjecentRooms16));
+//	   listOfRooms.add(new Room("ECS 308", 17, 1127, 1399, listOfAdjecentRooms17));
+//	   listOfRooms.add(new Room("EAT Club", 18, 1263, 888, listOfAdjecentRooms18));
+//	   listOfRooms.add(new Room("CECS Conference Room", 19, 1481, 891, listOfAdjecentRooms19));
+//	   listOfRooms.add(new Room("Lactation Lounge", 20, 1447, 1410, listOfAdjecentRooms20));
+	   
+	   //String name = listOfRooms.get(15).getNameFromNumber();
 	   
 
+   }
+   
+   public void DisplayAdjecentRooms() {
+	   Room currentRoom = listOfRooms.get(0);
+	   
+	   //Get the room number on the 1st adjecent room
+	   System.out.println(listOfRooms.get(0).getListOfAdjecentRooms().get(0));
+	   
+	   //Create the JList here
+	   
    }
    
 //   void eventOutput(String eventDescription, MouseEvent e) {
