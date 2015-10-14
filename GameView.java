@@ -149,7 +149,7 @@ public class GameView /*implements MouseListener, Runnable */ {
     }
 
     public void updateGameBoard() {
-        imageLabel.repaint();
+        gameBoardLabel.repaint();
         masterPanel.repaint();
     }
 //   void eventOutput(String eventDescription, MouseEvent e) {
