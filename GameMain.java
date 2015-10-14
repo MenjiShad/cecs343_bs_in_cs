@@ -22,6 +22,7 @@ public class GameMain {
       
       GameView view = new GameView(gameName, imageFileName);
       
-      view.drawGameBoard();   // Used to set up the frame
+      view.createGameBoard();   // Used to set up the frame
+      view.updateGameBoard();
    }
 }

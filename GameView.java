@@ -17,6 +17,8 @@ public class GameView /*implements MouseListener, Runnable */ {
     private JFrame gameFrame;
     private String frameTitle;
     private String imageFileName;
+    private GameBoardLabel imageLabel;
+    private JPanel masterPanel;
     private ArrayList<Room> listOfRooms;
 
 	   //For finding the x, y of the rooms
@@ -51,21 +53,18 @@ public class GameView /*implements MouseListener, Runnable */ {
         // widthMultiplier makes it look cleaner* 
         // *needs to be tested
         double heightMultiplier = (double) 2 / 3;
-        double widthMultiplier = (double) 99 / 100;
+        double widthMultiplier = (double) 100 / 100;
 
         ImageIcon image = new ImageIcon(imageFileName);
-        JLabel imageLabel = new JLabel(image);
-        JPanel gameBoardPanel = new JPanel();
-        JPanel masterPanel = new JPanel(new GridLayout(2, 0));
+        imageLabel = new ScrollablePicture(image, 3);    
+        masterPanel = new JPanel();
         BoxLayout layout = new BoxLayout(masterPanel, BoxLayout.Y_AXIS);
         masterPanel.setLayout(layout);
         JPanel controlPanel = new JPanel(new CardLayout());
         JPanel moveButton = new JPanel();
 
-        gameBoardPanel.add(imageLabel);
         // Adds scroll bars
-        JScrollPane gameBoardScroller = new JScrollPane(gameBoardPanel);
-
+        JScrollPane gameBoardScroller = new JScrollPane(imageLabel);
         // Set the 2/3 size for the game map
         Dimension gameBoardSize = new Dimension((int) (windowWidth * widthMultiplier),
                 (int) (windowHeight * heightMultiplier));
@@ -142,6 +141,10 @@ public class GameView /*implements MouseListener, Runnable */ {
 
     }
 
+    public void updateGameBoard() {
+        imageLabel.repaint();
+        masterPanel.repaint();
+    }
 //   void eventOutput(String eventDescription, MouseEvent e) {
 //        System.out.println(eventDescription + " detected on "
 //                + e.getComponent().getClass().getName()
