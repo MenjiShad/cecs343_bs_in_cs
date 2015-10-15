@@ -1,3 +1,4 @@
+package cecs343_bs_in_cs;
 import java.util.*;
 
 public class Deck {
