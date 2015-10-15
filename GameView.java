@@ -21,14 +21,14 @@ public class GameView /*implements MouseListener, Runnable */ {
     private JPanel masterPanel;
     private ArrayList<Room> listOfRooms;
 
-	   //For finding the x, y of the rooms
+    //For finding the x, y of the rooms
 //	   JTextArea textArea;
     // default constructor
     public GameView() {
 
     }
 
-	   // constructor that takes in the title of the frame and the 
+    // constructor that takes in the title of the frame and the 
     // file name of the board image
     public GameView(String title, String imageFileName) {
         frameTitle = title;
@@ -49,10 +49,11 @@ public class GameView /*implements MouseListener, Runnable */ {
         Dimension windowSize = gameFrame.getSize();
         int windowHeight = windowSize.height; // Save height of the window
         int windowWidth = windowSize.width;
-	// The map takes 2/3 of the window height
+        // The map takes 2/3 of the window height
         double heightMultiplier = (double) 2 / 3;
         double widthMultiplier = (double) 100 / 100;
 
+        // Set up the game board, the control panel, and the master panel
         ImageIcon gameBoardImage = new ImageIcon(imageFileName);
         gameBoardLabel = new ScrollablePicture(gameBoardImage, 3);
         JPanel gameBoardPanel = new JPanel();
@@ -61,11 +62,13 @@ public class GameView /*implements MouseListener, Runnable */ {
         masterPanel.setLayout(masterLayout);
         JPanel controlPanel = new JPanel();
 
+        // Set up move button
         JPanel moveButtonPanel = new JPanel();
         JButton moveButton = new JButton("Move");
         moveButton.setHorizontalTextPosition(SwingConstants.LEFT);
         moveButtonPanel.add(moveButton);
 
+        // Set up Play Card button
         JPanel playCardPanel = new JPanel();
         JButton playCardButton = new JButton("Play Card");
         playCardButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,7 +97,7 @@ public class GameView /*implements MouseListener, Runnable */ {
 
         gameFrame.setVisible(true);
 
-	     //For Showing the x, y location of the mouse click
+        //For Showing the x, y location of the mouse click
 //	     textArea = new JTextArea();
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
@@ -148,10 +151,10 @@ public class GameView /*implements MouseListener, Runnable */ {
 
     }
 
-    public void updateGameBoard() {
-        gameBoardLabel.repaint();
-        masterPanel.repaint();
-    }
+//    public void updateGameBoard() {
+//        gameBoardLabel.repaint();
+//        masterPanel.repaint();
+//    }
 //   void eventOutput(String eventDescription, MouseEvent e) {
 //        System.out.println(eventDescription + " detected on "
 //                + e.getComponent().getClass().getName()
