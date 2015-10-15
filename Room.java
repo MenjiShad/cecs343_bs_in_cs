@@ -1,4 +1,3 @@
-package cecs343_bs_in_cs;
 import java.util.*;
 
 public class Room {
@@ -6,7 +5,7 @@ public class Room {
 	private String roomName;
 	private int roomNumber;
 	int xPosition, yPosition;
-	private List<Integer> listOfAdjacentRooms;
+	private List<Integer> listOfAdjecentRooms;
 	
 	public Room() {
 		roomName = "";
@@ -14,22 +13,34 @@ public class Room {
 	}
 	
 	public Room(String name, int number, int x, int y, 
-					List<Integer> adjacentRooms) {
+					List<Integer> adjecentRooms) {
 		roomName = name;
 		roomNumber = number;
 		xPosition = x;
 		yPosition = y;
 		
-		listOfAdjacentRooms = adjacentRooms;
+		setListOfAdjecentRooms(adjecentRooms);
 
 	}
 	
-	public void DisplayAdjacentRoom() {
-		
+	public int GetRoomNumber() {
+		return  roomNumber;
 	}
 	
-	public void setAdjacentRooms() {
+	public String getRoomName() {
+		return roomName;
+	}
+	
+	public void DisplayAdjectentRoom() {
 		
+	}
+
+	public List<Integer> getListOfAdjecentRooms() {
+		return listOfAdjecentRooms;
+	}
+
+	public void setListOfAdjecentRooms(List<Integer> listOfAdjecentRooms) {
+		this.listOfAdjecentRooms = listOfAdjecentRooms;
 	}
 
 }

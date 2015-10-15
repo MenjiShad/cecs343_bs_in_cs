@@ -1,10 +1,14 @@
-package cecs343_bs_in_cs;
+import java.util.Arrays;
+import java.util.List;
+
+//package cecs343_bs_in_cs;
 
 public class Player {
 
 	private String name;
 	private String description;
 	private String rank;
+	private Room currentRoom;
 	private int qualityPoint;
 	private int learningChip;
 	private int integrityChip;
@@ -14,7 +18,8 @@ public class Player {
 	
 	// default constructor
 	public Player() {
-		
+		List<Integer> listOfAdjecentRooms17 = Arrays.asList(15);
+		currentRoom = new Room("ECS 308", 17, 1127, 1399, listOfAdjecentRooms17);
 	}
 	
 	public String getStudentName() {
