@@ -9,6 +9,9 @@ public class GameBoardLabel extends JLabel {
     
     // instance variables
     private ImageIcon image;
+    private String name;
+    private int xLocation;
+    private int yLocation;
     
     // default constructor
     public GameBoardLabel() {
@@ -21,13 +24,12 @@ public class GameBoardLabel extends JLabel {
     }
     
     @Override
-    public void paintComponents(Graphics g) {
+    public void paintComponent(Graphics g) {
        Graphics2D g2 = (Graphics2D) g;
     	super.paintComponent(g2);
-        g2.setColor(Color.BLUE);
-        g2.setFont(new Font("Arial", Font.PLAIN, 20));
-        //g.drawString("Matt", 100, 700);
-        g2.drawString("Matt", 1127, 1399);
+        g2.setColor(Color.RED);
+        g2.setFont(new Font("Arial", Font.PLAIN, 40));
+        g2.drawString(name, xLocation, yLocation);
         
         
         
