@@ -21,23 +21,23 @@ import java.util.List;
 //	   private List<Room> listOfRooms = new ArrayList<Room>();
 	   
 
-public class GameView /*implements MouseListener, Runnable */ {
+public class GameView implements /*MouseListener, Runnable */ ActionListener{
 
     // instance variables
     private JFrame gameFrame;
     private String frameTitle;
     private String imageFileName;
-    private GameBoardLabel gameBoardLabel;
+    private GameBoardLabel gameBoardLabel = new GameBoardLabel();
     private JPanel masterPanel;
     private JPanel gameBoardPanel = new JPanel();
     private JPanel controlPanel= new JPanel();
     private JPanel listAndButtonPanel= new JPanel();
     private JPanel gameCardPanel= new JPanel();
-    private JPanel textAreaPanel= new JPanel();
+    private JPanel textAreaPanel= new JPanel();   		
     private List<Room> listOfRooms = new ArrayList<Room>();
-    private Player HumanPlayer = new Player();
-    private Player AIPlayerOne = new Player();
-    private Player AIPlayerTwo = new Player();
+    private Player HumanPlayer = new Player("Matt");
+    private Player AIPlayerOne = new Player("Tony");
+    private Player AIPlayerTwo = new Player("Susan");
 
 
 	   //For finding the x, y of the rooms
@@ -98,6 +98,15 @@ public class GameView /*implements MouseListener, Runnable */ {
         JPanel moveButtonPanel = new JPanel();
         JButton moveButton = new JButton("Move");
         moveButton.setHorizontalTextPosition(SwingConstants.LEFT);
+        
+        // Add action listener to move button
+        final class MoveActionListener implements ActionListener {
+        	public void actionPerformed(ActionEvent e) {
+        		gameBoardLabel.setGameBoardLabel("Matt", 1068, 1172);
+        		gameBoardLabel.paintComponent(gameBoardLabel.getGraphics());
+        	}
+        }
+        moveButton.addActionListener(new MoveActionListener());
         moveButtonPanel.add(moveButton);
 
         JPanel playCardPanel = new JPanel();
@@ -138,7 +147,7 @@ public class GameView /*implements MouseListener, Runnable */ {
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
         
-        updateGameBoard();
+       updateGameBoard();
         gameFrame.setVisible(true);
 
    }
@@ -233,7 +242,8 @@ public class GameView /*implements MouseListener, Runnable */ {
    
 
     public void updateGameBoard() {
-        gameBoardLabel.paintComponents(gameBoardLabel.getGraphics());
+   
+    	gameBoardLabel.paintComponent(gameBoardLabel.getGraphics());
         //masterPanel.repaint();
     }
 //   void eventOutput(String eventDescription, MouseEvent e) {
@@ -288,4 +298,10 @@ public class GameView /*implements MouseListener, Runnable */ {
 //			}
 //		}
 //	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
