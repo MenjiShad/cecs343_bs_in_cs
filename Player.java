@@ -1,7 +1,8 @@
+package cecs343_bs_in_cs;
+
 import java.util.Arrays;
 import java.util.List;
 
-//package cecs343_bs_in_cs;
 
 public class Player {
 
@@ -18,10 +19,13 @@ public class Player {
 	
 	// default constructor
 	public Player() {
-		List<Integer> listOfAdjecentRooms17 = Arrays.asList(15);
-		currentRoom = new Room("ECS 308", 17, 1127, 1399, listOfAdjecentRooms17);
+		List<Integer> listOfAdjacentRooms17 = Arrays.asList(15);
+		currentRoom = new Room("ECS 308", 17, 1127, 1399, listOfAdjacentRooms17);
 	}
 	
+        public Player(String name) {
+            this.name = name;
+        }
 	public String getStudentName() {
 		return name;
 	}
