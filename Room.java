@@ -25,7 +25,7 @@ public class Room {
 
     }
 
-    public int GetRoomNumber() {
+    public int getRoomNumber() {
         return roomNumber;
     }
 
@@ -33,6 +33,14 @@ public class Room {
         return roomName;
     }
 
+    public int getRoomX() {
+        return xPosition;
+    }
+    
+    public int getRoomY() {
+        return yPosition;
+    }
+            
     public void DisplayAdjacentRoom() {
 
     }

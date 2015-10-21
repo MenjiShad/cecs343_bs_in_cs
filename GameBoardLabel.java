@@ -1,4 +1,4 @@
-//package cecs343_bs_in_cs;
+package cecs343_bs_in_cs;
 import javax.swing.*;
 import java.awt.*;
 /**
@@ -9,9 +9,7 @@ public class GameBoardLabel extends JLabel {
     
     // instance variables
     private ImageIcon image;
-    private String name;
-    private int xLocation;
-    private int yLocation;
+    private static GameModel model;
     
     // default constructor
     public GameBoardLabel() {
@@ -29,7 +27,10 @@ public class GameBoardLabel extends JLabel {
     	super.paintComponent(g2);
         g2.setColor(Color.RED);
         g2.setFont(new Font("Arial", Font.PLAIN, 40));
-        g2.drawString(name, xLocation, yLocation);
+        g2.drawString(model.getPlayer(PlayerNumber.Human).getStudentName(),
+                model.getPlayer(PlayerNumber.Human).getCurrentRoom().getRoomX() + 20,
+                model.getPlayer(PlayerNumber.Human).getCurrentRoom().getRoomY() +
+                        model.getPlayer(PlayerNumber.Human).getPlayerNumber() * 40);
         
         
         
