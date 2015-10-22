@@ -13,9 +13,8 @@ import java.util.List;
  *
  * @author James
  */
-
 public class GameModel {
-    
+
     private Player HumanPlayer;
     private Player AIPlayerOne;
     private Player AIPlayerTwo;
@@ -28,15 +27,21 @@ public class GameModel {
         listOfRooms = new ArrayList<Room>();
         createRooms();
     }
+
     public Player getPlayer(PlayerNumber pNumber) {
-        if (pNumber == PlayerNumber.Human)
+        if (pNumber == PlayerNumber.HUMAN) {
             return HumanPlayer;
-        else if (pNumber == PlayerNumber.AI1)
+        } else if (pNumber == PlayerNumber.AI1) {
             return AIPlayerOne;
-        else
+        } else {
             return AIPlayerTwo;
+        }
     }
-    
+
+    public List<Room> getListOfRooms() {
+        return listOfRooms;
+    }
+
     public void createRooms() {
 
         List<Integer> listOfAdjacentRooms0 = Arrays.asList(1, 3, 4, 5);

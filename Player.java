@@ -46,6 +46,10 @@ public class Player {
         return "\n" + name + "\n" + description + "\n" + rank;
     }
 
+    public void setCurrentRoom(Room newRoom) {
+        currentRoom = newRoom;
+    }
+            
     public Room getCurrentRoom() {
         return currentRoom;
     }

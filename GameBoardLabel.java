@@ -19,6 +19,7 @@ public class GameBoardLabel extends JLabel {
     public GameBoardLabel(ImageIcon i) {
         super(i);
         image = i;
+        model = new GameModel();
     }
     
     @Override
@@ -27,10 +28,10 @@ public class GameBoardLabel extends JLabel {
     	super.paintComponent(g2);
         g2.setColor(Color.RED);
         g2.setFont(new Font("Arial", Font.PLAIN, 40));
-        g2.drawString(model.getPlayer(PlayerNumber.Human).getStudentName(),
-                model.getPlayer(PlayerNumber.Human).getCurrentRoom().getRoomX() + 20,
-                model.getPlayer(PlayerNumber.Human).getCurrentRoom().getRoomY() +
-                        model.getPlayer(PlayerNumber.Human).getPlayerNumber() * 40);
+        g2.drawString(model.getPlayer(PlayerNumber.HUMAN).getStudentName(),
+                model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom().getRoomX(),
+                model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom().getRoomY() +
+                        model.getPlayer(PlayerNumber.HUMAN).getPlayerNumber() * 40);
         
         
         

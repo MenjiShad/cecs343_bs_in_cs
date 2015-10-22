@@ -39,7 +39,7 @@ public class Room {
     
     public int getRoomY() {
         return yPosition;
-    }
+    }      
             
     public void DisplayAdjacentRoom() {
 
@@ -53,4 +53,8 @@ public class Room {
         this.listOfAdjacentRooms = listOfAdjacentRooms;
     }
 
+    @Override
+    public String toString() {
+        return getRoomName();
+    }
 }
