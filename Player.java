@@ -43,7 +43,8 @@ public class Player {
     }
 
     public String toString() {
-        return "\n" + name + "\n" + description + "\n" + rank;
+        return "\n" + name + "\n" + description + "\n" + rank
+                + " is in " + currentRoom;
     }
 
     public void setCurrentRoom(Room newRoom) {
