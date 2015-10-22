@@ -11,6 +11,9 @@ import javax.swing.DefaultListCellRenderer;
 /**
  *
  * @author James
+ * 
+ * This class was implemented to allow a JList of Rooms to display room names
+ * and not address locations
  */
 public class AdjacentRoomsListRenderer extends DefaultListCellRenderer {
 

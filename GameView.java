@@ -9,7 +9,6 @@ import java.awt.event.*;
  *
  * This class is responsible for the display of the game board
  */
-
 public class GameView {
 
     // instance variables
@@ -28,9 +27,9 @@ public class GameView {
 
     //For finding the x, y of the rooms
 //	   JTextArea textArea;
-    
     // default constructor
-    public GameView() {}
+    public GameView() {
+    }
 
     // constructor that takes in the title of the frame and the 
     // file name of the board image
@@ -84,6 +83,7 @@ public class GameView {
         // Add action listener to move button
         final class MoveActionListener implements ActionListener {
 
+            // Move the player from one room to another on button press
             @Override
             public void actionPerformed(ActionEvent e) {
                 Room newRoom = adjacentRoomsList.getSelectedValue();
@@ -137,7 +137,7 @@ public class GameView {
 
     public void DisplayAdjacentRooms() {
 
-	   //Get the room number on the 1st adjacent room
+        //Get the room number on the 1st adjacent room
         //System.out.println(r.getListOfAdjacentRooms().get(1));
         //Create the JList here
         DefaultListModel<Room> listModel = new DefaultListModel<>();
@@ -157,7 +157,7 @@ public class GameView {
         // Use ListCellRenderer to display the room name
         adjacentRoomsList = new JList<Room>(listModel);
         adjacentRoomsList.setCellRenderer(new AdjacentRoomsListRenderer());
-                
+
         adjacentRoomsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         adjacentRoomsList.setSelectedIndex(0);
         adjacentRoomsList.setVisibleRowCount(3);
