@@ -27,18 +27,18 @@ public class GameModel {
         HumanPlayer = new Player("Matt", 0);
         AIPlayerOne = new Player("Tony", 1);
         AIPlayerTwo = new Player("Derek", 2);
-        listOfRooms = new ArrayList<Room>();
+        listOfRooms = new ArrayList<>();
         createRooms();
     }
 
     public Player getPlayer(PlayerNumber pNumber) {
-        if (pNumber == PlayerNumber.HUMAN) {
+        if (pNumber == PlayerNumber.HUMAN) 
             return HumanPlayer;
-        } else if (pNumber == PlayerNumber.AI1) {
+        else if (pNumber == PlayerNumber.AI1) 
             return AIPlayerOne;
-        } else {
+        else 
             return AIPlayerTwo;
-        }
+        
     }
 
     public List<Room> getListOfRooms() {

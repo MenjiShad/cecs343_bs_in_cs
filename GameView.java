@@ -119,9 +119,6 @@ public class GameView {
 
         masterPanel.add(gameBoardScroller);
 
-        //Create rooms and displays them on the list
-        DisplayAdjacentRooms();
-
         masterPanel.add(controlPanel);
 
         gameFrame.add(masterPanel);
@@ -130,9 +127,9 @@ public class GameView {
 //	     textArea = new JTextArea();
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
-        updateGameBoard();
+//        updateGameBoard();
+        DisplayAdjacentRooms();
         gameFrame.setVisible(true);
-
     }
 
     public void DisplayAdjacentRooms() {
@@ -159,7 +156,7 @@ public class GameView {
         adjacentRoomsList.setCellRenderer(new AdjacentRoomsListRenderer());
 
         adjacentRoomsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        adjacentRoomsList.setSelectedIndex(0);
+        //adjacentRoomsList.setSelectedIndex(0);
         adjacentRoomsList.setVisibleRowCount(3);
 
         JScrollPane listScroller = new JScrollPane(adjacentRoomsList);
@@ -178,6 +175,8 @@ public class GameView {
     }
 
     public void updateGameBoard() {
+        //Create rooms and displays them on the list
+        DisplayAdjacentRooms();
         gameBoardLabel.paintComponent(gameBoardLabel.getGraphics());
         //masterPanel.repaint();
     }

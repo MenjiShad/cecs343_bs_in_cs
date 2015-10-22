@@ -5,8 +5,7 @@ import java.util.*;
 public class Room {
 
     private String roomName;
-    private int roomNumber;
-    int xPosition, yPosition;
+    private int roomNumber, xPosition, yPosition;
     private List<Integer> listOfAdjacentRooms;
 
     public Room() {
@@ -15,14 +14,13 @@ public class Room {
     }
 
     public Room(String name, int number, int x, int y,
-            List<Integer> adjecentRooms) {
+            List<Integer> adjacentRooms) {
         roomName = name;
         roomNumber = number;
         xPosition = x;
         yPosition = y;
-
-        setListOfAdjacentRooms(adjecentRooms);
-
+        this.listOfAdjacentRooms = adjacentRooms;
+//        setListOfAdjacentRooms(adjacentRooms);
     }
 
     public int getRoomNumber() {
