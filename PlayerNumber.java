@@ -10,5 +10,5 @@ package cecs343_bs_in_cs;
  * @author James
  */
 public enum PlayerNumber {
-    Human, AI1, AI2 
+    HUMAN, AI1, AI2 
 }
