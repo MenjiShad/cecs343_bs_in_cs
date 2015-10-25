@@ -9,8 +9,8 @@ public class ScrollablePicture extends GameBoardLabel implements Scrollable {
 
     private int maxUnitIncrement = 1;
 
-    public ScrollablePicture(ImageIcon i, int m) {
-        super(i);
+    public ScrollablePicture(ImageIcon i, int m, GameModel model) {
+        super(i, model);
         maxUnitIncrement = m;
     }
 

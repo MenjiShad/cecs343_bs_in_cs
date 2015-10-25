@@ -18,10 +18,10 @@ public class GameBoardLabel extends JLabel {
         image = null;
     }
 
-    public GameBoardLabel(ImageIcon i) {
+    public GameBoardLabel(ImageIcon i, GameModel model) {
         super(i);
         image = i;
-        model = new GameModel();
+        this.model = model;
     }
 
     @Override

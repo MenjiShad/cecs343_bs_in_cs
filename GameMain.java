@@ -20,7 +20,7 @@ public class GameMain {
 
    //Zach Image File Location
 //   private static String imageFileName = "src/CSULBMap3.png";
-   // For the imageFileName, make sure to use your path, which may or may not be
+    // For the imageFileName, make sure to use your path, which may or may not be
     // the same as mine.
     public static void main(String[] args) {
 
@@ -29,7 +29,7 @@ public class GameMain {
 
         view.createGameBoard();   // Used to set up the frame
 
-        view.updateGameBoard();
+//        view.updateGameBoard();
 
     }
 }

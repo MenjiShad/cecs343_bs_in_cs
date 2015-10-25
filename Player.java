@@ -18,16 +18,12 @@ public class Player {
     private int handCount;
 
     // default constructor
-    public Player() {
-        List<Integer> listOfAdjacentRooms17 = Arrays.asList(15);
-        currentRoom = new Room("ECS 308", 17, 1127, 1399, listOfAdjacentRooms17);
-    }
+    public Player() {}
 
-    public Player(String name, int playerNumber) {
+    public Player(String name, int playerNumber, Room startingRoom) {
         this.name = name;
         this.playerNumber = playerNumber;
-        List<Integer> listOfAdjacentRooms17 = Arrays.asList(15);
-        currentRoom = new Room("ECS 308", 17, 1127, 1399, listOfAdjacentRooms17);
+        currentRoom = startingRoom;
     }
 
     public String getStudentName() {

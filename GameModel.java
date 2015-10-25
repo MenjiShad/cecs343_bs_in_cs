@@ -24,11 +24,12 @@ public class GameModel {
     private List<Room> listOfRooms;
 
     public GameModel() {
-        HumanPlayer = new Player("Matt", 0);
-        AIPlayerOne = new Player("Tony", 1);
-        AIPlayerTwo = new Player("Derek", 2);
         listOfRooms = new ArrayList<>();
         createRooms();
+        
+        HumanPlayer = new Player("Matt", 0, listOfRooms.get(17));
+        AIPlayerOne = new Player("Tony", 1, listOfRooms.get(17));
+        AIPlayerTwo = new Player("Derek", 2, listOfRooms.get(17));
     }
 
     public Player getPlayer(PlayerNumber pNumber) {
@@ -45,7 +46,7 @@ public class GameModel {
         return listOfRooms;
     }
 
-    public void createRooms() {
+    private void createRooms() {
 
         List<Integer> listOfAdjacentRooms0 = Arrays.asList(1, 3, 4, 5);
         List<Integer> listOfAdjacentRooms1 = Arrays.asList(0, 2, 3);

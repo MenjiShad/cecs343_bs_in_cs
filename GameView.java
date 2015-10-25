@@ -24,6 +24,7 @@ public class GameView {
     private JPanel textAreaPanel = new JPanel();
     private static GameModel model;
     private JList<Room> adjacentRoomsList;
+    private JScrollPane listScroller;
 
     //For finding the x, y of the rooms
 //	   JTextArea textArea;
@@ -56,7 +57,7 @@ public class GameView {
         double widthMultiplier = (double) 100 / 100;
 
         ImageIcon gameBoardImage = new ImageIcon(imageFileName);
-        gameBoardLabel = new ScrollablePicture(gameBoardImage, 3);
+        gameBoardLabel = new ScrollablePicture(gameBoardImage, 3, model);
         masterPanel = new JPanel();
         BoxLayout masterLayout = new BoxLayout(masterPanel, BoxLayout.Y_AXIS);
         masterPanel.setLayout(masterLayout);
@@ -128,7 +129,12 @@ public class GameView {
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
 //        updateGameBoard();
+        adjacentRoomsList = new JList<Room>();
         DisplayAdjacentRooms();
+        
+        listScroller = new JScrollPane(adjacentRoomsList);
+        listScroller.setPreferredSize(new Dimension(250, 80));
+        listAndButtonPanel.add(listScroller);
         gameFrame.setVisible(true);
     }
 
@@ -139,6 +145,8 @@ public class GameView {
         //Create the JList here
         DefaultListModel<Room> listModel = new DefaultListModel<>();
 
+        System.out.println(model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom());
+        
         //Stores Adjacent Rooms into a list model for JList
         for (int i = 0; i < model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom()
                 .getListOfAdjacentRooms().size(); i++) {
@@ -149,21 +157,16 @@ public class GameView {
 
             //System.out.println(listOfRooms.get(tempInt).getRoomName());
         }
-
+        
         // Create JList of adjacent Rooms
         // Use ListCellRenderer to display the room name
-        adjacentRoomsList = new JList<Room>(listModel);
+        adjacentRoomsList.setModel(listModel);
         adjacentRoomsList.setCellRenderer(new AdjacentRoomsListRenderer());
 
         adjacentRoomsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //adjacentRoomsList.setSelectedIndex(0);
         adjacentRoomsList.setVisibleRowCount(3);
-
-        JScrollPane listScroller = new JScrollPane(adjacentRoomsList);
-        listScroller.setPreferredSize(new Dimension(250, 80));
-
-        listAndButtonPanel.add(listScroller);
-
+        
     }
 
     public void DisplayGameCard() {
