@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cecs343_bs_in_cs;
+//package cecs343_bs_in_cs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,13 +48,14 @@ public class GameModel {
 
     private void createRooms() {
 
+    	//List of adjecent room numbers for each room
         List<Integer> listOfAdjacentRooms0 = Arrays.asList(1, 3, 4, 5);
         List<Integer> listOfAdjacentRooms1 = Arrays.asList(0, 2, 3);
-        List<Integer> listOfAdjacentRooms2 = Arrays.asList(1, 3, 4, 6);
+        List<Integer> listOfAdjacentRooms2 = Arrays.asList(1, 3, 5, 6);
         List<Integer> listOfAdjacentRooms3 = Arrays.asList(0, 1, 2, 4, 5, 6);
         List<Integer> listOfAdjacentRooms4 = Arrays.asList(0, 5, 7, 12);
         List<Integer> listOfAdjacentRooms5 = Arrays.asList(0, 2, 3, 4, 6);
-        List<Integer> listOfAdjacentRooms6 = Arrays.asList(2, 3, 5, 10);
+        List<Integer> listOfAdjacentRooms6 = Arrays.asList(2, 5, 10);
         List<Integer> listOfAdjacentRooms7 = Arrays.asList(4, 8);
         List<Integer> listOfAdjacentRooms8 = Arrays.asList(7, 9);
         List<Integer> listOfAdjacentRooms9 = Arrays.asList(8, 10);
@@ -70,26 +71,28 @@ public class GameModel {
         List<Integer> listOfAdjacentRooms19 = Arrays.asList(15);
         List<Integer> listOfAdjacentRooms20 = Arrays.asList(15);
 
-        listOfRooms.add(new Room("Geroge Allen Field", 0, 271, 56, listOfAdjacentRooms0));
-        listOfRooms.add(new Room("Japanese Garden", 1, 698, 45, listOfAdjacentRooms1));
-        listOfRooms.add(new Room("Student Parking", 2, 1284, 94, listOfAdjacentRooms2));
-        listOfRooms.add(new Room("The Pyramid", 3, 669, 292, listOfAdjacentRooms3));
-        listOfRooms.add(new Room("West Walkway", 4, 246, 666, listOfAdjacentRooms4));
-        listOfRooms.add(new Room("Health/Rec Center", 5, 708, 576, listOfAdjacentRooms5));
-        listOfRooms.add(new Room("Forbidden Parking", 6, 1287, 586, listOfAdjacentRooms6));
-        listOfRooms.add(new Room("Library", 7, 283, 1729, listOfAdjacentRooms7));
-        listOfRooms.add(new Room("LA 5", 8, 712, 1638, listOfAdjacentRooms8));
-        listOfRooms.add(new Room("Bratwurst Hall", 9, 1252, 1646, listOfAdjacentRooms9));
-        listOfRooms.add(new Room("East Walkway", 10, 1692, 975, listOfAdjacentRooms10));
-        listOfRooms.add(new Room("Computer Lab", 11, 422, 897, listOfAdjacentRooms11));
-        listOfRooms.add(new Room("North Hall", 12, 427, 1164, listOfAdjacentRooms12));
-        listOfRooms.add(new Room("Room of Retirement", 13, 437, 1367, listOfAdjacentRooms13));
-        listOfRooms.add(new Room("ECS 302", 14, 853, 869, listOfAdjacentRooms14));
-        listOfRooms.add(new Room("South Hall", 15, 1068, 1172, listOfAdjacentRooms15));
-        listOfRooms.add(new Room("Elevators", 16, 829, 1385, listOfAdjacentRooms16));
-        listOfRooms.add(new Room("ECS 308", 17, 1127, 1399, listOfAdjacentRooms17));
-        listOfRooms.add(new Room("EAT Club", 18, 1263, 888, listOfAdjacentRooms18));
-        listOfRooms.add(new Room("CECS Conference Room", 19, 1481, 891, listOfAdjacentRooms19));
-        listOfRooms.add(new Room("Lactation Lounge", 20, 1447, 1410, listOfAdjacentRooms20));
+        //Creates each room along with their adjecent rooms
+        listOfRooms.add(new Room("Geroge Allen Field", 0, 75, 100, listOfAdjacentRooms0));
+        listOfRooms.add(new Room("Japanese Garden", 1, 500, 95, listOfAdjacentRooms1));
+        listOfRooms.add(new Room("Student Parking", 2, 1085, 95, listOfAdjacentRooms2));
+        listOfRooms.add(new Room("The Pyramid", 3, 470, 310, listOfAdjacentRooms3));
+        listOfRooms.add(new Room("West Walkway", 4, 30, 675, listOfAdjacentRooms4));
+        listOfRooms.add(new Room("Health/Rec Center", 5, 500, 600, listOfAdjacentRooms5));
+        listOfRooms.add(new Room("Forbidden Parking", 6, 1085, 600, listOfAdjacentRooms6));
+        listOfRooms.add(new Room("Library", 7, 30, 1745, listOfAdjacentRooms7));
+        listOfRooms.add(new Room("LA 5", 8, 515, 1820, listOfAdjacentRooms8));
+        listOfRooms.add(new Room("Bratwurst Hall", 9, 1150, 1750, listOfAdjacentRooms9));
+        listOfRooms.add(new Room("East Walkway", 10, 1470, 975, listOfAdjacentRooms10));
+        listOfRooms.add(new Room("Computer Lab", 11, 175, 910, listOfAdjacentRooms11));
+        listOfRooms.add(new Room("North Hall", 12, 227, 1175, listOfAdjacentRooms12));
+        listOfRooms.add(new Room("Room of Retirement", 13, 200, 1375, listOfAdjacentRooms13));
+        listOfRooms.add(new Room("ECS 302", 14, 600, 910, listOfAdjacentRooms14));
+        listOfRooms.add(new Room("South Hall", 15, 850, 1175, listOfAdjacentRooms15));
+        listOfRooms.add(new Room("Elevators", 16, 600, 1400, listOfAdjacentRooms16));
+        listOfRooms.add(new Room("ECS 308", 17, 850, 1375, listOfAdjacentRooms17));
+        listOfRooms.add(new Room("EAT Club", 18, 1050, 910, listOfAdjacentRooms18));
+        listOfRooms.add(new Room("CECS Conference Room", 19, 1250, 910, listOfAdjacentRooms19));
+        listOfRooms.add(new Room("Lactation Lounge", 20, 1210, 1425, listOfAdjacentRooms20));
     }
+    
 }
