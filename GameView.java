@@ -1,4 +1,4 @@
-package cecs343_bs_in_cs;
+//package cecs343_bs_in_cs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.event.*;
  *
  * This class is responsible for the display of the game board
  */
-public class GameView {
+public class GameView  /*implements MouseListener*/ {
 
     // instance variables
     private JFrame gameFrame;
@@ -28,6 +28,7 @@ public class GameView {
 
     //For finding the x, y of the rooms
 //	   JTextArea textArea;
+	   
     // default constructor
     public GameView() {
     }
@@ -108,6 +109,9 @@ public class GameView {
         BoxLayout listAndButtonPanelLayout = new BoxLayout(listAndButtonPanel, BoxLayout.Y_AXIS);
         listAndButtonPanel.setLayout(listAndButtonPanelLayout);
         listAndButtonPanel.setPreferredSize(new Dimension(20, (int) (windowHeight * (heightMultiplier / 2))));
+        
+        //Create and display the gamecard panel
+        //gameCardPanel.add(model.getPlayer(PlayerNumber.HUMAN).getHand());
 
         //Add panels to control panel
         controlPanel.add(listAndButtonPanel);
@@ -128,6 +132,7 @@ public class GameView {
 //	     textArea = new JTextArea();
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
+	     
 //        updateGameBoard();
         adjacentRoomsList = new JList<Room>();
         DisplayAdjacentRooms();
@@ -152,7 +157,7 @@ public class GameView {
                 .getListOfAdjacentRooms().size(); i++) {
 
             int adjacentRoomNumber = model.getPlayer(PlayerNumber.HUMAN).
-                    getCurrentRoom().getListOfAdjacentRooms().get(i);
+            getCurrentRoom().getListOfAdjacentRooms().get(i);
             listModel.addElement(model.getListOfRooms().get(adjacentRoomNumber));
 
             //System.out.println(listOfRooms.get(tempInt).getRoomName());
@@ -224,7 +229,7 @@ public class GameView {
 //		
 //	}
 //
-//	@Override
+//	//@Override
 //	public void run() {
 //		while(true) {
 //			try {
