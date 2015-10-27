@@ -1,5 +1,6 @@
-package cecs343_bs_in_cs;
+//package cecs343_bs_in_cs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Player {
     private int learningChip;
     private int integrityChip;
     private int craftChip;
-    private Deck handOfCards;
+    private ArrayList<GameCard> handOfCards;
     private int handCount;
 
     // default constructor
@@ -24,6 +25,10 @@ public class Player {
         this.name = name;
         this.playerNumber = playerNumber;
         currentRoom = startingRoom;
+        
+        //Create first 5 cards to hand 
+        
+        
     }
 
     public String getStudentName() {
@@ -56,6 +61,10 @@ public class Player {
     }
     public void move() {
 
+    }
+    
+    public void getHand() {
+    	
     }
 
     public void drawCard() {
