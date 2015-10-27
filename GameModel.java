@@ -22,6 +22,7 @@ public class GameModel {
     private Player AIPlayerOne;
     private Player AIPlayerTwo;
     private List<Room> listOfRooms;
+    private Deck cardDeck;
 
     public GameModel() {
         listOfRooms = new ArrayList<>();
