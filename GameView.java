@@ -1,4 +1,4 @@
-//package cecs343_bs_in_cs;
+package cecs343_bs_in_cs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,8 +30,7 @@ public class GameView  /*implements MouseListener*/ {
 //	   JTextArea textArea;
 	   
     // default constructor
-    public GameView() {
-    }
+    public GameView() {}
 
     // constructor that takes in the title of the frame and the 
     // file name of the board image
@@ -88,6 +87,10 @@ public class GameView  /*implements MouseListener*/ {
             // Move the player from one room to another on button press
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                // Add handling for the case where no room is selected
+                
+           
                 Room newRoom = adjacentRoomsList.getSelectedValue();
                 model.getPlayer(PlayerNumber.HUMAN).setCurrentRoom(newRoom);
                 updateGameBoard();
@@ -133,7 +136,6 @@ public class GameView  /*implements MouseListener*/ {
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
 	     
-//        updateGameBoard();
         adjacentRoomsList = new JList<Room>();
         DisplayAdjacentRooms();
         
@@ -145,8 +147,6 @@ public class GameView  /*implements MouseListener*/ {
 
     public void DisplayAdjacentRooms() {
 
-        //Get the room number on the 1st adjacent room
-        //System.out.println(r.getListOfAdjacentRooms().get(1));
         //Create the JList here
         DefaultListModel<Room> listModel = new DefaultListModel<>();
 
@@ -159,8 +159,6 @@ public class GameView  /*implements MouseListener*/ {
             int adjacentRoomNumber = model.getPlayer(PlayerNumber.HUMAN).
             getCurrentRoom().getListOfAdjacentRooms().get(i);
             listModel.addElement(model.getListOfRooms().get(adjacentRoomNumber));
-
-            //System.out.println(listOfRooms.get(tempInt).getRoomName());
         }
         
         // Create JList of adjacent Rooms
@@ -169,9 +167,7 @@ public class GameView  /*implements MouseListener*/ {
         adjacentRoomsList.setCellRenderer(new AdjacentRoomsListRenderer());
 
         adjacentRoomsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        //adjacentRoomsList.setSelectedIndex(0);
-        adjacentRoomsList.setVisibleRowCount(3);
-        
+        adjacentRoomsList.setVisibleRowCount(3);   
     }
 
     public void DisplayGameCard() {

@@ -1,8 +1,6 @@
-//package cecs343_bs_in_cs;
+package cecs343_bs_in_cs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Player {
 
@@ -26,23 +24,14 @@ public class Player {
         this.playerNumber = playerNumber;
         currentRoom = startingRoom;
         
-        //Create first 5 cards to hand 
-        
-        
+        //Create first 5 cards to hand     
     }
 
     public String getStudentName() {
         return name;
     }
 
-    public String getStudentDescription() {
-        return description;
-    }
-
-    public String getStudentRank() {
-        return rank;
-    }
-
+    @Override
     public String toString() {
         return "\n" + name + "\n" + description + "\n" + rank
                 + " is in " + currentRoom;
@@ -58,17 +47,6 @@ public class Player {
 
     public int getPlayerNumber() {
         return playerNumber;
-    }
-    public void move() {
-
-    }
-    
-    public void getHand() {
-    	
-    }
-
-    public void drawCard() {
-
     }
 
     public void updateQp() {

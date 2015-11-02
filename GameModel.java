@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
- * @author James
- * 
  * The model class of the MVC scheme for the BS in CS game
  * Holds instances of the 3 players and the Rooms
  */

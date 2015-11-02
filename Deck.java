@@ -1,7 +1,5 @@
-//package cecs343_bs_in_cs;
+package cecs343_bs_in_cs;
 import java.util.*;
-
-import javax.swing.ImageIcon;
 
 public class Deck {
 	
@@ -25,14 +23,6 @@ public class Deck {
 	}
 	
 	public void shuffle() {
-		
-	}
-	
-	public void activate() {
-		
-	}
-	
-	public void disable() {
 		
 	}
 }

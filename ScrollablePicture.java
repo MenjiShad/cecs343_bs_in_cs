@@ -1,9 +1,7 @@
-//package cecs343_bs_in_cs;
+package cecs343_bs_in_cs;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 public class ScrollablePicture extends GameBoardLabel implements Scrollable {
 

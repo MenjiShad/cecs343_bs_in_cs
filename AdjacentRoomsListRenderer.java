@@ -3,6 +3,7 @@ package cecs343_bs_in_cs;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.DefaultListCellRenderer;
+
 /**
  *
  * @author James
@@ -16,6 +17,7 @@ public class AdjacentRoomsListRenderer extends DefaultListCellRenderer {
         setOpaque(true);
     }
     
+    @Override
     public Component getListCellRendererComponent(JList<?> list,
                                  Object value,
                                  int index,

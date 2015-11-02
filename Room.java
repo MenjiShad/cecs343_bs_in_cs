@@ -1,4 +1,4 @@
-//package cecs343_bs_in_cs;
+package cecs343_bs_in_cs;
 
 import java.util.*;
 
@@ -39,10 +39,6 @@ public class Room {
         return yPosition;
     }      
             
-    public void DisplayAdjacentRoom() {
-
-    }
-
     public List<Integer> getListOfAdjacentRooms() {
         return listOfAdjacentRooms;
     }
