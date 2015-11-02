@@ -3,16 +3,17 @@ package cecs343_bs_in_cs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The model class of the MVC scheme for the BS in CS game
- * Holds instances of the 3 players and the Rooms
+ * Holds instances of the 3 players, the Rooms, and the Deck
  */
 public class GameModel {
 
     private Player HumanPlayer;
-    private Player AIPlayerOne;
-    private Player AIPlayerTwo;
+    private Player AIPlayer1;
+    private Player AIPlayer2;
     private List<Room> listOfRooms;
     private Deck cardDeck;
 
@@ -20,18 +21,48 @@ public class GameModel {
         listOfRooms = new ArrayList<>();
         createRooms();
         
-        HumanPlayer = new Player("Matt", 0, listOfRooms.get(17));
-        AIPlayerOne = new Player("Tony", 1, listOfRooms.get(17));
-        AIPlayerTwo = new Player("Derek", 2, listOfRooms.get(17));
+        int initialLearning;
+        int initialIntegrity;        
+        int initialCraft;
+        
+        // Initial stats for Player 1
+        initialLearning = 2;
+        initialIntegrity = 2;
+        initialCraft = 2;      
+        Player Player1 = new Player("Matt", 0, listOfRooms.get(17),
+                initialLearning, initialIntegrity, initialCraft);
+        
+        // Initial stats for Player 2
+        initialLearning = 3;
+        initialIntegrity = 1;
+        initialCraft = 2;
+        Player Player2 = new Player("Tony", 1, listOfRooms.get(17),
+                initialLearning, initialIntegrity, initialCraft);
+        
+        // Initial stats for Player 3
+        initialLearning = 0;
+        initialIntegrity = 3;
+        initialCraft = 3;
+        Player Player3 = new Player("Derek", 2, listOfRooms.get(17),
+                initialLearning, initialIntegrity, initialCraft);
+        
+        
+        Player[] playerTokenArray = new Player[]{Player1, Player2, Player3}; 
+        shuffleArray(playerTokenArray);   // Randomize the tokens
+                  
+        // Assign randomized tokens to each player
+        HumanPlayer = playerTokenArray[0];
+        AIPlayer1 = playerTokenArray[1];
+        AIPlayer2 = playerTokenArray[2];
     }
 
     public Player getPlayer(PlayerNumber pNumber) {
         if (pNumber == PlayerNumber.HUMAN) 
             return HumanPlayer;
         else if (pNumber == PlayerNumber.AI1) 
-            return AIPlayerOne;
+            return AIPlayer1;
         else 
-            return AIPlayerTwo;
+            return AIPlayer2;
         
     }
 
@@ -88,4 +119,22 @@ public class GameModel {
         listOfRooms.add(new Room("Lactation Lounge", 20, 1210, 1425, listOfAdjacentRooms20));
     }
     
+    /**
+     * Implemented the Knuth Shuffle to shuffle a small array
+     * 
+     * @param arr - Player array to shuffle
+     */
+    private void shuffleArray(Player[] arr) {
+        
+        Random rng = new Random(System.currentTimeMillis());
+        
+        for (int i = arr.length - 1; i > 0; i--) {
+            int index = rng.nextInt(i + 1);
+            
+            // Swap
+            Player player = arr[index];
+            arr[index] = arr[i];
+            arr[i] = player;
+        }
+    }
 }

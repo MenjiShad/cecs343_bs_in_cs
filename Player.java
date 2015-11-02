@@ -18,12 +18,15 @@ public class Player {
 
     // default constructor
     public Player() {}
-
-    public Player(String name, int playerNumber, Room startingRoom) {
+    
+    public Player(String name, int playerNumber, Room startingRoom,
+            int initialLearning, int initialIntegrity, int initialCraft) {
         this.name = name;
         this.playerNumber = playerNumber;
         currentRoom = startingRoom;
-        
+        learningChip = initialLearning;
+        integrityChip = initialIntegrity;
+        craftChip = initialCraft;
         //Create first 5 cards to hand     
     }
 
@@ -33,8 +36,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "\n" + name + "\n" + description + "\n" + rank
-                + " is in " + currentRoom;
+        return "\n" + name + " is in " + currentRoom;
     }
 
     public void setCurrentRoom(Room newRoom) {
