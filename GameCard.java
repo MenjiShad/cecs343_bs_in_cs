@@ -1,9 +1,8 @@
+package cecs343_bs_in_cs;
 
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-
-//package cecs343_bs_in_cs;
 
 public abstract class GameCard {
 	
@@ -14,6 +13,8 @@ public abstract class GameCard {
 	
 	//Maybe pass in the model to gamecard
 		
+        public GameCard() {}
+        
 	public GameCard(String newName, String imageFileName) {
 		gameCardName = newName;
 		gameCardImage = new ImageIcon(imageFileName);
