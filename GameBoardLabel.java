@@ -37,5 +37,16 @@ public class GameBoardLabel extends JLabel {
                 model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom().getRoomY()
                 + model.getPlayer(PlayerNumber.HUMAN).getPlayerNumber() * 40);
 
+        // Draw position of AI Player 1
+        g2.drawString(model.getPlayer(PlayerNumber.AI1).getStudentName(),
+                model.getPlayer(PlayerNumber.AI1).getCurrentRoom().getRoomX(),
+                model.getPlayer(PlayerNumber.AI1).getCurrentRoom().getRoomY()
+                + model.getPlayer(PlayerNumber.AI1).getPlayerNumber() * 40);
+        
+        // Draw position of AI Player 2
+        g2.drawString(model.getPlayer(PlayerNumber.AI2).getStudentName(),
+                model.getPlayer(PlayerNumber.AI2).getCurrentRoom().getRoomX(),
+                model.getPlayer(PlayerNumber.AI2).getCurrentRoom().getRoomY()
+                + model.getPlayer(PlayerNumber.AI2).getPlayerNumber() * 40);
     }
 }
