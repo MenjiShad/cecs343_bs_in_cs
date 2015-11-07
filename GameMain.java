@@ -23,8 +23,8 @@ public class GameMain {
 
     public static void main(String[] args) {
 
-        GameModel model = new GameModel();
-        GameView view = new GameView(gameName, imageFileName);
+        GameModel model = GameModel.getInstance();
+        GameView view = new GameView(gameName, imageFileName, model);
 
         view.createGameBoard();   // Used to set up the frame
     }

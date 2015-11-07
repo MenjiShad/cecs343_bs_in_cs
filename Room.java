@@ -51,4 +51,29 @@ public class Room {
     public String toString() {
         return getRoomName();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // If the other object is null, not equal
+        if (other == null) return false;
+        
+        // If the objects are two different types, not equal
+        if (other.getClass() != this.getClass()) return false;
+        
+        // If the Room Names are different, not equal
+        if (!this.roomName.equals(((Room)other).roomName)) return false;
+        
+        // If the other object passed the three tests, the two Rooms are equal
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        if (this == null)
+            return 0;
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.roomName);
+        hash = 17 * hash + this.roomNumber;
+        return hash;
+    }
 }

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class Player {
 
     private String name;
-    private String description;
-    private String rank;
     private int playerNumber;
     private Room currentRoom;
     private int qualityPoint;
@@ -15,10 +13,11 @@ public class Player {
     private int craftChip;
     private ArrayList<GameCard> handOfCards;
     private int handCount;
+    private static GameModel model;
 
     // default constructor
     public Player() {}
-    
+
     public Player(String name, int playerNumber, Room startingRoom,
             int initialLearning, int initialIntegrity, int initialCraft) {
         this.name = name;
@@ -42,7 +41,7 @@ public class Player {
     public void setCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
     }
-            
+
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -51,16 +50,31 @@ public class Player {
         return playerNumber;
     }
 
-    public void updateQp() {
-
+    public int getLearningChips() {
+        return learningChip;
+    }
+    
+    public int getCraftChips() {
+        return craftChip;
+    }
+    
+    public int getIntegrityChips() {
+        return integrityChip;
+    }
+    public void updateQP(int pointUpdate) {
+        qualityPoint += pointUpdate;
     }
 
-    public void updateSkillChip() {
-
+    public void updateSkillChip(int learningUpdate, int craftUpdate,
+            int integrityUpdate) {
+        learningChip += learningUpdate;
+        craftChip += craftUpdate;
+        integrityChip += integrityUpdate;
     }
 
-    public void playCard() {
-
+    public void playCard(GameCard card) {
+        card.play(this, model);
+        // Discard card afterwards
     }
 
 }

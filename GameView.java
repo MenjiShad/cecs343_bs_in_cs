@@ -34,10 +34,10 @@ public class GameView  /*implements MouseListener*/ {
 
     // constructor that takes in the title of the frame and the 
     // file name of the board image
-    public GameView(String title, String imageFileName) {
+    public GameView(String title, String imageFileName, GameModel model) {
         frameTitle = title;
         this.imageFileName = imageFileName;
-        model = new GameModel();
+        this.model = model;
     }
 
     /**
@@ -126,9 +126,7 @@ public class GameView  /*implements MouseListener*/ {
         listAndButtonPanel.add(playCardPanel);
 
         masterPanel.add(gameBoardScroller);
-
         masterPanel.add(controlPanel);
-
         gameFrame.add(masterPanel);
 
         //For Showing the x, y location of the mouse click
@@ -149,8 +147,6 @@ public class GameView  /*implements MouseListener*/ {
 
         //Create the JList here
         DefaultListModel<Room> listModel = new DefaultListModel<>();
-
-        System.out.println(model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom());
         
         //Stores Adjacent Rooms into a list model for JList
         for (int i = 0; i < model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom()
@@ -182,7 +178,6 @@ public class GameView  /*implements MouseListener*/ {
         //Create rooms and displays them on the list
         DisplayAdjacentRooms();
         gameBoardLabel.paintComponent(gameBoardLabel.getGraphics());
-        //masterPanel.repaint();
     }
 //   void eventOutput(String eventDescription, MouseEvent e) {
 //        System.out.println(eventDescription + " detected on "

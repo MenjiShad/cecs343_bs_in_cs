@@ -6,54 +6,65 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * The model class of the MVC scheme for the BS in CS game
- * Holds instances of the 3 players, the Rooms, and the Deck
+ * The model class of the MVC scheme for the BS in CS game Holds instances of
+ * the 3 players, the Rooms, and the Deck
  */
 public class GameModel {
 
+    private static GameModel model = null;
     private Player HumanPlayer;
     private Player AIPlayer1;
     private Player AIPlayer2;
     private List<Room> listOfRooms;
     private Deck cardDeck;
 
-    public GameModel() {
+    private GameModel() {
+        
+        // Initialize Rooms
         listOfRooms = new ArrayList<>();
         createRooms();
-        
+
+        // Initialize players
         int initialLearning;
-        int initialIntegrity;        
+        int initialIntegrity;
         int initialCraft;
-        
+
         // Initial stats for Player 1
         initialLearning = 2;
         initialIntegrity = 2;
-        initialCraft = 2;      
+        initialCraft = 2;
         Player Player1 = new Player("Matt", 0, listOfRooms.get(17),
                 initialLearning, initialIntegrity, initialCraft);
-        
+
         // Initial stats for Player 2
         initialLearning = 3;
         initialIntegrity = 1;
         initialCraft = 2;
         Player Player2 = new Player("Tony", 1, listOfRooms.get(17),
                 initialLearning, initialIntegrity, initialCraft);
-        
+
         // Initial stats for Player 3
         initialLearning = 0;
         initialIntegrity = 3;
         initialCraft = 3;
         Player Player3 = new Player("Derek", 2, listOfRooms.get(17),
                 initialLearning, initialIntegrity, initialCraft);
-        
-        
-        Player[] playerTokenArray = new Player[]{Player1, Player2, Player3}; 
+
+        Player[] playerTokenArray = new Player[]{Player1, Player2, Player3};
         shuffleArray(playerTokenArray);   // Randomize the tokens
-                  
+
         // Assign randomized tokens to each player
         HumanPlayer = playerTokenArray[0];
         AIPlayer1 = playerTokenArray[1];
         AIPlayer2 = playerTokenArray[2];
+    }
+
+    // Limit GameModel to a single instance
+    public static GameModel getInstance() {
+        if (model == null) {
+            model = new GameModel();
+        }
+        return model;
     }
 
     public Player getPlayer(PlayerNumber pNumber) {
@@ -72,7 +83,7 @@ public class GameModel {
 
     private void createRooms() {
 
-    	//List of adjecent room numbers for each room
+        //List of adjacent room numbers for each room
         List<Integer> listOfAdjacentRooms0 = Arrays.asList(1, 3, 4, 5);
         List<Integer> listOfAdjacentRooms1 = Arrays.asList(0, 2, 3);
         List<Integer> listOfAdjacentRooms2 = Arrays.asList(1, 3, 5, 6);
@@ -95,7 +106,7 @@ public class GameModel {
         List<Integer> listOfAdjacentRooms19 = Arrays.asList(15);
         List<Integer> listOfAdjacentRooms20 = Arrays.asList(15);
 
-        //Creates each room along with their adjecent rooms
+        //Creates each room along with their adjacent rooms
         listOfRooms.add(new Room("Geroge Allen Field", 0, 75, 100, listOfAdjacentRooms0));
         listOfRooms.add(new Room("Japanese Garden", 1, 500, 95, listOfAdjacentRooms1));
         listOfRooms.add(new Room("Student Parking", 2, 1085, 95, listOfAdjacentRooms2));
@@ -118,19 +129,19 @@ public class GameModel {
         listOfRooms.add(new Room("CECS Conference Room", 19, 1250, 910, listOfAdjacentRooms19));
         listOfRooms.add(new Room("Lactation Lounge", 20, 1210, 1425, listOfAdjacentRooms20));
     }
-    
+
     /**
      * Implemented the Knuth Shuffle to shuffle a small array
-     * 
+     *
      * @param arr - Player array to shuffle
      */
     private void shuffleArray(Player[] arr) {
-        
+
         Random rng = new Random(System.currentTimeMillis());
-        
+
         for (int i = arr.length - 1; i > 0; i--) {
             int index = rng.nextInt(i + 1);
-            
+
             // Swap
             Player player = arr[index];
             arr[index] = arr[i];

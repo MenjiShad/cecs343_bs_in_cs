@@ -7,8 +7,8 @@ public class Deck {
 	//private Stack<GameCard> listOfDiscardedCards;
 	//private List<GameCard> listOfDisabledCards;
 	
-	public Deck() {
-		
+	public Deck(ArrayList<Room> listofCards) {
+
 		//Creates game card images
 //		GameCard gameCard1 = new GameCard("Meet The Dean", "src/picture/1.png");
 //		GameCard gameCard2 = new GameCard("CECS 100", "src/picture/2.png");
