@@ -1,5 +1,8 @@
 package cecs343_bs_in_cs;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 public class GameCard12 extends GameCard {
 
     public GameCard12() {}
@@ -28,6 +31,8 @@ public class GameCard12 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 // Dialog box giving player choice of learning or integrity
+            	Object[] selectionValues = { "Learning", "Craft"};
+            	player.chooseChip(selectionValues, "Choose either 1 learning or integrity chip...");
             }
             else 
                 player.updateQP(incorrectRoomQPLoss);

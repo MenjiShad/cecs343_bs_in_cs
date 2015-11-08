@@ -30,7 +30,7 @@ public class GameCard17 extends GameCard {
                 player.updateQP(5);
             else {
                 player.updateQP(-3);
-                // Lose 1 GameCard
+                player.discardGameCard();
             }
             
         } else 

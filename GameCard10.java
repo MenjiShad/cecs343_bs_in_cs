@@ -30,6 +30,7 @@ public class GameCard10 extends GameCard {
                 player.updateQP(10);
             else {
                 // Discard one Card
+            	player.discardGameCard();
             }
         } else 
             player.updateQP(incorrectRoomQPLoss);
