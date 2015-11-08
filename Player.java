@@ -2,6 +2,9 @@ package cecs343_bs_in_cs;
 
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 public class Player {
 
     private String name;
@@ -75,6 +78,34 @@ public class Player {
     public void playCard(GameCard card) {
         card.play(this, model);
         // Discard card afterwards
+    }
+    
+    public void discardGameCard(){
+    	//figure out if we let them choose which gamecard to discard
+    	//or automatically discard 1
+    	handOfCards.remove(0);
+    }
+    
+    public void chooseChip(Object[] selectionValue, String message) {
+    	JDialog.setDefaultLookAndFeelDecorated(true);
+        Object[] selectionValues = { "Learning", "Craft"};
+        String initialSelection = "Learning";
+        Object selection = JOptionPane.showInputDialog(null, message,
+            "Choice", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        //System.out.println(selection);
+        if(selection == "Learning") {
+        	this.updateSkillChip(1, 0, 0);
+        }
+        else if(selection == "Craft"){
+        	this.updateSkillChip(0, 1, 0);
+        }
+        else {
+        	this.updateSkillChip(0, 0, 1);
+        }
+    }
+    
+    public void getGameCard() {
+    	//figure out how to add a gamecard to the hand
     }
 
 }
