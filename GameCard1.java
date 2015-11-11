@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * CECS105 Game Card
+ * Play in ECS 302 or 308
+ * Earn 1 Learning Chip
+ */
 public class GameCard1 extends GameCard {
 
     public GameCard1() {}
     
     public GameCard1(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -24,15 +25,10 @@ public class GameCard1 extends GameCard {
             }
         }
         
-        if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
-                player.updateSkillChip(1, 0, 0);
-            else 
-                player.updateQP(incorrectRoomQPLoss);
-            
-        } else 
-             player.updateQP(incorrectRoomQPLoss);
+        if (validRoom)
+            player.updateSkillChip(1, 0, 0);
+        else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

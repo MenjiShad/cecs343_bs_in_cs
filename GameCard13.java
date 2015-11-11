@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Late for Class
+ * Play in any space outside except Forbidden Parking
+ * Get 1 Craft and teleport to Lactation Lounge
+ */
 public class GameCard13 extends GameCard {
 
     public GameCard13() {}
     
     public GameCard13(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -25,16 +26,10 @@ public class GameCard13 extends GameCard {
         }
         
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                player.updateSkillChip(0, 1, 0);
-                player.setCurrentRoom(model.getListOfRooms().get(20));
-            }
-            else 
-                player.updateQP(incorrectRoomQPLoss);
-            
+            player.updateSkillChip(0, 1, 0);
+            player.setCurrentRoom(model.getListOfRooms().get(20));       
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

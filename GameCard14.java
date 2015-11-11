@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Physics 151
+ * Play in ECS 308
+ * Prereq: 3 Craft
+ * Get 5 QP
+ * Fail: Lose 3 QP
+ */
 public class GameCard14 extends GameCard {
 
     public GameCard14() {}
@@ -32,7 +39,7 @@ public class GameCard14 extends GameCard {
                 player.updateQP(-3);
             
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

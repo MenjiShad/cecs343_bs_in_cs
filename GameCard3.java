@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * MATH122
+ * Play in Library
+ * Get 1 Learning or Integrity
+ */
 public class GameCard3 extends GameCard {
 
     public GameCard3() {}
     
     public GameCard3(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -25,15 +26,10 @@ public class GameCard3 extends GameCard {
         }
         
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-               // Player chooses between 1 learning or integrity
-            }
-            else 
-                player.updateQP(incorrectRoomQPLoss);
-            
+            // Player chooses between 1 learning or integrity
+     
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

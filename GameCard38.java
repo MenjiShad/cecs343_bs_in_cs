@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Enjoying Nature
+ * Play in any space outside ECS
+ * Get 1 Craft and teleport to Lactation Lounge
+ */
 public class GameCard38 extends GameCard {
 
     public GameCard38() {}
     
     public GameCard38(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -25,18 +26,11 @@ public class GameCard38 extends GameCard {
         }
         
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                player.updateSkillChip(0, 1, 0);
-            	player.setCurrentRoom(model.getListOfRooms().get(20));
-            }
-            else {
-            	//do nothing
-            }
-            
-        } else {
-        	//do nothing
-        }
+            player.updateSkillChip(0, 1, 0);
+            player.setCurrentRoom(model.getListOfRooms().get(20));
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+        
         
     }
 }

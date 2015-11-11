@@ -1,17 +1,24 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Make the Dean's List 
+ * Play in North or South Halls
+ * Prereq: 6 Learning
+ * Get 5 QP
+ * Fail: Go to Student Parking
+ */
 public class GameCard23 extends GameCard {
 
     public GameCard23() {}
-    
+
     public GameCard23(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
+
         learningPreReq = 6;
         craftPreReq = 0;
         integrityPreReq = 0;
     }
-    
+
     @Override
     public void play(Player player, GameModel model) {
         // Check for correct Room
@@ -23,17 +30,16 @@ public class GameCard23 extends GameCard {
                 break;
             }
         }
-        
+
         if (validRoom) {
             // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
+            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) 
                 player.updateQP(5);
-            else {
-            	player.setCurrentRoom(model.getListOfRooms().get(2));
-            }
-            
-        } else{
-        	player.setCurrentRoom(model.getListOfRooms().get(2));
-        	}
+            else 
+                player.setCurrentRoom(model.getListOfRooms().get(2));
+  
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+        
     }
 }

@@ -1,5 +1,10 @@
 package cecs343_bs_in_cs;
 
+/**
+ * The Outpost
+ * Play in any space outside ECS except Forbidden Parking
+ * Get 1 chip of choice
+ */
 public class GameCard35 extends GameCard {
 
     public GameCard35() {}
@@ -25,18 +30,12 @@ public class GameCard35 extends GameCard {
         }
         
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)){
-            	Object[] selectionValues = { "Learning", "Craft", "Integrity"};
-            	player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
-            }
-            else {
-            	//do nothing
-            }
-            
-        } else {
-        	//do nothing
-        }
-        
+           //Dialog box
+           Object[] selectionValues = { "Learning", "Craft", "Integrity"};
+           player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
+       
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+   
     }
 }

@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Press the Right Floor
+ * Play at Elevators
+ * Prereq: 4 Learning
+ * Get 2 Craft
+ * Fail: Lose 2 QP
+ */
 public class GameCard29 extends GameCard {
 
     public GameCard29() {}
@@ -28,11 +35,9 @@ public class GameCard29 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
                 player.updateSkillChip(0, 2, 0);
-            else 
-                player.updateQP(incorrectRoomQPLoss);
             
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 }

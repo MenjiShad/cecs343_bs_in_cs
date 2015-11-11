@@ -3,16 +3,17 @@ package cecs343_bs_in_cs;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+/**
+ * Buddy Up
+ * Play in EAT Room or George Allen Field
+ * Get 1 Learning or 1 Craft
+ */
 public class GameCard12 extends GameCard {
 
     public GameCard12() {}
     
     public GameCard12(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -28,17 +29,11 @@ public class GameCard12 extends GameCard {
         }
         
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                // Dialog box giving player choice of learning or integrity
-            	Object[] selectionValues = { "Learning", "Craft"};
-            	player.chooseChip(selectionValues, "Choose either 1 learning or integrity chip...");
-            }
-            else 
-                player.updateQP(incorrectRoomQPLoss);
-            
+            // Dialog box giving player choice of learning or integrity
+            Object[] selectionValues = { "Learning", "Craft"};
+            player.chooseChip(selectionValues, "Choose either 1 learning or integrity chip..."); 
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 }

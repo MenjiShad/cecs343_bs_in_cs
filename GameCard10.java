@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Goodbye Professor
+ * Play in Room of Retirement
+ * Prereqs: 6 Learning, 6 Craft, 6 Integrity
+ * Get 10 QP
+ * Fail: Lose 1 Game Card and leave in RoR
+ */
 public class GameCard10 extends GameCard {
 
     public GameCard10() {}
@@ -33,7 +40,7 @@ public class GameCard10 extends GameCard {
             	player.discardGameCard();
             }
         } else 
-            player.updateQP(incorrectRoomQPLoss);
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

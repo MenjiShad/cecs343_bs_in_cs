@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * MATH123
+ * Play in ECS302 or 308
+ * Prereq: 5 Learning
+ * Get 5 QP
+ * Fail: Lose 3 QP and 1 Game Card
+ */
 public class GameCard17 extends GameCard {
 
     public GameCard17() {}
@@ -34,7 +41,7 @@ public class GameCard17 extends GameCard {
             }
             
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

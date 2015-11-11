@@ -1,16 +1,23 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Fall in the Pond
+ * Play in Japanese Garden
+ * Prereq: 3 Learning
+ * Get 1 Integrity and Craft
+ * Fail: Go to Lactaction Lounge
+ */
 public class GameCard22 extends GameCard {
 
     public GameCard22() {}
-    
+
     public GameCard22(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
         learningPreReq = 3;
         craftPreReq = 0;
         integrityPreReq = 0;
     }
-    
+
     @Override
     public void play(Player player, GameModel model) {
         // Check for correct Room
@@ -22,19 +29,18 @@ public class GameCard22 extends GameCard {
                 break;
             }
         }
-        
+
         if (validRoom) {
             // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
+            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateSkillChip(0, 1, 1);
-
-            else {
-            	player.setCurrentRoom(model.getListOfRooms().get(20));
+            } else {
+                player.setCurrentRoom(model.getListOfRooms().get(20));
             }
-            
-        } else {
-        	player.setCurrentRoom(model.getListOfRooms().get(20));
-        }
+
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
+
     }
 }

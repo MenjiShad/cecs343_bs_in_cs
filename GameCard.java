@@ -10,10 +10,9 @@ public abstract class GameCard {
     private ImageIcon gameCardImage;
     protected ArrayList<Room> listOfValidRooms;
     protected int learningPreReq, craftPreReq, integrityPreReq;
-    protected static final int incorrectRoomQPLoss = -2;
+    protected static final int INCORRECT_ROOM_QP_LOSS = -2;
 
-    public GameCard() {
-    }
+    public GameCard() {}
 
     public GameCard(String newName, String imageFileName, Room[] validRooms) {
         gameCardName = newName;

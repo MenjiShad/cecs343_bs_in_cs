@@ -1,5 +1,10 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Parking Violation
+ * Play in Forbidden Parking
+ * Get 1 Learning (May discard 1 Card for another Learning)
+ */
 public class GameCard8 extends GameCard {
 
     public GameCard8() {}
@@ -26,10 +31,11 @@ public class GameCard8 extends GameCard {
         
         if (validRoom) {
             player.updateSkillChip(2, 0, 0);
+            
             // Prompt user to discard one card for 1 additional learning chip
-            player.discardGameCard();
+            //player.discardGameCard();
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

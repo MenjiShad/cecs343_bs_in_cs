@@ -1,16 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Professor Murgolo's CECS174 Class
+ * Play in ECS302
+ * Get 1 Learning
+ */
 public class GameCard4 extends GameCard {
 
-    public GameCard4() {
-    }
+    public GameCard4() {}
 
     public GameCard4(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
 
     @Override
@@ -28,9 +28,6 @@ public class GameCard4 extends GameCard {
         if (validRoom) 
             player.updateSkillChip(1, 0, 0);
         else 
-            player.updateQP(incorrectRoomQPLoss);
-        
-
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
     }
-
 }

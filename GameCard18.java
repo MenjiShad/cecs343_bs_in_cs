@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Learning NetBeans
+ * Play in Lactation Lounge
+ * Prereq: 3 Learning
+ * Get 5 QP
+ * Fail: Lose 3 QP
+ */
 public class GameCard18 extends GameCard {
 
     public GameCard18() {}
@@ -32,7 +39,7 @@ public class GameCard18 extends GameCard {
                 player.updateQP(-3);
             
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

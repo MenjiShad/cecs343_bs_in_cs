@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Oral Communication
+ * Play in any building not ECS
+ * Prereq: 4 Integrity
+ * Get 4 QP and a chip of choice
+ * Fail: Discard 1 Card
+ */
 public class GameCard32 extends GameCard {
 
     public GameCard32() {}
@@ -31,14 +38,12 @@ public class GameCard32 extends GameCard {
             	Object[] selectionValues = { "Learning", "Craft", "Integrity"};
             	player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
             }
-            else {
+            else 
             	player.discardGameCard();
-            }
-            
+       
         } 
-        else {
-        	player.discardGameCard();
-        }
-        
+        else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+    
     }
 }

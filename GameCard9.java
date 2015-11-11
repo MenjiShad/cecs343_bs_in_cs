@@ -1,16 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Finding the Lab
+ * Play at Elevators
+ * Get 1 Integrity
+ */
 public class GameCard9 extends GameCard {
 
-    public GameCard9() {
-    }
+    public GameCard9() {}
 
     public GameCard9(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class GameCard9 extends GameCard {
         if (validRoom) 
             player.updateSkillChip(0, 0, 1);
         else 
-            player.updateQP(incorrectRoomQPLoss);
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
 
     }

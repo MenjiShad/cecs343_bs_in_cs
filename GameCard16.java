@@ -1,5 +1,13 @@
 package cecs343_bs_in_cs;
 
+/**
+ * KIN253
+ * Learning the Rules of Soccer
+ * Play in George Allen Field
+ * Prereq: 4 Integrity
+ * Get 2 Craft
+ * Fail: Go to Room of Retirement
+ */
 public class GameCard16 extends GameCard {
 
     public GameCard16() {}
@@ -28,13 +36,11 @@ public class GameCard16 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
                 player.updateSkillChip(0, 2, 0);
-            else {
-                player.updateQP(incorrectRoomQPLoss);
+            else 
                 player.setCurrentRoom(model.getListOfRooms().get(13));
-            }
-            
+           
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

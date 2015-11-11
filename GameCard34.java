@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * CHEM111
+ * Play in any building not ECS
+ * Prereq: 6 Craft
+ * Get 5 QP
+ * Fail: Go to Student Parking
+ */
 public class GameCard34 extends GameCard {
 
     public GameCard34() {}
@@ -32,9 +39,8 @@ public class GameCard34 extends GameCard {
             	player.setCurrentRoom(model.getListOfRooms().get(2));
             }
             
-        } else {
-        	player.setCurrentRoom(model.getListOfRooms().get(2));
-        }
-        
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+           
     }
 }

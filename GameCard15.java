@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * The Big Game
+ * Play in the Pyramid
+ * Get 1 Craft and teleport to Lactation Lounge
+ */
 public class GameCard15 extends GameCard {
 
     public GameCard15() {}
     
     public GameCard15(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -25,16 +26,10 @@ public class GameCard15 extends GameCard {
         }
         
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                player.updateSkillChip(0, 1, 0);
-                player.setCurrentRoom(model.getListOfRooms().get(20));
-            }
-            else 
-                player.updateQP(incorrectRoomQPLoss);
-            
+            player.updateSkillChip(0, 1, 0);
+            player.setCurrentRoom(model.getListOfRooms().get(20));     
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

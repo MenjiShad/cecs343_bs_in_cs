@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Choosing a Major
+ * Play in CECS Conference
+ * Prereq: 3 Integrity
+ * Get 5 QP
+ * Fail: Lose 3 QP
+ */
 public class GameCard19 extends GameCard {
 
     public GameCard19() {}
@@ -32,7 +39,7 @@ public class GameCard19 extends GameCard {
                 player.updateQP(-3);
             
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

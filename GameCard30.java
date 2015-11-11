@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Soccer Goalie
+ * Play in George Allen Field
+ * Prereqs: 3 Learning and 3 Craft
+ * Get 5 QP and 1 Card
+ * Fail: Go to Student Parking
+ */
 public class GameCard30 extends GameCard {
 
     public GameCard30() {}
@@ -30,14 +37,12 @@ public class GameCard30 extends GameCard {
                 player.updateQP(5);
             	player.getGameCard();
             }
-            else {
+            else 
             	player.setCurrentRoom(model.getListOfRooms().get(2));
-            }
-            
+               
         } 
-        else {
-        	player.setCurrentRoom(model.getListOfRooms().get(2));
-        }
+        else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 }

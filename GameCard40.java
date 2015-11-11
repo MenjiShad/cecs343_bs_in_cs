@@ -28,11 +28,10 @@ public class GameCard40 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
                 player.updateSkillChip(1, 0, 0);
-            else 
-                player.updateQP(incorrectRoomQPLoss);
             
-        } else 
-             player.updateQP(incorrectRoomQPLoss);
+        else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
+        }
     }
 }

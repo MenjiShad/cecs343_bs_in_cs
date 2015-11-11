@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * CECS100
+ * Play in ECS308
+ * Get 1 Craft
+ */
 public class GameCard6 extends GameCard {
 
     public GameCard6() {}
     
     public GameCard6(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
         
     @Override
@@ -27,7 +28,7 @@ public class GameCard6 extends GameCard {
         if (validRoom) 
             player.updateSkillChip(0, 1, 0);
         else 
-             player.updateQP(incorrectRoomQPLoss);
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

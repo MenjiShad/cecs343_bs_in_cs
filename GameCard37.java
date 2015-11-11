@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Make a Friend
+ * Play in North or South Hall
+ * Prereqs: 2 Integrity
+ * Get 3 QP and chip of choice
+ * Fail: Discard 1 Card
+ */
 public class GameCard37 extends GameCard {
 
     public GameCard37() {}
@@ -31,13 +38,12 @@ public class GameCard37 extends GameCard {
             	Object[] selectionValues = { "Learning", "Craft", "Integrity"};
             	player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
             }
-            else {
+            else 
             	player.discardGameCard();
-            }
-            
-        } else {
-        	player.discardGameCard();
-        }
+
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+        
         
     }
 }

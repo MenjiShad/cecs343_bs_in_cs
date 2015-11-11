@@ -1,5 +1,12 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Pass Soccer Class
+ * Play in George Allen Field
+ * Prereq: 5 Craft
+ * Get 5 QP
+ * Fail: Lose 3 QP
+ */
 public class GameCard20 extends GameCard {
 
     public GameCard20() {}
@@ -32,7 +39,7 @@ public class GameCard20 extends GameCard {
                 player.updateQP(-3);
             
         } else 
-             player.updateQP(incorrectRoomQPLoss);
+             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         
     }
 

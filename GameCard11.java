@@ -1,16 +1,16 @@
 package cecs343_bs_in_cs;
 
+/**
+ * Enjoying the Peace
+ * Play in Japanese Gardens
+ * Get 1 Learning or 1 Integrity
+ */
 public class GameCard11 extends GameCard {
 
-    public GameCard11() {
-    }
+    public GameCard11() {}
 
     public GameCard11(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
-        
-        learningPreReq = 0;
-        craftPreReq = 0;
-        integrityPreReq = 0;
     }
 
     @Override
@@ -26,17 +26,10 @@ public class GameCard11 extends GameCard {
         }
 
         if (validRoom) {
-            // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                // Dialog box giving player choice of learning or integrity
-            }
-            else 
-                player.updateQP(incorrectRoomQPLoss);
-            
-
-        } else {
-            player.updateQP(incorrectRoomQPLoss);
-        }
+            // Add choosing dialog box
+        } else 
+            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+        
 
     }
 
