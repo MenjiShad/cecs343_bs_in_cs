@@ -34,21 +34,21 @@ public class GameModel {
         initialIntegrity = 2;
         initialCraft = 2;
         Player Player1 = new Player("Matt", 0, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft);
+                initialLearning, initialIntegrity, initialCraft, model);
 
         // Initial stats for Player 2
         initialLearning = 3;
         initialIntegrity = 1;
         initialCraft = 2;
         Player Player2 = new Player("Tony", 1, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft);
+                initialLearning, initialIntegrity, initialCraft, model);
 
         // Initial stats for Player 3
         initialLearning = 0;
         initialIntegrity = 3;
         initialCraft = 3;
         Player Player3 = new Player("Derek", 2, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft);
+                initialLearning, initialIntegrity, initialCraft, model);
 
         Player[] playerTokenArray = new Player[]{Player1, Player2, Player3};
         shuffleArray(playerTokenArray);   // Randomize the tokens

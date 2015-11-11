@@ -22,13 +22,15 @@ public class Player {
     public Player() {}
 
     public Player(String name, int playerNumber, Room startingRoom,
-            int initialLearning, int initialIntegrity, int initialCraft) {
+            int initialLearning, int initialIntegrity, int initialCraft,
+            GameModel model) {
         this.name = name;
         this.playerNumber = playerNumber;
         currentRoom = startingRoom;
         learningChip = initialLearning;
         integrityChip = initialIntegrity;
         craftChip = initialCraft;
+        this.model = model;
         //Create first 5 cards to hand     
     }
 
