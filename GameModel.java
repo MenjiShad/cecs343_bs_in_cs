@@ -148,4 +148,10 @@ public class GameModel {
             arr[i] = player;
         }
     }
+    
+    //Creates the deck of cards
+    private void createDeck() {
+    	Deck deck = new Deck(listOfRooms);
+    	deck.shuffle();
+    }
 }
