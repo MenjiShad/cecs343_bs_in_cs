@@ -16,6 +16,7 @@ public class GameView  /*implements MouseListener*/ {
     private String frameTitle;
     private String imageFileName;
     private GameBoardLabel gameBoardLabel;
+    private JLabel gameCardLabel;
     private JPanel masterPanel;
     private JPanel gameBoardPanel = new JPanel();
     private JPanel controlPanel = new JPanel();
@@ -118,21 +119,22 @@ public class GameView  /*implements MouseListener*/ {
 
         //Add panels to control panel
         controlPanel.add(listAndButtonPanel);
-        controlPanel.add(gameCardPanel);
-        controlPanel.add(textAreaPanel);
+        
 
         //Add panels to list and button panel
         listAndButtonPanel.add(moveButtonPanel);
         listAndButtonPanel.add(playCardPanel);
 
-        masterPanel.add(gameBoardScroller);
-        masterPanel.add(controlPanel);
-        gameFrame.add(masterPanel);
-
         //For Showing the x, y location of the mouse click
 //	     textArea = new JTextArea();
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
+        gameCardPanel.setPreferredSize(new Dimension(20, (int) (windowHeight * (heightMultiplier / 2))));
+        gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
+        		.getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
+        gameCardPanel.add(gameCardLabel);
+        controlPanel.add(gameCardPanel);
+        
 	     
         adjacentRoomsList = new JList<Room>();
         DisplayAdjacentRooms();
@@ -140,7 +142,15 @@ public class GameView  /*implements MouseListener*/ {
         listScroller = new JScrollPane(adjacentRoomsList);
         listScroller.setPreferredSize(new Dimension(250, 80));
         listAndButtonPanel.add(listScroller);
+        
+        
+        controlPanel.add(textAreaPanel);
+        
+        masterPanel.add(gameBoardScroller);
+        masterPanel.add(controlPanel);
+        gameFrame.add(masterPanel);
         gameFrame.setVisible(true);
+        
     }
 
     public void DisplayAdjacentRooms() {
@@ -167,6 +177,8 @@ public class GameView  /*implements MouseListener*/ {
     }
 
     public void DisplayGameCard() {
+    	
+    	
 
     }
 
