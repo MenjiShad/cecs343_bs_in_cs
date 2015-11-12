@@ -13,7 +13,7 @@ public class GameCard40 extends GameCard {
     }
         
     @Override
-    public void play(Player player, GameModel model) {
+    public void play(Player player) {
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {

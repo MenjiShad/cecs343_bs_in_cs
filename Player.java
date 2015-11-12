@@ -16,22 +16,24 @@ public class Player {
     private int craftChip;
     private ArrayList<GameCard> handOfCards;
     private int handCount;
-    private static GameModel model;
 
     // default constructor
     public Player() {}
 
     public Player(String name, int playerNumber, Room startingRoom,
-            int initialLearning, int initialIntegrity, int initialCraft,
-            GameModel model) {
+            int initialLearning, int initialIntegrity, int initialCraft, Deck cardDeck) {
         this.name = name;
         this.playerNumber = playerNumber;
         currentRoom = startingRoom;
         learningChip = initialLearning;
         integrityChip = initialIntegrity;
         craftChip = initialCraft;
-        this.model = model;
-        //Create first 5 cards to hand     
+        handOfCards = new ArrayList<>();
+        //Create first 5 cards to hand
+        
+        for (int i = 0; i < 5; i++) {
+        	addCardToHand(cardDeck);
+        }
     }
 
     public String getStudentName() {
@@ -78,14 +80,14 @@ public class Player {
     }
 
     public void playCard(GameCard card) {
-        card.play(this, model);
+        card.play(this);
         // Discard card afterwards
     }
     
     public void discardGameCard(){
     	//figure out if we let them choose which gamecard to discard
     	//or automatically discard 1
-    	handOfCards.remove(0);
+    	getHandOfCards().remove(0);
     }
     
     public void chooseChip(Object[] selectionValue, String message) {
@@ -106,8 +108,16 @@ public class Player {
         }
     }
     
-    public void getGameCard() {
-    	//figure out how to add a gamecard to the hand
+    public void addCardToHand(Deck cardDeck) {
+    	// getCardDeck is returning null
+    	// fix it
+    	handOfCards.add(cardDeck.drawCard());
     }
+
+	public ArrayList<GameCard> getHandOfCards() {
+		return handOfCards;
+	}
+
+
 
 }

@@ -19,7 +19,7 @@ public class GameCard22 extends GameCard {
     }
 
     @Override
-    public void play(Player player, GameModel model) {
+    public void play(Player player) {
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -35,7 +35,7 @@ public class GameCard22 extends GameCard {
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateSkillChip(0, 1, 1);
             } else {
-                player.setCurrentRoom(model.getListOfRooms().get(20));
+//                player.setCurrentRoom(model.getListOfRooms().get(20));
             }
 
         } else 

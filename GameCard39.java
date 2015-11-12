@@ -15,7 +15,7 @@ public class GameCard39 extends GameCard {
     }
         
     @Override
-    public void play(Player player, GameModel model) {
+    public void play(Player player) {
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -28,7 +28,7 @@ public class GameCard39 extends GameCard {
         
         if (validRoom) {
                 player.updateSkillChip(0, 1, 0);
-            	player.setCurrentRoom(model.getListOfRooms().get(20));
+//            	player.setCurrentRoom(model.getListOfRooms().get(20));
         } else 
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
         

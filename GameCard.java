@@ -19,6 +19,11 @@ public abstract class GameCard {
         gameCardImage = new ImageIcon(imageFileName);
         listOfValidRooms = new ArrayList<Room>(Arrays.asList(validRooms));
     }
+    
+    protected ImageIcon getCardImage() {
+    	System.out.println(gameCardImage);
+    	return gameCardImage;
+    }
 
     protected boolean checkPreReqs(Player player, int learning,
             int craft, int integrity) {
@@ -27,5 +32,10 @@ public abstract class GameCard {
                 && player.getIntegrityChips() >= integrity);
     }
 
-    public abstract void play(Player player, GameModel model);
+    public abstract void play(Player player);
+    
+    public String toString() {
+    	return gameCardName;
+    }
+    
 }

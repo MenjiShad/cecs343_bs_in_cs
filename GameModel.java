@@ -23,6 +23,10 @@ public class GameModel {
         // Initialize Rooms
         listOfRooms = new ArrayList<>();
         createRooms();
+        
+        // Initalize Deck
+    	cardDeck = new Deck(listOfRooms);
+    	cardDeck.shuffle();
 
         // Initialize players
         int initialLearning;
@@ -34,21 +38,21 @@ public class GameModel {
         initialIntegrity = 2;
         initialCraft = 2;
         Player Player1 = new Player("Matt", 0, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft, model);
+                initialLearning, initialIntegrity, initialCraft, cardDeck);
 
         // Initial stats for Player 2
         initialLearning = 3;
         initialIntegrity = 1;
         initialCraft = 2;
         Player Player2 = new Player("Tony", 1, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft, model);
+                initialLearning, initialIntegrity, initialCraft, cardDeck);
 
         // Initial stats for Player 3
         initialLearning = 0;
         initialIntegrity = 3;
         initialCraft = 3;
         Player Player3 = new Player("Derek", 2, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft, model);
+                initialLearning, initialIntegrity, initialCraft, cardDeck);
 
         Player[] playerTokenArray = new Player[]{Player1, Player2, Player3};
         shuffleArray(playerTokenArray);   // Randomize the tokens
@@ -57,6 +61,7 @@ public class GameModel {
         HumanPlayer = playerTokenArray[0];
         AIPlayer1 = playerTokenArray[1];
         AIPlayer2 = playerTokenArray[2];
+        
     }
 
     // Limit GameModel to a single instance
@@ -149,9 +154,9 @@ public class GameModel {
         }
     }
     
-    //Creates the deck of cards
-    private void createDeck() {
-    	Deck deck = new Deck(listOfRooms);
-    	deck.shuffle();
+    public Deck getCardDeck() {
+    	return cardDeck;
     }
+    
+    
 }
