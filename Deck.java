@@ -3,11 +3,14 @@ import java.util.*;
 
 public class Deck {
 	
-	private Stack<GameCard> stackOfCards;
-	//private Stack<GameCard> listOfDiscardedCards;
+	private ArrayList<GameCard> listOfCards;
+	private ArrayList<GameCard> listOfDiscardedCards;
 	//private List<GameCard> listOfDisabledCards;
 	
 	public Deck(List<Room> listOfRooms) {
+		
+		listOfCards = new ArrayList<>();
+		listOfDiscardedCards = new ArrayList<>();
 		
 		//Initialize the valid rooms for each game card
 		Room[] validRoomsGC1 = {listOfRooms.get(14), listOfRooms.get(17)};
@@ -74,95 +77,102 @@ public class Deck {
 		
 
 		//Creates game card images
-		GameCard1 gameCard1 = new GameCard1("CECS 105", "src/cecs343_bs_in_cs/picture/1.png", validRoomsGC1);
-		GameCard2 gameCard2 = new GameCard2("Research Compilers", "src/cecs343_bs_in_cs/picture/2.png", validRoomsGC2);
-		GameCard3 gameCard3 = new GameCard3("Math 122", "src/cecs343_bs_in_cs/picture/3.png", validRoomsGC3);
-		GameCard4 gameCard4 = new GameCard4("Professor Murgolo's CECS 174 Class", "src/cecs343_bs_in_cs/picture/4.png", validRoomsGC4);
-		GameCard5 gameCard5 = new GameCard5("Lunch at Brawtwurst Hall", "src/cecs343_bs_in_cs/picture/5.png", validRoomsGC5);
-		GameCard6 gameCard6 = new GameCard6("CECS 100", "src/cecs343_bs_in_cs/picture/6.png", validRoomsGC6);
-		GameCard7 gameCard7 = new GameCard7("Exercising Mind and Body", "src/cecs343_bs_in_cs/picture/7.png", validRoomsGC7);
-		GameCard8 gameCard8 = new GameCard8("Parking Violation", "src/cecs343_bs_in_cs/picture/8.png", validRoomsGC8);
-		GameCard9 gameCard9 = new GameCard9("Finding the Lab", "src/cecs343_bs_in_cs/picture/9.png", validRoomsGC9);
-		GameCard10 gameCard10 = new GameCard10("Goodbye, Professor", "src/cecs343_bs_in_cs/picture/10.png", validRoomsGC10);
-		GameCard11 gameCard11 = new GameCard11("Enjoying the Peace", "src/cecs343_bs_in_cs/picture/11.png", validRoomsGC11);
-		GameCard12 gameCard12 = new GameCard12("Buddy Up", "src/cecs343_bs_in_cs/picture/12.png", validRoomsGC12);
-		GameCard13 gameCard13 = new GameCard13("Late for Class", "src/cecs343_bs_in_cs/picture/13.png", validRoomsGC13);
-		GameCard14 gameCard14 = new GameCard14("Physics 151", "src/cecs343_bs_in_cs/picture/14.png", validRoomsGC14);
-		GameCard15 gameCard15 = new GameCard15("The Big Game", "src/cecs343_bs_in_cs/picture/15.png", validRoomsGC15);
-		GameCard16 gameCard16 = new GameCard16("KIN 253 Learning the Rules of Soccer", "src/cecs343_bs_in_cs/picture/16.png", validRoomsGC16);
-		GameCard17 gameCard17 = new GameCard17("Math 123", "src/cecs343_bs_in_cs/picture/17.png", validRoomsGC17);
-		GameCard18 gameCard18 = new GameCard18("Learning Netbeans", "src/cecs343_bs_in_cs/picture/18.png", validRoomsGC18);
-		GameCard19 gameCard19 = new GameCard19("Choosing a Major", "src/cecs343_bs_in_cs/picture/19.png", validRoomsGC19);
-		GameCard20 gameCard20 = new GameCard20("Pass Soccer Class", "src/cecs343_bs_in_cs/picture/20.png", validRoomsGC20);
-		GameCard21 gameCard21 = new GameCard21("Score a Goal!", "src/cecs343_bs_in_cs/picture/21.png", validRoomsGC21);
-		GameCard22 gameCard22 = new GameCard22("Fall in the Pond", "src/cecs343_bs_in_cs/picture/22.png", validRoomsGC22);
-		GameCard23 gameCard23 = new GameCard23("Make the Dean's List", "src/cecs343_bs_in_cs/picture/23.png", validRoomsGC23);
-		GameCard24 gameCard24 = new GameCard24("A New Laptop", "src/cecs343_bs_in_cs/picture/24.png", validRoomsGC24);
-		GameCard25 gameCard25 = new GameCard25("Meet the Dean", "src/cecs343_bs_in_cs/picture/25.png", validRoomsGC25);
-		GameCard26 gameCard26 = new GameCard26("Loud Buzzing", "src/cecs343_bs_in_cs/picture/26.png", validRoomsGC26);
-		GameCard27 gameCard27 = new GameCard27("Program Crashes", "src/cecs343_bs_in_cs/picture/27.png", validRoomsGC27);
-		GameCard28 gameCard28 = new GameCard28("Professor Englert", "src/cecs343_bs_in_cs/picture/28.png", validRoomsGC28);
-		GameCard29 gameCard29 = new GameCard29("Press the Right Floor", "src/cecs343_bs_in_cs/picture/29.png", validRoomsGC29);
-		GameCard30 gameCard30 = new GameCard30("Soccer Goalie", "src/cecs343_bs_in_cs/picture/30.png", validRoomsGC30);
-		GameCard31 gameCard31 = new GameCard31("Elective Class", "src/cecs343_bs_in_cs/picture/31.png", validRoomsGC31);
-		GameCard32 gameCard32 = new GameCard32("Oral Communication", "src/cecs343_bs_in_cs/picture/32.png", validRoomsGC32);
-		GameCard33 gameCard33 = new GameCard33("Professor Hoffman", "src/cecs343_bs_in_cs/picture/33.png", validRoomsGC33);
-		GameCard34 gameCard34 = new GameCard34("CHEM 111", "src/cecs343_bs_in_cs/picture/34.png", validRoomsGC34);
-		GameCard35 gameCard35 = new GameCard35("The Outpost", "src/cecs343_bs_in_cs/picture/35.png", validRoomsGC35);
-		GameCard36 gameCard36 = new GameCard36("Learning Linux", "src/cecs343_bs_in_cs/picture/36.png", validRoomsGC36);
-		GameCard37 gameCard37 = new GameCard37("Make a Friend", "src/cecs343_bs_in_cs/picture/37.png", validRoomsGC37);
-		GameCard38 gameCard38 = new GameCard38("Enjoying Nature", "src/cecs343_bs_in_cs/picture/38.png", validRoomsGC38);
-		GameCard39 gameCard39 = new GameCard39("Student Parking", "src/cecs343_bs_in_cs/picture/5.png", validRoomsGC5);
-		
+		GameCard gameCard1 = new GameCard1("CECS 105", "src/cecs343_bs_in_cs/pictures/1.png", validRoomsGC1);
+		GameCard gameCard2 = new GameCard2("Research Compilers", "src/cecs343_bs_in_cs/pictures/2.png", validRoomsGC2);
+		GameCard gameCard3 = new GameCard3("Math 122", "src/cecs343_bs_in_cs/pictures/3.png", validRoomsGC3);
+		GameCard gameCard4 = new GameCard4("Professor Murgolo's CECS 174 Class", "src/cecs343_bs_in_cs/pictures/4.png", validRoomsGC4);
+		GameCard gameCard5 = new GameCard5("Lunch at Brawtwurst Hall", "src/cecs343_bs_in_cs/pictures/5.png", validRoomsGC5);
+		GameCard gameCard6 = new GameCard6("CECS 100", "src/cecs343_bs_in_cs/pictures/6.png", validRoomsGC6);
+		GameCard gameCard7 = new GameCard7("Exercising Mind and Body", "src/cecs343_bs_in_cs/pictures/7.png", validRoomsGC7);
+		GameCard gameCard8 = new GameCard8("Parking Violation", "src/cecs343_bs_in_cs/pictures/8.png", validRoomsGC8);
+		GameCard gameCard9 = new GameCard9("Finding the Lab", "src/cecs343_bs_in_cs/pictures/9.png", validRoomsGC9);
+		GameCard gameCard10 = new GameCard10("Goodbye, Professor", "src/cecs343_bs_in_cs/pictures/10.png", validRoomsGC10);
+		GameCard gameCard11 = new GameCard11("Enjoying the Peace", "src/cecs343_bs_in_cs/pictures/11.png", validRoomsGC11);
+		GameCard gameCard12 = new GameCard12("Buddy Up", "src/cecs343_bs_in_cs/pictures/12.png", validRoomsGC12);
+		GameCard gameCard13 = new GameCard13("Late for Class", "src/cecs343_bs_in_cs/pictures/13.png", validRoomsGC13);
+		GameCard gameCard14 = new GameCard14("Physics 151", "src/cecs343_bs_in_cs/pictures/14.png", validRoomsGC14);
+		GameCard gameCard15 = new GameCard15("The Big Game", "src/cecs343_bs_in_cs/pictures/15.png", validRoomsGC15);
+		GameCard gameCard16 = new GameCard16("KIN 253 Learning the Rules of Soccer", "src/cecs343_bs_in_cs/pictures/16.png", validRoomsGC16);
+		GameCard gameCard17 = new GameCard17("Math 123", "src/cecs343_bs_in_cs/pictures/17.png", validRoomsGC17);
+		GameCard gameCard18 = new GameCard18("Learning Netbeans", "src/cecs343_bs_in_cs/pictures/18.png", validRoomsGC18);
+		GameCard gameCard19 = new GameCard19("Choosing a Major", "src/cecs343_bs_in_cs/pictures/19.png", validRoomsGC19);
+		GameCard gameCard20 = new GameCard20("Pass Soccer Class", "src/cecs343_bs_in_cs/pictures/20.png", validRoomsGC20);
+		GameCard gameCard21 = new GameCard21("Score a Goal!", "src/cecs343_bs_in_cs/pictures/21.png", validRoomsGC21);
+		GameCard gameCard22 = new GameCard22("Fall in the Pond", "src/cecs343_bs_in_cs/pictures/22.png", validRoomsGC22);
+		GameCard gameCard23 = new GameCard23("Make the Dean's List", "src/cecs343_bs_in_cs/pictures/23.png", validRoomsGC23);
+		GameCard gameCard24 = new GameCard24("A New Laptop", "src/cecs343_bs_in_cs/pictures/24.png", validRoomsGC24);
+		GameCard gameCard25 = new GameCard25("Meet the Dean", "src/cecs343_bs_in_cs/pictures/25.png", validRoomsGC25);
+		GameCard gameCard26 = new GameCard26("Loud Buzzing", "src/cecs343_bs_in_cs/pictures/26.png", validRoomsGC26);
+		GameCard gameCard27 = new GameCard27("Program Crashes", "src/cecs343_bs_in_cs/pictures/27.png", validRoomsGC27);
+		GameCard gameCard28 = new GameCard28("Professor Englert", "src/cecs343_bs_in_cs/pictures/28.png", validRoomsGC28);
+		GameCard gameCard29 = new GameCard29("Press the Right Floor", "src/cecs343_bs_in_cs/pictures/29.png", validRoomsGC29);
+		GameCard gameCard30 = new GameCard30("Soccer Goalie", "src/cecs343_bs_in_cs/pictures/30.png", validRoomsGC30);
+		GameCard gameCard31 = new GameCard31("Elective Class", "src/cecs343_bs_in_cs/pictures/31.png", validRoomsGC31);
+		GameCard gameCard32 = new GameCard32("Oral Communication", "src/cecs343_bs_in_cs/pictures/32.png", validRoomsGC32);
+		GameCard gameCard33 = new GameCard33("Professor Hoffman", "src/cecs343_bs_in_cs/pictures/33.png", validRoomsGC33);
+		GameCard gameCard34 = new GameCard34("CHEM 111", "src/cecs343_bs_in_cs/pictures/34.png", validRoomsGC34);
+		GameCard gameCard35 = new GameCard35("The Outpost", "src/cecs343_bs_in_cs/pictures/35.png", validRoomsGC35);
+		GameCard gameCard36 = new GameCard36("Learning Linux", "src/cecs343_bs_in_cs/pictures/36.png", validRoomsGC36);
+		GameCard gameCard37 = new GameCard37("Make a Friend", "src/cecs343_bs_in_cs/pictures/37.png", validRoomsGC37);
+		GameCard gameCard38 = new GameCard38("Enjoying Nature", "src/cecs343_bs_in_cs/pictures/38.png", validRoomsGC38);
+		GameCard gameCard39 = new GameCard39("Student Parking", "src/cecs343_bs_in_cs/pictures/39.png", validRoomsGC39);
+
 		//Adds game card images to list of active cards
-		stackOfCards.add(gameCard1);
-		stackOfCards.add(gameCard2);
-		stackOfCards.add(gameCard3);
-		stackOfCards.add(gameCard4);
-		stackOfCards.add(gameCard5);
-		stackOfCards.add(gameCard6);
-		stackOfCards.add(gameCard7);
-		stackOfCards.add(gameCard8);
-		stackOfCards.add(gameCard9);
-		stackOfCards.add(gameCard10);
-		stackOfCards.add(gameCard11);
-		stackOfCards.add(gameCard12);
-		stackOfCards.add(gameCard13);
-		stackOfCards.add(gameCard14);
-		stackOfCards.add(gameCard15);
-		stackOfCards.add(gameCard16);
-		stackOfCards.add(gameCard17);
-		stackOfCards.add(gameCard18);
-		stackOfCards.add(gameCard19);
-		stackOfCards.add(gameCard20);
-		stackOfCards.add(gameCard21);
-		stackOfCards.add(gameCard22);
-		stackOfCards.add(gameCard23);
-		stackOfCards.add(gameCard25);
-		stackOfCards.add(gameCard26);
-		stackOfCards.add(gameCard27);
-		stackOfCards.add(gameCard28);
-		stackOfCards.add(gameCard29);
-		stackOfCards.add(gameCard30);
-		stackOfCards.add(gameCard31);
-		stackOfCards.add(gameCard32);
-		stackOfCards.add(gameCard33);
-		stackOfCards.add(gameCard34);
-		stackOfCards.add(gameCard35);
-		stackOfCards.add(gameCard36);
-		stackOfCards.add(gameCard37);
-		stackOfCards.add(gameCard38);
-		stackOfCards.add(gameCard39);
+		listOfCards.add(gameCard1);
+		listOfCards.add(gameCard2);
+		listOfCards.add(gameCard3);
+		listOfCards.add(gameCard4);
+		listOfCards.add(gameCard5);
+		listOfCards.add(gameCard6);
+		listOfCards.add(gameCard7);
+		listOfCards.add(gameCard8);
+		listOfCards.add(gameCard9);
+		listOfCards.add(gameCard10);
+		listOfCards.add(gameCard11);
+		listOfCards.add(gameCard12);
+		listOfCards.add(gameCard13);
+		listOfCards.add(gameCard14);
+		listOfCards.add(gameCard15);
+		listOfCards.add(gameCard16);
+		listOfCards.add(gameCard17);
+		listOfCards.add(gameCard18);
+		listOfCards.add(gameCard19);
+		listOfCards.add(gameCard20);
+		listOfCards.add(gameCard21);
+		listOfCards.add(gameCard22);
+		listOfCards.add(gameCard23);
+		listOfCards.add(gameCard24);
+		listOfCards.add(gameCard25);
+		listOfCards.add(gameCard26);
+		listOfCards.add(gameCard27);
+		listOfCards.add(gameCard28);
+		listOfCards.add(gameCard29);
+		listOfCards.add(gameCard30);
+		listOfCards.add(gameCard31);
+		listOfCards.add(gameCard32);
+		listOfCards.add(gameCard33);
+		listOfCards.add(gameCard34);
+		listOfCards.add(gameCard35);
+		listOfCards.add(gameCard36);
+		listOfCards.add(gameCard37);
+		listOfCards.add(gameCard38);
+		listOfCards.add(gameCard39);
 		
 	}
 	
 	public void shuffle() {
 		//Shuffle deck 
 		long seed = System.nanoTime();
-		Collections.shuffle(stackOfCards, new Random(seed));
+		Collections.shuffle(listOfCards, new Random(seed));
 	}
 	
-	public GameCard getCard() {
-		return stackOfCards.pop();
+	public GameCard drawCard() {
+		listOfDiscardedCards.add(listOfCards.get(listOfCards.size() - 1));
+		listOfCards.remove(listOfCards.size() - 1);
+		return listOfDiscardedCards.get(listOfDiscardedCards.size() - 1);
+	}
+	
+	public ArrayList<GameCard> getListOfCards() {
+		return listOfCards;
 	}
 }
