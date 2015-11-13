@@ -26,6 +26,7 @@ public class GameView  /*implements MouseListener*/ {
     private static GameModel model;
     private JList<Room> adjacentRoomsList;
     private JScrollPane listScroller;
+    private int moveCount;
 
     //For finding the x, y of the rooms
 //	   JTextArea textArea;
@@ -77,10 +78,36 @@ public class GameView  /*implements MouseListener*/ {
                 (int) (windowHeight * (heightMultiplier / 2)));
         controlPanel.setPreferredSize(controlPanelSize);
 
+        // Create Draw Card button
+        JPanel drawCardButtonPanel = new JPanel();
+        JButton drawCardButton = new JButton("Draw Card");
+        drawCardButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        drawCardButton.setEnabled(true);
+        
         //Creates the play card and move button
         JPanel moveButtonPanel = new JPanel();
         JButton moveButton = new JButton("Move");
         moveButton.setHorizontalTextPosition(SwingConstants.LEFT);
+        moveButton.setEnabled(false);
+        
+        JPanel playCardPanel = new JPanel();
+        JButton playCardButton = new JButton("Play Card");
+        playCardButton.setHorizontalAlignment(SwingConstants.CENTER);
+        playCardPanel.add(playCardButton);
+        playCardButton.setEnabled(false);
+        
+        // Draw Card Action Listener
+        final class DrawCardActionListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.getPlayer(PlayerNumber.HUMAN).addCardToHand(model.getCardDeck());
+                drawCardButton.setEnabled(false);
+                moveButton.setEnabled(true);
+                playCardButton.setEnabled(true);
+            }
+        }
+        drawCardButton.addActionListener(new DrawCardActionListener());
+        drawCardButtonPanel.add(drawCardButton);
 
         // Add action listener to move button
         final class MoveActionListener implements ActionListener {
@@ -91,7 +118,7 @@ public class GameView  /*implements MouseListener*/ {
                 
                 // Add handling for the case where no room is selected
                 
-           
+                
                 Room newRoom = adjacentRoomsList.getSelectedValue();
                 model.getPlayer(PlayerNumber.HUMAN).setCurrentRoom(newRoom);
                 updateGameBoard();
@@ -100,42 +127,67 @@ public class GameView  /*implements MouseListener*/ {
         moveButton.addActionListener(new MoveActionListener());
         moveButtonPanel.add(moveButton);
 
-        JPanel playCardPanel = new JPanel();
-        JButton playCardButton = new JButton("Play Card");
-        playCardButton.setHorizontalAlignment(SwingConstants.CENTER);
-        playCardPanel.add(playCardButton);
-
-        //Create layoput for the control panel
+        // Play Card action listener
+        final class PlayCardActionListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Figure out how to pass GameCard value into here
+                model.getPlayer(PlayerNumber.HUMAN).playCard(null);
+            }      
+        }
+        
+        //Create layout for the control panel
         BoxLayout controlPanelLayout = new BoxLayout(controlPanel, BoxLayout.X_AXIS);
         controlPanel.setLayout(controlPanelLayout);
-
-        //Create layout for the list and buttons panel and set prefered size
-        BoxLayout listAndButtonPanelLayout = new BoxLayout(listAndButtonPanel, BoxLayout.Y_AXIS);
-        listAndButtonPanel.setLayout(listAndButtonPanelLayout);
-        listAndButtonPanel.setPreferredSize(new Dimension(20, (int) (windowHeight * (heightMultiplier / 2))));
-        
-        //Create and display the gamecard panel
-        //gameCardPanel.add(model.getPlayer(PlayerNumber.HUMAN).getHand());
-
-        //Add panels to control panel
-        controlPanel.add(listAndButtonPanel);
-        
-
-        //Add panels to list and button panel
-        listAndButtonPanel.add(moveButtonPanel);
-        listAndButtonPanel.add(playCardPanel);
 
         //For Showing the x, y location of the mouse click
 //	     textArea = new JTextArea();
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
-        gameCardPanel.setPreferredSize(new Dimension(20, (int) (windowHeight * (heightMultiplier / 2))));
+        
+        // Control panel components
+        double controlPanelWidthMultipler = (double) 1 / 6;
+        
+        //Create layout for the list and buttons panel and set prefered size
+        BoxLayout listAndButtonPanelLayout = new BoxLayout(listAndButtonPanel, BoxLayout.Y_AXIS);
+        listAndButtonPanel.setLayout(listAndButtonPanelLayout);
+        listAndButtonPanel.setPreferredSize(new Dimension((int)
+                (controlPanelSize.width * controlPanelWidthMultipler),
+                controlPanelSize.height));
+
+        //Add panels to list and button panel
+        listAndButtonPanel.add(drawCardButtonPanel);
+        listAndButtonPanel.add(moveButtonPanel);
+        listAndButtonPanel.add(playCardPanel);
+        
+        gameCardPanel.setPreferredSize(new Dimension(
+                (int) (controlPanelSize.width * controlPanelWidthMultipler),
+                controlPanelSize.height));
         gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
         		.getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
         gameCardPanel.add(gameCardLabel);
-        controlPanel.add(gameCardPanel);
+
+        // Figure out how to expand both text areas into better sizes
+	JTextArea informationTextArea = new JTextArea("Information Panel");
+        JTextArea currentPlayTextArea = new JTextArea("Current Play Panel");
         
-	     
+        JPanel informationPanel = new JPanel();
+        informationPanel.add(informationTextArea);
+        informationPanel.setPreferredSize(new Dimension((int)
+                (controlPanelSize.width * controlPanelWidthMultipler * 4),
+                controlPanelSize.height));
+        
+        JPanel currentPlayPanel = new JPanel();
+        currentPlayPanel.add(currentPlayTextArea);
+        currentPlayPanel.setPreferredSize(new Dimension((int)
+                (controlPanelSize.width * (controlPanelWidthMultipler * 2)),
+                controlPanelSize.height));
+        
+        BoxLayout textAreaPanelLayout = new BoxLayout(textAreaPanel, BoxLayout.Y_AXIS);
+        textAreaPanel.setLayout(textAreaPanelLayout);
+        textAreaPanel.add(informationPanel);
+        textAreaPanel.add(currentPlayPanel);
+        
         adjacentRoomsList = new JList<Room>();
         DisplayAdjacentRooms();
         
@@ -143,7 +195,9 @@ public class GameView  /*implements MouseListener*/ {
         listScroller.setPreferredSize(new Dimension(250, 80));
         listAndButtonPanel.add(listScroller);
         
-        
+        //Add panels to control panel
+        controlPanel.add(listAndButtonPanel);
+        controlPanel.add(gameCardPanel);
         controlPanel.add(textAreaPanel);
         
         masterPanel.add(gameBoardScroller);
@@ -178,8 +232,6 @@ public class GameView  /*implements MouseListener*/ {
 
     public void DisplayGameCard() {
     	
-    	
-
     }
 
     public void DisplayTextArea() {
