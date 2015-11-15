@@ -68,6 +68,11 @@ public class Player {
     public int getIntegrityChips() {
         return integrityChip;
     }
+    
+    public int getQualityPoints() {
+    	return qualityPoint;
+    }
+    
     public void updateQP(int pointUpdate) {
         qualityPoint += pointUpdate;
     }
@@ -82,6 +87,7 @@ public class Player {
     public void playCard(GameCard card) {
         card.play(this);
         // Discard card afterwards
+        getHandOfCards().remove(0);
     }
     
     public void discardGameCard(){
@@ -110,7 +116,7 @@ public class Player {
     
     public void addCardToHand(Deck cardDeck) {
     	// getCardDeck is returning null
-    	// fix it
+    	// fix it  	
     	handOfCards.add(cardDeck.drawCard());
     }
 
