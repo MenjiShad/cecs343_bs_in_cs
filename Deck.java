@@ -167,6 +167,7 @@ public class Deck {
 	}
 	
 	public GameCard drawCard() {
+
 		listOfDiscardedCards.add(listOfCards.get(listOfCards.size() - 1));
 		listOfCards.remove(listOfCards.size() - 1);
 		return listOfDiscardedCards.get(listOfDiscardedCards.size() - 1);
@@ -174,5 +175,9 @@ public class Deck {
 	
 	public ArrayList<GameCard> getListOfCards() {
 		return listOfCards;
+	}
+	
+	public ArrayList<GameCard> getListOfDiscardedCards(){
+		return listOfDiscardedCards;
 	}
 }
