@@ -27,6 +27,8 @@ public class GameView  /*implements MouseListener*/ {
     private JList<Room> adjacentRoomsList;
     private JScrollPane listScroller;
     private int moveCount;
+    private JTextArea informationTextArea = new JTextArea(10,110);
+    private GameCard currentViewedCard;
 
     //For finding the x, y of the rooms
 //	   JTextArea textArea;
@@ -96,6 +98,14 @@ public class GameView  /*implements MouseListener*/ {
         playCardPanel.add(playCardButton);
         playCardButton.setEnabled(false);
         
+        JPanel cycleCardPanel = new JPanel();
+        JButton cycleCardButton = new JButton("Cycle Card");
+        cycleCardButton.setHorizontalAlignment(SwingConstants.CENTER);
+        cycleCardPanel.add(cycleCardButton);
+        cycleCardButton.setEnabled(true);
+        
+   
+    
         // Draw Card Action Listener
         final class DrawCardActionListener implements ActionListener {
             @Override
@@ -126,19 +136,77 @@ public class GameView  /*implements MouseListener*/ {
         }
         moveButton.addActionListener(new MoveActionListener());
         moveButtonPanel.add(moveButton);
+        
+      //Cycle cards to choose from
+        //Still have to figure out how to delete card from screen if the player plays the card
+        final class CycleCardActionListener implements ActionListener {
+        	private int counter = 1;
+        	
+        	CycleCardActionListener(){ 
+        		gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
+        	            		.getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
+        		currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+		        		.getHandOfCards().get(0);
+        	}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//If its the last card in the hand, show the first card
+				if(counter == model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()) {
+
+					gameCardLabel.setIcon( model.getPlayer(PlayerNumber.HUMAN)
+			        		.getHandOfCards().get(0).getCardImage());
+					currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+			        		.getHandOfCards().get(0);
+					gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
+					counter = 1;
+					System.out.println();
+
+				}
+				else {
+					gameCardLabel.setIcon( model.getPlayer(PlayerNumber.HUMAN)
+			        		.getHandOfCards().get(counter).getCardImage());
+					currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+			        		.getHandOfCards().get(counter);
+					gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
+					counter++;
+				}
+				 
+				
+			}
+
+        	
+        }
+        cycleCardButton.addActionListener(new CycleCardActionListener());
+        cycleCardPanel.add(cycleCardButton);
 
         // Play Card action listener
         final class PlayCardActionListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Figure out how to pass GameCard value into here
-                model.getPlayer(PlayerNumber.HUMAN).playCard(null);
+            	
+            	//Debug
+            	System.out.println(currentViewedCard);
+            	
+            	//Still have to figure out how to discard the card on the screen before the player is allowed to play the card again
+            	
+                model.getPlayer(PlayerNumber.HUMAN).playCard(currentViewedCard);
+                playCardButton.setEnabled(false);
+                drawCardButton.setEnabled(true);
+                model.getPlayer(PlayerNumber.HUMAN).discardGameCard();
+                updateGameBoard();
             }      
         }
+        playCardButton.addActionListener(new PlayCardActionListener());
+        playCardPanel.add(playCardButton);
         
         //Create layout for the control panel
         BoxLayout controlPanelLayout = new BoxLayout(controlPanel, BoxLayout.X_AXIS);
         controlPanel.setLayout(controlPanelLayout);
+        
+        
+        
 
         //For Showing the x, y location of the mouse click
 //	     textArea = new JTextArea();
@@ -154,6 +222,10 @@ public class GameView  /*implements MouseListener*/ {
         listAndButtonPanel.setPreferredSize(new Dimension((int)
                 (controlPanelSize.width * controlPanelWidthMultipler),
                 controlPanelSize.height));
+        
+        //Create layout for the cycle button panel
+        BoxLayout gameCardPanelLayout = new BoxLayout(gameCardPanel, BoxLayout.Y_AXIS);
+        gameCardPanel.setLayout(gameCardPanelLayout);
 
         //Add panels to list and button panel
         listAndButtonPanel.add(drawCardButtonPanel);
@@ -163,13 +235,32 @@ public class GameView  /*implements MouseListener*/ {
         gameCardPanel.setPreferredSize(new Dimension(
                 (int) (controlPanelSize.width * controlPanelWidthMultipler),
                 controlPanelSize.height));
-        gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
-        		.getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
+        
+                
+        
         gameCardPanel.add(gameCardLabel);
+        gameCardPanel.add(cycleCardPanel);
 
         // Figure out how to expand both text areas into better sizes
-	JTextArea informationTextArea = new JTextArea("Information Panel");
-        JTextArea currentPlayTextArea = new JTextArea("Current Play Panel");
+        informationTextArea.append("\tLearning\tCraft\tIntegrity\tQuality Points"
+        												+ "\n" + model.getPlayer(PlayerNumber.HUMAN).getStudentName() + "\t " + model.getPlayer(PlayerNumber.HUMAN).getLearningChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.HUMAN).getCraftChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.HUMAN).getIntegrityChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.HUMAN).getQualityPoints()
+        												+ "\n" + model.getPlayer(PlayerNumber.AI1).getStudentName() + "\t " + model.getPlayer(PlayerNumber.AI1).getLearningChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.AI1).getCraftChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.AI1).getIntegrityChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.AI1).getQualityPoints()
+        												+ "\n" + model.getPlayer(PlayerNumber.AI2).getStudentName() + "\t " + model.getPlayer(PlayerNumber.AI2).getLearningChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.AI2).getCraftChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.AI2).getIntegrityChips() + "\t "
+        												+ model.getPlayer(PlayerNumber.AI2).getQualityPoints()
+        												+ "\n\n" 
+        												+ "Cards in Deck:  " + model.getCardDeck().getListOfCards().size()
+        												+ "\tDiscards out of play:  " + model.getCardDeck().getListOfDiscardedCards().size()
+        												+ "\n\nYou are " + model.getPlayer(PlayerNumber.HUMAN).getStudentName() 
+        												+ " and you are in room " + model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom());
+        JTextArea currentPlayTextArea = new JTextArea("Current Play Panel", 5, 110);
         
         JPanel informationPanel = new JPanel();
         informationPanel.add(informationTextArea);
@@ -230,18 +321,35 @@ public class GameView  /*implements MouseListener*/ {
         adjacentRoomsList.setVisibleRowCount(3);   
     }
 
-    public void DisplayGameCard() {
+
+    public void DisplayInformationPanel() {
     	
-    }
-
-    public void DisplayTextArea() {
-
     }
 
     public void updateGameBoard() {
         //Create rooms and displays them on the list
         DisplayAdjacentRooms();
         gameBoardLabel.paintComponent(gameBoardLabel.getGraphics());
+        
+        //Have to figure out how to not reuse this code...
+        informationTextArea.setText("\tLearning\tCraft\tIntegrity\tQuality Points"
+				+ "\n" + model.getPlayer(PlayerNumber.HUMAN).getStudentName() + "\t " + model.getPlayer(PlayerNumber.HUMAN).getLearningChips() + "\t "
+				+ model.getPlayer(PlayerNumber.HUMAN).getCraftChips() + "\t "
+				+ model.getPlayer(PlayerNumber.HUMAN).getIntegrityChips() + "\t "
+				+ model.getPlayer(PlayerNumber.HUMAN).getQualityPoints()
+				+ "\n" + model.getPlayer(PlayerNumber.AI1).getStudentName() + "\t " + model.getPlayer(PlayerNumber.AI1).getLearningChips() + "\t "
+				+ model.getPlayer(PlayerNumber.AI1).getCraftChips() + "\t "
+				+ model.getPlayer(PlayerNumber.AI1).getIntegrityChips() + "\t "
+				+ model.getPlayer(PlayerNumber.AI1).getQualityPoints()
+				+ "\n" + model.getPlayer(PlayerNumber.AI2).getStudentName() + "\t " + model.getPlayer(PlayerNumber.AI2).getLearningChips() + "\t "
+				+ model.getPlayer(PlayerNumber.AI2).getCraftChips() + "\t "
+				+ model.getPlayer(PlayerNumber.AI2).getIntegrityChips() + "\t "
+				+ model.getPlayer(PlayerNumber.AI2).getQualityPoints()
+				+ "\n\n" 
+				+ "Cards in Deck:  " + model.getCardDeck().getListOfCards().size()
+				+ "\tDiscards out of play:  " + model.getCardDeck().getListOfDiscardedCards().size()
+				+ "\n\nYou are " + model.getPlayer(PlayerNumber.HUMAN).getStudentName() 
+				+ " and you are in room " + model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom());
     }
 //   void eventOutput(String eventDescription, MouseEvent e) {
 //        System.out.println(eventDescription + " detected on "
