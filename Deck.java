@@ -182,4 +182,13 @@ public class Deck {
     public void addToDiscard(GameCard card) {
         listOfDiscardedCards.add(card);
     }
+    
+    public void shuffleDiscardDeck() {
+    	System.out.println("\n\nIn shufflediscardmethod\n\n");
+    	for(int i = 0; i < listOfDiscardedCards.size(); i++) {
+    		listOfCards.add(listOfDiscardedCards.get(i));
+    		listOfDiscardedCards.remove(i);
+    	}
+    	shuffle();
+    }
 }
