@@ -1,5 +1,7 @@
 package cecs343_bs_in_cs;
 
+import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -22,7 +24,7 @@ public class ChipChoosingDialogBox extends JDialog {
     public ChipChoosingDialogBox(boolean learningEnable, boolean craftEnable,
             boolean integrityEnable) {
         this.setModalityType(DEFAULT_MODALITY_TYPE); // Set to Modal
-        dialogPanel.setLayout(null); // Thinking BoxLayout
+        dialogPanel.setLayout(new FlowLayout()); // Thinking BoxLayout
         this.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT); // May change
         dialogPanel.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT); // May change
         
@@ -35,10 +37,14 @@ public class ChipChoosingDialogBox extends JDialog {
 
         
         // setEnabled(boolean) on the 3 buttons
-        
+        learningButton.setEnabled(learningEnable);
+        craftButton.setEnabled(craftEnable);
+        integrityButton.setEnabled(integrityEnable);
         
         // add Buttons to the panel
-        
+        dialogPanel.add(learningButton);
+        dialogPanel.add(craftButton);
+        dialogPanel.add(integrityButton);
         
         // add panel to the dialog box
         this.add(dialogPanel);
