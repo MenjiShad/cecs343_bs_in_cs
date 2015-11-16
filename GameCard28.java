@@ -4,12 +4,13 @@ package cecs343_bs_in_cs;
  * Professor Englert
  * Play in CECS Conference
  * Prereq: 3 Integrity
- * Get chip of choice
+ * Get chip of choice 
  * Fail: Discard 1 Card
  */
 public class GameCard28 extends GameCard {
 
-    public GameCard28() {}
+    public GameCard28() {
+    }
 
     public GameCard28(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
@@ -21,6 +22,8 @@ public class GameCard28 extends GameCard {
 
     @Override
     public void play(Player player) {
+        // Prep Current Play String
+        gameCardAction = player.getStudentName() + " played " + gameCardName;
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -36,12 +39,21 @@ public class GameCard28 extends GameCard {
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 Object[] selectionValues = {"Learning", "Craft", "Integrity"};
                 player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
-            } else 
+                gameCardAction += " for 1 <chip> Chip";
+            } else {
                 player.discardGameCard();
-            
+                gameCardAction += " and failed";
+            }
 
-        } else 
+        } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
-    
+            gameCardAction += " and failed";
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 }

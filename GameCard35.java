@@ -19,6 +19,8 @@ public class GameCard35 extends GameCard {
         
     @Override
     public void play(Player player) {
+        // Prep Current Play String
+        gameCardAction = player.getStudentName() + " played " + gameCardName;
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -33,9 +35,17 @@ public class GameCard35 extends GameCard {
            //Dialog box
            Object[] selectionValues = { "Learning", "Craft", "Integrity"};
            player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
+           gameCardAction += " for 1 <chip> Chip";
        
-        } else 
+        } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            gameCardAction += " and failed";
+        }
    
+    }
+
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 }

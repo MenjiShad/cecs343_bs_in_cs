@@ -22,6 +22,8 @@ public class GameCard25 extends GameCard {
 
     @Override
     public void play(Player player) {
+        // Prep Current Play String
+        gameCardAction = player.getStudentName() + " played " + gameCardName;
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -38,10 +40,19 @@ public class GameCard25 extends GameCard {
                 player.updateQP(5);
                 Object[] selectionValues = {"Learning", "Craft", "Integrity"};
                 player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
-            } else 
+                gameCardAction += " for 5 Quality Points and 1 card";
+            } else {
                 player.discardGameCard();
-            
-        } else 
+                gameCardAction += " and failed";
+            }
+        } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            gameCardAction += " and failed";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 }

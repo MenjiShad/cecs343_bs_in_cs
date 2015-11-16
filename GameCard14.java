@@ -32,15 +32,28 @@ public class GameCard14 extends GameCard {
         }
         
         if (validRoom) {
+            // Prep Current Play String
+            gameCardAction = player.getStudentName() + " played " + gameCardName;
             // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
+            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateQP(5);
-            else 
+                gameCardAction += " for 5 Quality Points";
+            }
+            else {
                 player.updateQP(-3);
+                gameCardAction += " and failed";
+            }
             
-        } else 
+        } else {
              player.updateQP(INCORRECT_ROOM_QP_LOSS);
+             gameCardAction += " and failed";
+        }
         
+    }
+
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 
 }

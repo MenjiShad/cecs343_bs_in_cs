@@ -15,6 +15,8 @@ public class GameCard3 extends GameCard {
         
     @Override
     public void play(Player player) {
+        // Prep Current Play String
+        gameCardAction = player.getStudentName() + " played " + gameCardName;
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -27,10 +29,17 @@ public class GameCard3 extends GameCard {
         
         if (validRoom) {
             // Player chooses between 1 learning or integrity
-     
-        } else 
+            gameCardAction += " for 1 <chip> Chip";
+        } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            gameCardAction += " and failed";
+        }
         
+    }
+
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 
 }

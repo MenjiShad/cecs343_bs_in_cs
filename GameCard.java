@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 public abstract class GameCard {
 
-    private String gameCardName;
+    protected String gameCardName, gameCardAction;
     private ImageIcon gameCardImage;
     protected ArrayList<Room> listOfValidRooms;
     protected int learningPreReq, craftPreReq, integrityPreReq;
@@ -19,10 +19,10 @@ public abstract class GameCard {
         gameCardImage = new ImageIcon(imageFileName);
         listOfValidRooms = new ArrayList<Room>(Arrays.asList(validRooms));
     }
-    
+
     protected ImageIcon getCardImage() {
-    	System.out.println(gameCardImage);
-    	return gameCardImage;
+        System.out.println(gameCardImage);
+        return gameCardImage;
     }
 
     protected boolean checkPreReqs(Player player, int learning,
@@ -33,9 +33,5 @@ public abstract class GameCard {
     }
 
     public abstract void play(Player player);
-    
-    public String toString() {
-    	return gameCardName;
-    }
-    
+
 }

@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
 /**
- * Loud Buzzing
- * Play in EAT Room
- * Prereq: 3 Craft
- * Get 1 Chip of choice
+ * Loud Buzzing 
+ * Play in EAT Room 
+ * Prereq: 3 Craft 
+ * Get 1 Chip of choice 
  * Fail: Lose 2 QP
  */
 public class GameCard26 extends GameCard {
 
-    public GameCard26() {}
+    public GameCard26() {
+    }
 
     public GameCard26(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
@@ -21,6 +22,8 @@ public class GameCard26 extends GameCard {
 
     @Override
     public void play(Player player) {
+        // Prep Current Play String
+        gameCardAction = player.getStudentName() + " played " + gameCardName;
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -34,13 +37,20 @@ public class GameCard26 extends GameCard {
         if (validRoom) {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                //get 1 chip of choice
-            }
-            else
+                gameCardAction += " for 1 <chip> Chip";
+            } else {
                 player.updateQP(-2);
-        } else 
+                gameCardAction += " and failed";
+            }
+        } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
-        
+            gameCardAction += " and failed";
+        }
 
+    }
+    
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 }

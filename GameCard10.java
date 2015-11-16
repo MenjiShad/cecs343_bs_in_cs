@@ -21,6 +21,8 @@ public class GameCard10 extends GameCard {
         
     @Override
     public void play(Player player) {
+        // Prep Current Play String
+        gameCardAction = player.getStudentName() + " played " + gameCardName;
         // Check for correct Room
         boolean validRoom = false;
         for (Room room : listOfValidRooms) {
@@ -33,15 +35,25 @@ public class GameCard10 extends GameCard {
         
         if (validRoom) {
             // Check prereqs
-            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq))
+            if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateQP(10);
+            gameCardAction += " for 10 Quality Points";
+            }
             else {
                 // Discard one Card
             	player.discardGameCard();
+                gameCardAction += " and failed";
             }
-        } else 
+        } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            gameCardAction += " and failed";
+        }
         
+    }
+
+    @Override
+    public String toString() {
+        return gameCardAction;
     }
 
 }
