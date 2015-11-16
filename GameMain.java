@@ -13,19 +13,16 @@ package cecs343_bs_in_cs;
 public class GameMain {
 
     // Master location to control the name of the game and the image file
-    private static String gameName = "BS in CS";
+    private static final String gameName = "BS in CS";
 
-    //James Image File Location
-    private static String imageFileName = "src/cecs343_bs_in_cs/CSULBMap3.png";
-
-   //Zach Image File Location
-//   private static String imageFileName = "src/CSULBMap3.png";
+    // Image File Location
+    private static final String imageFileName = "src/cecs343_bs_in_cs/CSULBMap3.png";
 
     public static void main(String[] args) {
 
         GameModel model = GameModel.getInstance();
         GameView view = new GameView(gameName, imageFileName, model);
-
-        view.createGameBoard();   // Used to set up the frame
+        
+        view.createGameFrame();   // Used to set up the frame
     }
 }
