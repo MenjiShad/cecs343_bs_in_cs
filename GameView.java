@@ -31,11 +31,15 @@ public class GameView /*implements MouseListener*/ {
     private JTextArea informationTextArea;
     private JTextArea currentPlayTextArea;
     private GameCard currentViewedCard;
+    private boolean playedCard;
 
     //For finding the x, y of the rooms
 //	   JTextArea textArea;
     // default constructor
-    public GameView() {}
+    public GameView() {
+    	moveCount = 0;
+    	playedCard = false;
+    }
 
     // constructor that takes in the title of the frame and the 
     // file name of the board image
@@ -109,10 +113,18 @@ public class GameView /*implements MouseListener*/ {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	//Shuffle discarded deck and add them to active deck
+            	if(model.getCardDeck().getListOfCards().size() == 0) {
+            		model.getCardDeck().shuffleDiscardDeck();
+            	}
+            
                 model.getPlayer(PlayerNumber.HUMAN).addCardToHand(model.getCardDeck());
                 drawCardButton.setEnabled(false);
                 moveButton.setEnabled(true);
-                playCardButton.setEnabled(true);
+                playCardButton.setEnabled(true);    
+                moveCount = 0;
+                updateGameBoard();
             }
         }
         drawCardButton.addActionListener(new DrawCardActionListener());
@@ -130,6 +142,13 @@ public class GameView /*implements MouseListener*/ {
                 model.getPlayer(PlayerNumber.HUMAN).setCurrentRoom(newRoom);
                 updateGameBoard();
                 moveCount++;
+                
+                //Only allows the player to move up to 3 times
+                //Might need to implement this differently
+                if(moveCount >= 3) {
+                    moveButton.setEnabled(false);
+                }
+                	
             }
         }
         moveButton.addActionListener(new MoveActionListener());
@@ -192,7 +211,16 @@ public class GameView /*implements MouseListener*/ {
                 updateCurrentPlay(currentViewedCard);
                 playCardButton.setEnabled(false);
                 drawCardButton.setEnabled(true);
-                model.getPlayer(PlayerNumber.HUMAN).discardGameCard(currentViewedCard);
+                
+                //Updates the current card viewed 
+                playedCard = true;
+                if(playedCard) {
+                	gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+                            .getHandOfCards().get(0).getCardImage());
+                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0);
+                }
+                playedCard = false;
+                
                 updateGameBoard();
             }
         }
@@ -228,8 +256,9 @@ public class GameView /*implements MouseListener*/ {
         gameCardPanel.add(gameCardLabel);
         gameCardPanel.add(cycleCardPanel);
         
-        informationTextArea = new JTextArea("Infomration Panel", 15, 110);
-        currentPlayTextArea = new JTextArea("Current Play Panel", 10, 110);
+        informationTextArea = new JTextArea("Infomration Panel", 15, 115);
+        currentPlayTextArea = new JTextArea("Huamn player is " + model.getPlayer(PlayerNumber.HUMAN).getStudentName() + "\n", 7, 113);
+        JScrollPane currentPlayTextAreaSP = new JScrollPane(currentPlayTextArea);   // JTextArea is placed in a JScrollPane.
         Border blackline = BorderFactory.createLineBorder(Color.black);
         
         // Info Panel GUI
@@ -243,7 +272,7 @@ public class GameView /*implements MouseListener*/ {
         // Current Play Text Area GUI
         JPanel currentPlayPanel = new JPanel();
         currentPlayPanel.setBorder(blackline);
-        currentPlayPanel.add(currentPlayTextArea);
+        currentPlayPanel.add(currentPlayTextAreaSP);
         currentPlayPanel.setPreferredSize(new Dimension((int) 
                 (controlPanelSize.width * (controlPanelWidthMultipler * 2)),
                 controlPanelSize.height));
@@ -324,6 +353,8 @@ public class GameView /*implements MouseListener*/ {
                 + "\n\n"
                 + "Cards in Deck:  " + model.getCardDeck().getListOfCards().size()
                 + "\tDiscards out of play:  " + model.getCardDeck().getListOfDiscardedCards().size()
+                //For Debugging
+                + "\tCards in hand:  " + model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()
                 + "\n\nYou are " + model.getPlayer(PlayerNumber.HUMAN).getStudentName()
                 + " and you are in room " + model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom());
     }
