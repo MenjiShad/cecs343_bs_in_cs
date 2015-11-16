@@ -11,11 +11,11 @@ import java.util.Random;
  */
 public class GameModel {
 
-    private static GameModel model = null;
+    private static GameModel model = new GameModel();
     private Player HumanPlayer;
     private Player AIPlayer1;
     private Player AIPlayer2;
-    private List<Room> listOfRooms;
+    private static List<Room> listOfRooms;
     private Deck cardDeck;
 
     private GameModel() {
@@ -28,40 +28,8 @@ public class GameModel {
     	cardDeck = new Deck(listOfRooms);
     	cardDeck.shuffle();
 
-        // Initialize players
-        int initialLearning;
-        int initialIntegrity;
-        int initialCraft;
-
-        // Initial stats for Player 1
-        initialLearning = 2;
-        initialIntegrity = 2;
-        initialCraft = 2;
-        Player Player1 = new Player("Matt", 0, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft, cardDeck);
-
-        // Initial stats for Player 2
-        initialLearning = 3;
-        initialIntegrity = 1;
-        initialCraft = 2;
-        Player Player2 = new Player("Tony", 1, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft, cardDeck);
-
-        // Initial stats for Player 3
-        initialLearning = 0;
-        initialIntegrity = 3;
-        initialCraft = 3;
-        Player Player3 = new Player("Derek", 2, listOfRooms.get(17),
-                initialLearning, initialIntegrity, initialCraft, cardDeck);
-
-        Player[] playerTokenArray = new Player[]{Player1, Player2, Player3};
-        shuffleArray(playerTokenArray);   // Randomize the tokens
-
-        // Assign randomized tokens to each player
-        HumanPlayer = playerTokenArray[0];
-        AIPlayer1 = playerTokenArray[1];
-        AIPlayer2 = playerTokenArray[2];
-        
+        // Initialize Players
+        createPlayers();
     }
 
     // Limit GameModel to a single instance
@@ -78,11 +46,10 @@ public class GameModel {
         else if (pNumber == PlayerNumber.AI1) 
             return AIPlayer1;
         else 
-            return AIPlayer2;
-        
+            return AIPlayer2;     
     }
 
-    public List<Room> getListOfRooms() {
+    public static List<Room> getListOfRooms() {
         return listOfRooms;
     }
 
@@ -135,6 +102,50 @@ public class GameModel {
         listOfRooms.add(new Room("Lactation Lounge", 20, 1210, 1425, listOfAdjacentRooms20));
     }
 
+    private void createPlayers() {
+        // Initialize players
+        int initialLearning;
+        int initialIntegrity;
+        int initialCraft;
+
+        // Initial stats for Player 1
+        initialLearning = 2;
+        initialIntegrity = 2;
+        initialCraft = 2;
+        Player Player1 = new Player("Matt", 0, listOfRooms.get(17),
+                initialLearning, initialIntegrity, initialCraft);
+
+        // Initial stats for Player 2
+        initialLearning = 3;
+        initialIntegrity = 1;
+        initialCraft = 2;
+        Player Player2 = new Player("Tony", 1, listOfRooms.get(17),
+                initialLearning, initialIntegrity, initialCraft);
+
+        // Initial stats for Player 3
+        initialLearning = 0;
+        initialIntegrity = 3;
+        initialCraft = 3;
+        Player Player3 = new Player("Derek", 2, listOfRooms.get(17),
+                initialLearning, initialIntegrity, initialCraft);
+
+        Player[] playerTokenArray = new Player[]{Player1, Player2, Player3};
+        shuffleArray(playerTokenArray);   // Randomize the tokens
+
+        // Assign randomized tokens to each player
+        HumanPlayer = playerTokenArray[0];
+        AIPlayer1 = playerTokenArray[1];
+        AIPlayer2 = playerTokenArray[2];
+        
+        for (int i = 0; i < 5; i++) {
+            HumanPlayer.addCardToHand(cardDeck);
+        }
+    }
+    
+    public GameCard drawCardFromDeck() {
+        return cardDeck.drawCard();
+    }
+    
     /**
      * Implemented the Knuth Shuffle to shuffle a small array
      *
