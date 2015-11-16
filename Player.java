@@ -21,7 +21,7 @@ public class Player {
     public Player() {}
 
     public Player(String name, int playerNumber, Room startingRoom,
-            int initialLearning, int initialIntegrity, int initialCraft, Deck cardDeck) {
+            int initialLearning, int initialIntegrity, int initialCraft) {
         this.name = name;
         this.playerNumber = playerNumber;
         currentRoom = startingRoom;
@@ -29,11 +29,7 @@ public class Player {
         integrityChip = initialIntegrity;
         craftChip = initialCraft;
         handOfCards = new ArrayList<>();
-        //Create first 5 cards to hand
-        
-        for (int i = 0; i < 5; i++) {
-        	addCardToHand(cardDeck);
-        }
+            
     }
 
     public String getStudentName() {
@@ -60,19 +56,19 @@ public class Player {
     public int getLearningChips() {
         return learningChip;
     }
-    
+
     public int getCraftChips() {
         return craftChip;
     }
-    
+
     public int getIntegrityChips() {
         return integrityChip;
     }
-    
+
     public int getQualityPoints() {
-    	return qualityPoint;
+        return qualityPoint;
     }
-    
+
     public void updateQP(int pointUpdate) {
         qualityPoint += pointUpdate;
     }
@@ -87,43 +83,46 @@ public class Player {
     public void playCard(GameCard card) {
         card.play(this);
         // Discard card afterwards
-        getHandOfCards().remove(0);
+        discardGameCard(card);
     }
-    
-    public void discardGameCard(){
-    	//figure out if we let them choose which gamecard to discard
-    	//or automatically discard 1
-    	getHandOfCards().remove(0);
+
+    public void discardGameCard() {
+        //Open dialog box to allow player to discard
     }
-    
+
+    /**
+     * Discard a GameCard that has been played
+     *
+     * @param card - GameCard to be discarded
+     */
+    public void discardGameCard(GameCard card) {
+        // Remove specific card
+        GameModel.getInstance().getCardDeck().addToDiscard(card);
+        getHandOfCards().remove(card);
+    }
+
     public void chooseChip(Object[] selectionValue, String message) {
-    	JDialog.setDefaultLookAndFeelDecorated(true);
-        Object[] selectionValues = { "Learning", "Craft"};
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        Object[] selectionValues = {"Learning", "Craft"};
         String initialSelection = "Learning";
         Object selection = JOptionPane.showInputDialog(null, message,
-            "Choice", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+                "Choice", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         //System.out.println(selection);
-        if(selection == "Learning") {
-        	this.updateSkillChip(1, 0, 0);
-        }
-        else if(selection == "Craft"){
-        	this.updateSkillChip(0, 1, 0);
-        }
-        else {
-        	this.updateSkillChip(0, 0, 1);
+        if (selection == "Learning") {
+            this.updateSkillChip(1, 0, 0);
+        } else if (selection == "Craft") {
+            this.updateSkillChip(0, 1, 0);
+        } else {
+            this.updateSkillChip(0, 0, 1);
         }
     }
-    
-    public void addCardToHand(Deck cardDeck) {
-    	// getCardDeck is returning null
-    	// fix it  	
-    	handOfCards.add(cardDeck.drawCard());
+
+    public void addCardToHand(Deck cardDeck) {	
+        handOfCards.add(cardDeck.drawCard());
     }
 
-	public ArrayList<GameCard> getHandOfCards() {
-		return handOfCards;
-	}
-
-
+    public ArrayList<GameCard> getHandOfCards() {
+        return handOfCards;
+    }
 
 }
