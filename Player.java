@@ -116,6 +116,15 @@ public class Player {
             this.updateSkillChip(0, 0, 1);
         }
     }
+    
+    //Dialog for choosing a card to discard
+    public void chooseCardToDiscard() {
+    	JDialog.setDefaultLookAndFeelDecorated(true);
+    	ArrayList<GameCard> objectCards = new ArrayList<>();
+    	for(int i = 0; i < handOfCards.size(); i++) {
+    		objectCards.add (handOfCards.get(i));
+    	}
+     }
 
     public void addCardToHand(Deck cardDeck) {	
         handOfCards.add(cardDeck.drawCard());
