@@ -37,8 +37,8 @@ public class GameView /*implements MouseListener*/ {
 //	   JTextArea textArea;
     // default constructor
     public GameView() {
-    	moveCount = 0;
-    	playedCard = false;
+        moveCount = 0;
+        playedCard = false;
     }
 
     // constructor that takes in the title of the frame and the 
@@ -113,16 +113,16 @@ public class GameView /*implements MouseListener*/ {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
-            	//Shuffle discarded deck and add them to active deck
-            	if(model.getCardDeck().getListOfCards().size() == 0) {
-            		model.getCardDeck().shuffleDiscardDeck();
-            	}
-            
+
+                //Shuffle discarded deck and add them to active deck
+                if (model.getCardDeck().getListOfCards().isEmpty()) {
+                    model.getCardDeck().shuffleDiscardDeck();
+                }
+
                 model.getPlayer(PlayerNumber.HUMAN).addCardToHand(model.getCardDeck());
                 drawCardButton.setEnabled(false);
                 moveButton.setEnabled(true);
-                playCardButton.setEnabled(true);    
+                playCardButton.setEnabled(true);
                 moveCount = 0;
                 updateGameBoard();
             }
@@ -142,13 +142,13 @@ public class GameView /*implements MouseListener*/ {
                 model.getPlayer(PlayerNumber.HUMAN).setCurrentRoom(newRoom);
                 updateGameBoard();
                 moveCount++;
-                
+
                 //Only allows the player to move up to 3 times
                 //Might need to implement this differently
-                if(moveCount >= 3) {
+                if (moveCount >= 3) {
                     moveButton.setEnabled(false);
                 }
-                	
+
             }
         }
         moveButton.addActionListener(new MoveActionListener());
@@ -169,25 +169,34 @@ public class GameView /*implements MouseListener*/ {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //If its the last card in the hand, show the first card
-                if (counter == model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()) {
-
-                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
-                            .getHandOfCards().get(0).getCardImage());
-                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
-                            .getHandOfCards().get(0);
-                    gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
-                    counter = 1;
-                    System.out.println();
-
-                } else {
-                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
-                            .getHandOfCards().get(counter).getCardImage());
-                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
-                            .getHandOfCards().get(counter);
-                    gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
-                    counter++;
-                }
+                // Cycle through the hand using modulus
+                gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+                        .getHandOfCards().get(counter
+                                % (model.getPlayer(PlayerNumber.HUMAN)
+                                .getHandOfCards().size())).getCardImage());
+                currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+                        .getHandOfCards().get(counter % (model
+                                .getPlayer(PlayerNumber.HUMAN).getHandOfCards()
+                                .size()));
+                counter++;
+//                if (counter == model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()) {
+//
+//                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+//                            .getHandOfCards().get(0).getCardImage());
+//                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+//                            .getHandOfCards().get(0);
+//                    gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
+//                    counter = 1;
+//                    System.out.println();
+//
+//                } else {
+//                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+//                            .getHandOfCards().get(counter).getCardImage());
+//                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+//                            .getHandOfCards().get(counter);
+//                    gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
+//                    counter++;
+//                }
 
             }
 
@@ -203,24 +212,24 @@ public class GameView /*implements MouseListener*/ {
                 // Figure out how to pass GameCard value into here
 
                 //Debug
-                System.out.println(currentViewedCard);
-
-            	//Still have to figure out how to discard the card on the screen
+//                System.out.println(currentViewedCard);
+                //Still have to figure out how to discard the card on the screen
                 // before the player is allowed to play the card again
                 model.getPlayer(PlayerNumber.HUMAN).playCard(currentViewedCard);
                 updateCurrentPlay(currentViewedCard);
                 playCardButton.setEnabled(false);
+                moveButton.setEnabled(false);
                 drawCardButton.setEnabled(true);
-                
+
                 //Updates the current card viewed 
                 playedCard = true;
-                if(playedCard) {
-                	gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+                if (playedCard) {
+                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
                             .getHandOfCards().get(0).getCardImage());
                     currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0);
                 }
                 playedCard = false;
-                
+                updateTurn();
                 updateGameBoard();
             }
         }
@@ -235,7 +244,6 @@ public class GameView /*implements MouseListener*/ {
 //	     textArea = new JTextArea();
 //	     textArea.setEditable(false);
 //	     gameBoardPanel.addMouseListener(this);
-        
         // Control panel components
         double controlPanelWidthMultipler = (double) 1 / 6;
 
@@ -255,30 +263,28 @@ public class GameView /*implements MouseListener*/ {
 
         gameCardPanel.add(gameCardLabel);
         gameCardPanel.add(cycleCardPanel);
-        
-        informationTextArea = new JTextArea("Infomration Panel", 15, 115);
-        currentPlayTextArea = new JTextArea("Huamn player is " + model.getPlayer(PlayerNumber.HUMAN).getStudentName() + "\n", 7, 113);
+
+        informationTextArea = new JTextArea("Information Panel", 15, 115);
+        currentPlayTextArea = new JTextArea("Human player is "
+                + model.getPlayer(PlayerNumber.HUMAN).getStudentName() + "\n", 7, 113);
         JScrollPane currentPlayTextAreaSP = new JScrollPane(currentPlayTextArea);   // JTextArea is placed in a JScrollPane.
         Border blackline = BorderFactory.createLineBorder(Color.black);
-        
+
         // Info Panel GUI
         JPanel informationPanel = new JPanel();
         informationPanel.setBorder(blackline);
         informationPanel.add(informationTextArea);
-        informationPanel.setPreferredSize(new Dimension((int) 
-                (controlPanelSize.width * controlPanelWidthMultipler * 4),
+        informationPanel.setPreferredSize(new Dimension((int) (controlPanelSize.width * controlPanelWidthMultipler * 4),
                 (int) (controlPanelSize.height * ((double) 2 / 3))));
 
         // Current Play Text Area GUI
         JPanel currentPlayPanel = new JPanel();
         currentPlayPanel.setBorder(blackline);
         currentPlayPanel.add(currentPlayTextAreaSP);
-        currentPlayPanel.setPreferredSize(new Dimension((int) 
-                (controlPanelSize.width * (controlPanelWidthMultipler * 2)),
+        currentPlayPanel.setPreferredSize(new Dimension((int) (controlPanelSize.width * (controlPanelWidthMultipler * 2)),
                 controlPanelSize.height));
         JScrollPane currentPlayScroller = new JScrollPane(currentPlayPanel);
-        currentPlayPanel.setPreferredSize(new Dimension((int) 
-                (controlPanelSize.width * (controlPanelWidthMultipler * 2)),
+        currentPlayPanel.setPreferredSize(new Dimension((int) (controlPanelSize.width * (controlPanelWidthMultipler * 2)),
                 (int) (controlPanelSize.height * ((double) 1 / 3))));
 
         BoxLayout textAreaPanelLayout = new BoxLayout(textAreaPanel, BoxLayout.Y_AXIS);
@@ -288,9 +294,9 @@ public class GameView /*implements MouseListener*/ {
 
         adjacentRoomsList = new JList<Room>();
         DisplayAdjacentRooms();
-        
+
         updateInformationPanel();
-        
+
         //Add panels to list and button panel
         listAndButtonPanel.add(drawCardButtonPanel);
         listAndButtonPanel.add(moveButtonPanel);
@@ -336,7 +342,7 @@ public class GameView /*implements MouseListener*/ {
     public void updateInformationPanel() {
         informationTextArea.setText("\tLearning\tCraft\tIntegrity\tQuality Points"
                 + "\n" + model.getPlayer(PlayerNumber.HUMAN).getStudentName()
-                + "\t " + model.getPlayer(PlayerNumber.HUMAN).getLearningChips() 
+                + "\t " + model.getPlayer(PlayerNumber.HUMAN).getLearningChips()
                 + "\t " + model.getPlayer(PlayerNumber.HUMAN).getCraftChips()
                 + "\t " + model.getPlayer(PlayerNumber.HUMAN).getIntegrityChips()
                 + "\t " + model.getPlayer(PlayerNumber.HUMAN).getQualityPoints()
@@ -362,18 +368,24 @@ public class GameView /*implements MouseListener*/ {
     public void updateCurrentPlay(GameCard card) {
         currentPlayTextArea.append("\n" + card.toString());
     }
-    
+
     // Method used to control the turn-taking
     public void updateTurn() {
+        //Shuffle discarded deck and add them to active deck
+        if (model.getCardDeck().getListOfCards().isEmpty()) {
+            model.getCardDeck().shuffleDiscardDeck();
+        }
         moveCount = 0;
+        // AI Move and Play
+        updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI1)));
+        updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI2)));
     }
-    
+
     public void updateGameBoard() {
         //Create rooms and displays them on the list
         DisplayAdjacentRooms();
         gameBoardLabel.repaint();
         updateInformationPanel();
-
     }
 //   void eventOutput(String eventDescription, MouseEvent e) {
 //        System.out.println(eventDescription + " detected on "

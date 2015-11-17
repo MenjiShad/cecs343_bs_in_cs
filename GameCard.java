@@ -20,6 +20,10 @@ public abstract class GameCard {
         listOfValidRooms = new ArrayList<Room>(Arrays.asList(validRooms));
     }
 
+    public ArrayList<Room> getValidRooms() {
+        return listOfValidRooms;
+    }
+            
     protected ImageIcon getCardImage() {
         System.out.println(gameCardImage);
         return gameCardImage;

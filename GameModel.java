@@ -169,5 +169,54 @@ public class GameModel {
     	return cardDeck;
     }
     
+    public GameCard AITurn(Player AIPlayer) {
+        AIMove(AIPlayer);
+        return AIPlay(AIPlayer);
+    }
     
+    private void AIMove(Player AIPlayer) {
+        Random rng = new Random(System.currentTimeMillis());
+        int moveLimit = 3;
+        
+        // AI will randomly move 0-3 rooms
+        int AIMoveCount = rng.nextInt(moveLimit + 1);
+        
+        // Call the RandomMove function as many times as the AIMoveCount
+        for (int i = 0; i < AIMoveCount; i++) {
+            AIRandomRoomMove(AIPlayer, rng);
+        }
+    }
+    
+    private void AIRandomRoomMove(Player AIPlayer, Random rng) {
+        // Randomly select one of the adjacent Rooms
+        int randAdjRoomSelect = rng.nextInt(AIPlayer.getCurrentRoom()
+                .getListOfAdjacentRooms().size());
+        
+        // Move AIPlayer to adjacent room
+        AIPlayer.setCurrentRoom(listOfRooms.get(AIPlayer.getCurrentRoom()
+                .getListOfAdjacentRooms().get(randAdjRoomSelect)));
+    }
+    
+    private GameCard AIPlay(Player AIPlayer) {
+        // The first card the AIPlayer encounters,
+        // whose valid Room matches the AI's, will be played by the AI
+        GameCard AIPlayedCard = null;
+        for (int i = cardDeck.getListOfCards().size() - 1; i >= 0; i--) {
+            for (Room validRoom : cardDeck.getListOfCards().get(i).getValidRooms()) {
+                if (AIPlayer.getCurrentRoom().equals(validRoom)) {
+                    AIPlayedCard = cardDeck.getListOfCards().get(i);
+                    AIPlayer.playCard(cardDeck.getListOfCards().get(i));
+                    break;
+                }
+            }
+        }
+        
+        // If there are no GameCards that match the AI's Room,
+        // play the top of the deck
+        if (AIPlayedCard == null) {
+            AIPlayedCard = cardDeck.getListOfCards().get(cardDeck.getListOfCards().size() - 1);
+            AIPlayer.playCard(cardDeck.getListOfCards().get(cardDeck.getListOfCards().size() - 1));
+        }
+        return AIPlayedCard;
+    }
 }
