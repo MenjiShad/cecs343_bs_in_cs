@@ -86,9 +86,9 @@ public class Player {
         discardGameCard(card);
     }
 
-    public void discardGameCard() {
-        //Open dialog box to allow player to discard
-    }
+//    public void discardGameCard() {
+//        //Open dialog box to allow player to discard
+//    }
 
     /**
      * Discard a GameCard that has been played
@@ -101,28 +101,64 @@ public class Player {
         getHandOfCards().remove(card);
     }
 
+    /**
+     * Dialog for choosing a chip
+     * Does not allow Human player to choose for AI player
+     *
+     * @param Object[] - the selection values 
+     * 		  String - the message to display
+     */
     public void chooseChip(Object[] selectionValue, String message) {
-        JDialog.setDefaultLookAndFeelDecorated(true);
-        Object[] selectionValues = {"Learning", "Craft"};
-        String initialSelection = "Learning";
-        Object selection = JOptionPane.showInputDialog(null, message,
-                "Choice", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-        //System.out.println(selection);
-        if (selection == "Learning") {
-            this.updateSkillChip(1, 0, 0);
-        } else if (selection == "Craft") {
-            this.updateSkillChip(0, 1, 0);
-        } else {
-            this.updateSkillChip(0, 0, 1);
-        }
+    	
+    	//Checks if Human Player
+    	if(checkIfHumanPlayer()) {
+	        JDialog.setDefaultLookAndFeelDecorated(true);
+	        
+	       // Object[] selectionValues = {"Learning", "Craft"};
+	        String initialSelection = "Learning";
+	        
+	        Object selection = JOptionPane.showInputDialog(null, message,
+	                "Choice", JOptionPane.QUESTION_MESSAGE, null, selectionValue, initialSelection);
+
+	        if (selection == "Learning") {
+	            this.updateSkillChip(1, 0, 0);
+	        } else if (selection == "Craft") {
+	            this.updateSkillChip(0, 1, 0);
+	        } else {
+	            this.updateSkillChip(0, 0, 1);
+	        }
+    	}
     }
     
-    //Dialog for choosing a card to discard
+    /**
+     * Dialog for choosing a card to discard
+     * Does not allow Human player to choose for AI player
+     *
+     * @param 
+     */
     public void chooseCardToDiscard() {
-    	JDialog.setDefaultLookAndFeelDecorated(true);
-    	ArrayList<GameCard> objectCards = new ArrayList<>();
-    	for(int i = 0; i < handOfCards.size(); i++) {
-    		objectCards.add (handOfCards.get(i));
+    	
+    	//Checks if human player
+    	if(checkIfHumanPlayer()) {
+    		
+	    	JDialog.setDefaultLookAndFeelDecorated(true);
+	    	Object[] objectCards = new Object[getHandOfCards().size()];
+	    	
+	    	for(int i = 0; i < getHandOfCards().size(); i++) {
+	    		objectCards[i] = getHandOfCards().get(i).getCardName();
+	    	}
+	    	
+	    	Object selection = JOptionPane.showInputDialog(null, "Choose a card to discard",
+	                "Choice", JOptionPane.QUESTION_MESSAGE, null, objectCards, getHandOfCards().get(0));
+	    	
+    		System.out.println("\n\nSELECTION: " + selection + "\n\n");		//Debugging
+
+	    	for(int i = 0; i < getHandOfCards().size(); i++) {
+	    		
+    			if(selection.equals(getHandOfCards().get(i).getCardName())) {
+    				handOfCards.remove(getHandOfCards().get(i));
+	    		}
+	    	}
     	}
      }
 
@@ -132,6 +168,17 @@ public class Player {
 
     public ArrayList<GameCard> getHandOfCards() {
         return handOfCards;
+    }
+    
+    /**
+     * Checks to see if the player is human
+     *
+     * @param 
+     */
+    public boolean checkIfHumanPlayer() {
+    	if(name == GameModel.getInstance().getPlayer(PlayerNumber.HUMAN).getStudentName())
+    		return true;
+		return false;
     }
 
 }
