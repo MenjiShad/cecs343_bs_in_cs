@@ -42,7 +42,7 @@ public class GameCard25 extends GameCard {
                 player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
                 gameCardAction += " for 5 Quality Points and 1 card";
             } else {
-                player.discardGameCard();
+                player.chooseCardToDiscard();
                 gameCardAction += " and failed";
             }
         } else {

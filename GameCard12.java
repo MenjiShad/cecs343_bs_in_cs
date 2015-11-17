@@ -30,7 +30,7 @@ public class GameCard12 extends GameCard {
         if (validRoom) {
             // Dialog box giving player choice of learning or integrity
             Object[] selectionValues = { "Learning", "Craft"};
-            player.chooseChip(selectionValues, "Choose either 1 learning or integrity chip..."); 
+            player.chooseChip(selectionValues, "Choose either 1 Learning or Integrity chip..."); 
             gameCardAction += " for 1 <chip> Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);

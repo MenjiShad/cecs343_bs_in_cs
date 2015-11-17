@@ -41,7 +41,10 @@ public class GameCard10 extends GameCard {
             }
             else {
                 // Discard one Card
-            	player.discardGameCard();
+            	player.chooseCardToDiscard();
+            	
+            	//Need to figure out how to delete card from deck 
+            	
                 gameCardAction += " and failed";
             }
         } else {

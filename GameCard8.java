@@ -32,12 +32,12 @@ public class GameCard8 extends GameCard {
         }
         
         if (validRoom) {
-            player.updateSkillChip(1, 0, 0);
-            gameCardAction += " for 1 Learning Chip";
+            player.updateSkillChip(2, 0, 0);
+            gameCardAction += " for 1 Learning Chip and discarded 1 GameCard for 1 Learning Chip";
             // Prompt user to discard one card for 1 additional learning chip
-            //player.discardGameCard();
+            player.chooseCardToDiscard();
         } else {
-            player.updateQP(INCORRECT_ROOM_QP_LOSS);
+        	player.updateQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
         

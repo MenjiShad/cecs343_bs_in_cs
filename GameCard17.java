@@ -41,7 +41,7 @@ public class GameCard17 extends GameCard {
             }
             else {
                 player.updateQP(-3);
-                player.discardGameCard();
+                player.chooseCardToDiscard();
                 gameCardAction += " and failed";
             }
             
