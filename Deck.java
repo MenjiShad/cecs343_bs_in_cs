@@ -161,8 +161,7 @@ public class Deck {
 
     public void shuffle() {
         //Shuffle deck 
-        long seed = System.nanoTime();
-        Collections.shuffle(listOfCards, new Random(seed));
+        Collections.shuffle(listOfCards, new Random(System.nanoTime()));
     }
 
     public GameCard drawCard() {
@@ -180,12 +179,15 @@ public class Deck {
     }
     
     public void addToDiscard(GameCard card) {
+        listOfCards.remove(card);
         listOfDiscardedCards.add(card);
     }
     
     public void shuffleDiscardDeck() {
     	System.out.println("\n\nIn shufflediscardmethod\n\n");
-    	for(int i = 0; i < listOfDiscardedCards.size(); i++) {
+        // Removes discarded cards from the top, going downward
+        // and places them in the listOfCards, which will then be shuffled
+    	for(int i = listOfDiscardedCards.size(); i < 0; i--) {
     		listOfCards.add(listOfDiscardedCards.get(i));
     		listOfDiscardedCards.remove(i);
     	}
