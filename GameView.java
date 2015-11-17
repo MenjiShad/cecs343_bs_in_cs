@@ -362,7 +362,11 @@ public class GameView /*implements MouseListener*/ {
                 //For Debugging
                 + "\tCards in hand:  " + model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()
                 + "\n\nYou are " + model.getPlayer(PlayerNumber.HUMAN).getStudentName()
-                + " and you are in room " + model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom());
+                + " and you are in room " + model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom()
+                + "\n" + model.getPlayer(PlayerNumber.AI1).getStudentName() + " is in room "
+                + model.getPlayer(PlayerNumber.AI1).getCurrentRoom()
+                + "\n" + model.getPlayer(PlayerNumber.AI2).getStudentName() + " is in room "
+                + model.getPlayer(PlayerNumber.AI2).getCurrentRoom());
     }
 
     public void updateCurrentPlay(GameCard card) {
