@@ -73,6 +73,8 @@ public class Player {
         qualityPoint += pointUpdate;
     }
 
+    // Think about passing in String gameCardAction and then
+    // using this method to modify it?
     public void updateSkillChip(int learningUpdate, int craftUpdate,
             int integrityUpdate) {
         learningChip += learningUpdate;

@@ -29,6 +29,7 @@ public class GameCard11 extends GameCard {
 
         if (validRoom) {
             // Add choosing dialog box
+            new ChipChoosingDialogBox(true, false, true);
             gameCardAction += " for 1 <chip> Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
