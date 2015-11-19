@@ -114,11 +114,6 @@ public class GameView /*implements MouseListener*/ {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //Shuffle discarded deck and add them to active deck
-                if (model.getCardDeck().getListOfCards().isEmpty()) {
-                    model.getCardDeck().shuffleDiscardDeck();
-                }
-
                 model.getPlayer(PlayerNumber.HUMAN).addCardToHand(model.getCardDeck());
                 drawCardButton.setEnabled(false);
                 moveButton.setEnabled(true);
@@ -375,16 +370,25 @@ public class GameView /*implements MouseListener*/ {
 
     // Method used to control the turn-taking
     public void updateTurn() {
+        // Reset move counter
+        moveCount = 0;
+        
+        // AI Move and Play
+        // Make sure the AI doesn't try to draw from an empty Deck
+        checkDeckEmpty();
+        updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI1)));
+        checkDeckEmpty();
+        updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI2)));
+        checkDeckEmpty();
+    }
+
+    private void checkDeckEmpty() {
         //Shuffle discarded deck and add them to active deck
         if (model.getCardDeck().getListOfCards().isEmpty()) {
             model.getCardDeck().shuffleDiscardDeck();
         }
-        moveCount = 0;
-        // AI Move and Play
-        updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI1)));
-        updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI2)));
     }
-
+    
     public void updateGameBoard() {
         //Create rooms and displays them on the list
         DisplayAdjacentRooms();
