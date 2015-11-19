@@ -187,7 +187,7 @@ public class Deck {
     	System.out.println("\n\nIn shufflediscardmethod\n\n");
         // Removes discarded cards from the top, going downward
         // and places them in the listOfCards, which will then be shuffled
-    	for(int i = listOfDiscardedCards.size(); i >= 0; i--) {
+    	for(int i = listOfDiscardedCards.size() - 1; i >= 0; i--) {
     		listOfCards.add(listOfDiscardedCards.get(i));
     		listOfDiscardedCards.remove(i);
     	}
