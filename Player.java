@@ -166,6 +166,7 @@ public class Player {
 
     public void addCardToHand(Deck cardDeck) {	
         handOfCards.add(cardDeck.drawCard());
+//    	handOfCards.add(cardDeck.getListOfCards().get(24));
     }
 
     public ArrayList<GameCard> getHandOfCards() {

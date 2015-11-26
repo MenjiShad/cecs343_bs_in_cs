@@ -102,12 +102,6 @@ public class GameView /*implements MouseListener*/ {
         playCardPanel.add(playCardButton);
         playCardButton.setEnabled(false);
 
-        JPanel cycleCardPanel = new JPanel();
-        JButton cycleCardButton = new JButton("Cycle Card");
-        cycleCardButton.setHorizontalAlignment(SwingConstants.CENTER);
-        cycleCardPanel.add(cycleCardButton);
-        cycleCardButton.setEnabled(true);
-
         // Draw Card Action Listener
         final class DrawCardActionListener implements ActionListener {
 
@@ -149,31 +143,32 @@ public class GameView /*implements MouseListener*/ {
         moveButton.addActionListener(new MoveActionListener());
         moveButtonPanel.add(moveButton);
 
+        gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
+                .getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
         //Cycle cards to choose from
         //Still have to figure out how to delete card from screen if the player plays the card
-        final class CycleCardActionListener implements ActionListener {
+        final class CycleCardActionListener implements MouseListener {
 
             private int counter = 1;
 
             CycleCardActionListener() {
-                gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
-                        .getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
+
                 currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
                         .getHandOfCards().get(0);
             }
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
                 // Cycle through the hand using modulus
-                gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
-                        .getHandOfCards().get(counter
-                                % (model.getPlayer(PlayerNumber.HUMAN)
-                                .getHandOfCards().size())).getCardImage());
-                currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
-                        .getHandOfCards().get(counter % (model
-                                .getPlayer(PlayerNumber.HUMAN).getHandOfCards()
-                                .size()));
-                counter++;
+//                gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+//                        .getHandOfCards().get(counter
+//                                % (model.getPlayer(PlayerNumber.HUMAN)
+//                                .getHandOfCards().size())).getCardImage());
+//                currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+//                        .getHandOfCards().get(counter % (model
+//                                .getPlayer(PlayerNumber.HUMAN).getHandOfCards()
+//                                .size()));
+//                counter++;
 //                if (counter == model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()) {
 //
 //                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
@@ -193,11 +188,49 @@ public class GameView /*implements MouseListener*/ {
 //                    counter++;
 //                }
 
-            }
+//            }
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+                        .getHandOfCards().get(counter
+                                % (model.getPlayer(PlayerNumber.HUMAN)
+                                .getHandOfCards().size())).getCardImage());
+                currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
+                        .getHandOfCards().get(counter % (model
+                                .getPlayer(PlayerNumber.HUMAN).getHandOfCards()
+                                .size()));
+                counter++;
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
 
         }
-        cycleCardButton.addActionListener(new CycleCardActionListener());
-        cycleCardPanel.add(cycleCardButton);
+        gameCardLabel.addMouseListener(new CycleCardActionListener());
+//        cycleCardPanel.add(cycleCardButton);
 
         // Play Card action listener
         final class PlayCardActionListener implements ActionListener {
@@ -249,15 +282,14 @@ public class GameView /*implements MouseListener*/ {
                 controlPanelSize.height));
 
         //Create layout for the cycle button panel
-        BoxLayout gameCardPanelLayout = new BoxLayout(gameCardPanel, BoxLayout.Y_AXIS);
-        gameCardPanel.setLayout(gameCardPanelLayout);
+//        BoxLayout gameCardPanelLayout = new BoxLayout(gameCardPanel, BoxLayout.Y_AXIS);
+//        gameCardPanel.setLayout(gameCardPanelLayout);
 
         gameCardPanel.setPreferredSize(new Dimension(
                 (int) (controlPanelSize.width * controlPanelWidthMultipler),
                 controlPanelSize.height));
 
         gameCardPanel.add(gameCardLabel);
-        gameCardPanel.add(cycleCardPanel);
 
         informationTextArea = new JTextArea("Information Panel", 15, 115);
         currentPlayTextArea = new JTextArea("Human player is "
@@ -370,6 +402,7 @@ public class GameView /*implements MouseListener*/ {
 
     // Method used to control the turn-taking
     public void updateTurn() {
+        
         // Reset move counter
         moveCount = 0;
         
@@ -381,14 +414,14 @@ public class GameView /*implements MouseListener*/ {
         updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI2)));
         checkDeckEmpty();
     }
-
+    
     private void checkDeckEmpty() {
         //Shuffle discarded deck and add them to active deck
         if (model.getCardDeck().getListOfCards().isEmpty()) {
             model.getCardDeck().shuffleDiscardDeck();
         }
     }
-    
+
     public void updateGameBoard() {
         //Create rooms and displays them on the list
         DisplayAdjacentRooms();

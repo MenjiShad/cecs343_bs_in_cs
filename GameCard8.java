@@ -36,6 +36,8 @@ public class GameCard8 extends GameCard {
             gameCardAction += " for 1 Learning Chip and discarded 1 GameCard for 1 Learning Chip";
             // Prompt user to discard one card for 1 additional learning chip
             player.chooseCardToDiscard();
+//            CardChoosingDialogBox chooser = new CardChoosingDialogBox(player.getHandOfCards(), player);
+//            chooser.chooseCardToDiscard();
         } else {
         	player.updateQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
