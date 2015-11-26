@@ -34,10 +34,21 @@ public class GameCard26 extends GameCard {
             }
         }
 
+        String selection;
         if (validRoom) {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-                gameCardAction += " for 1 <chip> Chip";
+                // Add choosing dialog box if human
+                // Else, AI random selects
+                if (player.checkIfHumanPlayer()) {
+                    ChipChoosingDialogBox ccdb
+                            = new ChipChoosingDialogBox(true, true, true);
+                    selection = ccdb.getSelection();
+                } else {
+                    selection = player.randomChipSelection(true, true, true);
+                }
+                
+                gameCardAction += " for 1 " + selection + " Chip";
             } else {
                 player.updateQP(-2);
                 gameCardAction += " and failed";

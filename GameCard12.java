@@ -2,17 +2,18 @@ package cecs343_bs_in_cs;
 
 /**
  * Buddy Up
- * Play in EAT Room or George Allen Field
+ * Play in EAT Room or George Allen Field 
  * Get 1 Learning or 1 Craft
  */
 public class GameCard12 extends GameCard {
-    
-    public GameCard12() {}
-    
+
+    public GameCard12() {
+    }
+
     public GameCard12(String newName, String imageFileName, Room[] validRooms) {
         super(newName, imageFileName, validRooms);
     }
-        
+
     @Override
     public void play(Player player) {
         // Prep Current Play String
@@ -26,20 +27,28 @@ public class GameCard12 extends GameCard {
                 break;
             }
         }
-        
+
+        String selection;
         if (validRoom) {
-            // Dialog box giving player choice of learning or integrity
-            Object[] selectionValues = { "Learning", "Craft"};
-            player.chooseChip(selectionValues, "Choose either 1 Learning or Integrity chip..."); 
-            gameCardAction += " for 1 <chip> Chip";
+            // Add choosing dialog box if human
+            // Else, AI random selects
+            if (player.checkIfHumanPlayer()) {
+                ChipChoosingDialogBox ccdb
+                        = new ChipChoosingDialogBox(true, true, false);
+                selection = ccdb.getSelection();
+            } else {
+                selection = player.randomChipSelection(true, true, false);
+            }
+
+            gameCardAction += " for 1 " + selection + " Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
-        
+
     }
 
-   @Override
+    @Override
     public String toString() {
         return gameCardAction;
     }

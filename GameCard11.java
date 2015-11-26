@@ -26,11 +26,20 @@ public class GameCard11 extends GameCard {
                 break;
             }
         }
-
+        
+        String selection;
         if (validRoom) {
-            // Add choosing dialog box
-            new ChipChoosingDialogBox(true, false, true);
-            gameCardAction += " for 1 <chip> Chip";
+            // Add choosing dialog box if human
+            // Else, AI random selects
+            if (player.checkIfHumanPlayer()) {
+                ChipChoosingDialogBox ccdb = 
+                        new ChipChoosingDialogBox(true, false, true);
+                selection = ccdb.getSelection();
+            } else {
+                selection = player.randomChipSelection(true, false, true);
+            }
+            
+            gameCardAction += " for 1 " + selection + " Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";

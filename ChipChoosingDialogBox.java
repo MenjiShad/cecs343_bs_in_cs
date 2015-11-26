@@ -1,6 +1,6 @@
 package cecs343_bs_in_cs;
 
-import java.awt.Dialog;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -18,24 +18,26 @@ public class ChipChoosingDialogBox extends JDialog {
     private JButton learningButton;
     private JButton craftButton;
     private JButton integrityButton;
+    private String selection;
     private static final int DIALOG_BOX_WIDTH = 500;
     private static final int DIALOG_BOX_HEIGHT = 300;
     
     public ChipChoosingDialogBox(boolean learningEnable, boolean craftEnable,
             boolean integrityEnable) {
+        selection = "";
         dialogPanel = new JPanel();
         learningButton = new JButton("Learning");
         craftButton = new JButton("Craft");
         integrityButton = new JButton("Integrity");
         this.setModalityType(DEFAULT_MODALITY_TYPE); // Set to Modal
-        BoxLayout dialogLayout = new BoxLayout(dialogPanel, BoxLayout.X_AXIS);
-        dialogPanel.setLayout(dialogLayout);
+//        BoxLayout dialogLayout = new BoxLayout(dialogPanel, BoxLayout.X_AXIS);
+//        dialogPanel.setLayout(dialogLayout);
+        dialogPanel.setLayout(new GridLayout(1, 3));
         this.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT);
         dialogPanel.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT);
         
         // After 1 button is pressed, the dialog box should close
         // Notify the model on what button was pressed
-        
         
         // Implement Action Listeners for the 3 buttons
         final class learningButtonActionListener implements ActionListener {
@@ -44,6 +46,7 @@ public class ChipChoosingDialogBox extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 GameModel.getInstance().getPlayer(PlayerNumber.HUMAN)
                         .updateSkillChip(1, 0, 0);
+                selection = "Learning";
                 dispose(); // Close dialog box
             }
             
@@ -55,6 +58,7 @@ public class ChipChoosingDialogBox extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 GameModel.getInstance().getPlayer(PlayerNumber.HUMAN)
                         .updateSkillChip(0, 1, 0);
+                selection = "Craft";
                 dispose();
             }
 
@@ -66,6 +70,7 @@ public class ChipChoosingDialogBox extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 GameModel.getInstance().getPlayer(PlayerNumber.HUMAN)
                         .updateSkillChip(0, 0, 1);
+                selection = "Integrity";
                 dispose();
             }
 
@@ -91,4 +96,7 @@ public class ChipChoosingDialogBox extends JDialog {
         this.setVisible(true);
     }
 
+    public String getSelection() {
+        return selection;
+    }
 }
