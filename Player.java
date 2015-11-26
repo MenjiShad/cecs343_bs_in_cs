@@ -17,9 +17,6 @@ public class Player {
     private ArrayList<GameCard> handOfCards;
     private int handCount;
 
-    // default constructor
-    public Player() {}
-
     public Player(String name, int playerNumber, Room startingRoom,
             int initialLearning, int initialIntegrity, int initialCraft) {
         this.name = name;
@@ -29,7 +26,7 @@ public class Player {
         integrityChip = initialIntegrity;
         craftChip = initialCraft;
         handOfCards = new ArrayList<>();
-            
+
     }
 
     public String getStudentName() {
@@ -91,7 +88,6 @@ public class Player {
 //    public void discardGameCard() {
 //        //Open dialog box to allow player to discard
 //    }
-
     /**
      * Discard a GameCard that has been played
      *
@@ -104,67 +100,38 @@ public class Player {
     }
 
     /**
-     * Dialog for choosing a chip
-     * Does not allow Human player to choose for AI player
+     * Dialog for choosing a card to discard Does not allow Human player to
+     * choose for AI player
      *
-     * @param Object[] - the selection values 
-     * 		  String - the message to display
-     */
-    public void chooseChip(Object[] selectionValue, String message) {
-    	
-    	//Checks if Human Player
-    	if(checkIfHumanPlayer()) {
-	        JDialog.setDefaultLookAndFeelDecorated(true);
-	        
-	       // Object[] selectionValues = {"Learning", "Craft"};
-	        String initialSelection = "Learning";
-	        
-	        Object selection = JOptionPane.showInputDialog(null, message,
-	                "Choice", JOptionPane.QUESTION_MESSAGE, null, selectionValue, initialSelection);
-
-	        if (selection == "Learning") {
-	            this.updateSkillChip(1, 0, 0);
-	        } else if (selection == "Craft") {
-	            this.updateSkillChip(0, 1, 0);
-	        } else {
-	            this.updateSkillChip(0, 0, 1);
-	        }
-    	}
-    }
-    
-    /**
-     * Dialog for choosing a card to discard
-     * Does not allow Human player to choose for AI player
-     *
-     * @param 
+     * @param
      */
     public void chooseCardToDiscard() {
-    	
-    	//Checks if human player
-    	if(checkIfHumanPlayer()) {
-    		
-	    	JDialog.setDefaultLookAndFeelDecorated(true);
-	    	Object[] objectCards = new Object[getHandOfCards().size()];
-	    	
-	    	for(int i = 0; i < getHandOfCards().size(); i++) {
-	    		objectCards[i] = getHandOfCards().get(i).getCardName();
-	    	}
-	    	
-	    	Object selection = JOptionPane.showInputDialog(null, "Choose a card to discard",
-	                "Choice", JOptionPane.QUESTION_MESSAGE, null, objectCards, getHandOfCards().get(0));
-	    	
-    		System.out.println("\n\nSELECTION: " + selection + "\n\n");		//Debugging
 
-	    	for(int i = 0; i < getHandOfCards().size(); i++) {
-	    		
-    			if(selection.equals(getHandOfCards().get(i).getCardName())) {
-    				handOfCards.remove(getHandOfCards().get(i));
-	    		}
-	    	}
-    	}
-     }
+        //Checks if human player
+        if (checkIfHumanPlayer()) {
 
-    public void addCardToHand(Deck cardDeck) {	
+            JDialog.setDefaultLookAndFeelDecorated(true);
+            Object[] objectCards = new Object[getHandOfCards().size()];
+
+            for (int i = 0; i < getHandOfCards().size(); i++) {
+                objectCards[i] = getHandOfCards().get(i).getCardName();
+            }
+
+            Object selection = JOptionPane.showInputDialog(null, "Choose a card to discard",
+                    "Choice", JOptionPane.QUESTION_MESSAGE, null, objectCards, getHandOfCards().get(0));
+
+            System.out.println("\n\nSELECTION: " + selection + "\n\n");		//Debugging
+
+            for (int i = 0; i < getHandOfCards().size(); i++) {
+
+                if (selection.equals(getHandOfCards().get(i).getCardName())) {
+                    handOfCards.remove(getHandOfCards().get(i));
+                }
+            }
+        }
+    }
+
+    public void addCardToHand(Deck cardDeck) {
         handOfCards.add(cardDeck.drawCard());
 //    	handOfCards.add(cardDeck.getListOfCards().get(24));
     }
@@ -172,16 +139,55 @@ public class Player {
     public ArrayList<GameCard> getHandOfCards() {
         return handOfCards;
     }
-    
+
     /**
      * Checks to see if the player is human
      *
-     * @param 
+     * @param
      */
     public boolean checkIfHumanPlayer() {
-    	if(name == GameModel.getInstance().getPlayer(PlayerNumber.HUMAN).getStudentName())
-    		return true;
-		return false;
+        if (name.equals(GameModel.getInstance().getPlayer(PlayerNumber.HUMAN)
+                .getStudentName())) {
+            return true;
+        }
+        return false;
     }
 
+    public String randomChipSelection(boolean learningEnable,
+            boolean craftEnable, boolean integrityEnable) {
+        int i = 0;
+        if (learningEnable) { i++;}
+        if (craftEnable) { i++;}
+        if (integrityEnable) { i++;}
+        
+        String[] chips = new String[i];
+        if (learningEnable) { 
+            chips[--i] = "Learning";
+        }
+        
+        if (craftEnable) {
+            chips[--i] = "Craft";
+        }
+        
+        if (integrityEnable) { 
+            chips[--i] = "Integrity";
+        }
+        
+        String selection = chips[(int)(Math.pow(this.hashCode(), chips.length)
+                % chips.length)];
+        
+        if (selection.equals("Learning")) {
+            this.updateSkillChip(1, 0, 0);
+        }
+        
+        if (selection.equals("Craft")) {
+            this.updateSkillChip(0, 1, 0);
+        }
+        
+        if (selection.equals("Integrity")) {
+            this.updateSkillChip(0, 0, 1);
+        }
+        
+        return selection;
+    }
 }
