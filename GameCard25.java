@@ -3,8 +3,7 @@ package cecs343_bs_in_cs;
 /**
  * Meet the Dean
  * Play in North of South Hall
- * Prereq: 3 Learning, 3 Craft, 3
- * Integrity 
+ * Prereq: 3 Learning, 3 Craft, 3 Integrity 
  * Get 5 QP and 1 Card 
  * Fail: Discard 1 Card
  */
@@ -38,8 +37,7 @@ public class GameCard25 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateQP(5);
-                Object[] selectionValues = {"Learning", "Craft", "Integrity"};
-                player.chooseChip(selectionValues, "Choose a quality chip of your choice...");
+                player.addCardToHand(GameModel.getInstance().getCardDeck());
                 gameCardAction += " for 5 Quality Points and 1 card";
             } else {
 //                player.chooseCardToDiscard();

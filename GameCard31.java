@@ -38,7 +38,7 @@ public class GameCard31 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateSkillChip(1, 0, 0);
-//                player.addCardToHand();
+                player.addCardToHand(GameModel.getInstance().getCardDeck());
                 gameCardAction += " for 1 Learning Chip and 1 card";
             } 
             else {

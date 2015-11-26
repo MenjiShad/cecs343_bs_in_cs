@@ -37,8 +37,8 @@ public class GameCard33 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateQP(5);
-//                player.addCardToHand();
-//                player.addCardToHand();
+                player.addCardToHand(GameModel.getInstance().getCardDeck());
+                player.addCardToHand(GameModel.getInstance().getCardDeck());
                 gameCardAction += " for 5 Quality Points and 2 cards";
             } else {
                 player.updateQP(-5);
