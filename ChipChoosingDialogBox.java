@@ -29,9 +29,9 @@ public class ChipChoosingDialogBox extends JDialog {
         integrityButton = new JButton("Integrity");
         this.setModalityType(DEFAULT_MODALITY_TYPE); // Set to Modal
         BoxLayout dialogLayout = new BoxLayout(dialogPanel, BoxLayout.X_AXIS);
-        dialogPanel.setLayout(dialogLayout); // Thinking BoxLayout
-        this.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT); // May change
-        dialogPanel.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT); // May change
+        dialogPanel.setLayout(dialogLayout);
+        this.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT);
+        dialogPanel.setSize(DIALOG_BOX_WIDTH, DIALOG_BOX_HEIGHT);
         
         // After 1 button is pressed, the dialog box should close
         // Notify the model on what button was pressed

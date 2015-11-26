@@ -71,7 +71,6 @@ public abstract class GameCard {
     }
             
     protected ImageIcon getCardImage() {
-        System.out.println(gameCardImage);
         return gameCardImage;
     }
 

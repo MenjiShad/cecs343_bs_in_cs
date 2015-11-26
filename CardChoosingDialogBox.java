@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class CardChoosingDialogBox extends JDialog{
 	
-	private JPanel dialogPanel;
+    private JPanel dialogPanel;
     private static final int DIALOG_BOX_WIDTH = 800;
     private static final int DIALOG_BOX_HEIGHT = 600;
 	
