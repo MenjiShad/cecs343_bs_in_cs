@@ -205,7 +205,7 @@ public class GameModel {
             for (Room validRoom : cardDeck.getListOfCards().get(i).getValidRooms()) {
                 if (AIPlayer.getCurrentRoom().equals(validRoom)) {
                     AIPlayedCard = cardDeck.getListOfCards().get(i);
-                    AIPlayer.playCard(cardDeck.getListOfCards().get(i));
+                    AIPlayer.playCard(AIPlayedCard);
                     break;
                 }
             }
@@ -215,7 +215,7 @@ public class GameModel {
         // play the top of the deck
         if (AIPlayedCard == null) {
             AIPlayedCard = cardDeck.getListOfCards().get(cardDeck.getListOfCards().size() - 1);
-            AIPlayer.playCard(cardDeck.getListOfCards().get(cardDeck.getListOfCards().size() - 1));
+            AIPlayer.playCard(AIPlayedCard);
         }
         return AIPlayedCard;
     }

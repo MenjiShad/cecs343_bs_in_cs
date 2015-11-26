@@ -85,8 +85,7 @@ public abstract class GameCard {
     
     //For comparing game card names
     public String getCardName() {
-		return gameCardName;
-    	
+	return gameCardName;
     }
 
 }

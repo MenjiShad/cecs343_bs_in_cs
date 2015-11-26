@@ -157,42 +157,9 @@ public class GameView /*implements MouseListener*/ {
                         .getHandOfCards().get(0);
             }
 
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-                // Cycle through the hand using modulus
-//                gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
-//                        .getHandOfCards().get(counter
-//                                % (model.getPlayer(PlayerNumber.HUMAN)
-//                                .getHandOfCards().size())).getCardImage());
-//                currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
-//                        .getHandOfCards().get(counter % (model
-//                                .getPlayer(PlayerNumber.HUMAN).getHandOfCards()
-//                                .size()));
-//                counter++;
-//                if (counter == model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()) {
-//
-//                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
-//                            .getHandOfCards().get(0).getCardImage());
-//                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
-//                            .getHandOfCards().get(0);
-//                    gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
-//                    counter = 1;
-//                    System.out.println();
-//
-//                } else {
-//                    gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
-//                            .getHandOfCards().get(counter).getCardImage());
-//                    currentViewedCard = model.getPlayer(PlayerNumber.HUMAN)
-//                            .getHandOfCards().get(counter);
-//                    gameCardLabel.setHorizontalAlignment(JLabel.CENTER);
-//                    counter++;
-//                }
-
-//            }
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN)
                         .getHandOfCards().get(counter
                                 % (model.getPlayer(PlayerNumber.HUMAN)
                                 .getHandOfCards().size())).getCardImage());
@@ -201,32 +168,32 @@ public class GameView /*implements MouseListener*/ {
                                 .getPlayer(PlayerNumber.HUMAN).getHandOfCards()
                                 .size()));
                 counter++;
-				
-			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+            }
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
+            @Override
+            public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
-			}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+            }
 
-			@Override
-			public void mouseExited(MouseEvent e) {
+            @Override
+            public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
-			}
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+            }
 
         }
         gameCardLabel.addMouseListener(new CycleCardActionListener());
@@ -284,7 +251,6 @@ public class GameView /*implements MouseListener*/ {
         //Create layout for the cycle button panel
 //        BoxLayout gameCardPanelLayout = new BoxLayout(gameCardPanel, BoxLayout.Y_AXIS);
 //        gameCardPanel.setLayout(gameCardPanelLayout);
-
         gameCardPanel.setPreferredSize(new Dimension(
                 (int) (controlPanelSize.width * controlPanelWidthMultipler),
                 controlPanelSize.height));
@@ -402,10 +368,10 @@ public class GameView /*implements MouseListener*/ {
 
     // Method used to control the turn-taking
     public void updateTurn() {
-        
+
         // Reset move counter
         moveCount = 0;
-        
+
         // AI Move and Play
         // Make sure the AI doesn't try to draw from an empty Deck
         checkDeckEmpty();
@@ -414,7 +380,7 @@ public class GameView /*implements MouseListener*/ {
         updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI2)));
         checkDeckEmpty();
     }
-    
+
     private void checkDeckEmpty() {
         //Shuffle discarded deck and add them to active deck
         if (model.getCardDeck().getListOfCards().isEmpty()) {

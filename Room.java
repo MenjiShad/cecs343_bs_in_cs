@@ -60,11 +60,8 @@ public class Room {
         // If the objects are two different types, not equal
         if (other.getClass() != this.getClass()) return false;
         
-        // If the Room Names are different, not equal
-        if (!this.roomName.equals(((Room)other).roomName)) return false;
-        
-        // If the other object passed the three tests, the two Rooms are equal
-        return true;
+        // If the Room Names are the same, it's the same Room
+        return this.roomName.equals(((Room)other).roomName);
     }
 
     @Override
