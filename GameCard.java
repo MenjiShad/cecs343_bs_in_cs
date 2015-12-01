@@ -70,7 +70,8 @@ public abstract class GameCard {
         return listOfValidRooms;
     }
             
-    protected ImageIcon getCardImage() {
+    public ImageIcon getCardImage() {
+        //System.out.println(gameCardName);
         return gameCardImage;
     }
 
@@ -85,7 +86,8 @@ public abstract class GameCard {
     
     //For comparing game card names
     public String getCardName() {
-	return gameCardName;
+		return gameCardName;
+    	
     }
 
 }

@@ -47,7 +47,7 @@ public class GameCard28 extends GameCard {
                 }
                 gameCardAction += " for 1 " + selection + " Chip";
             } else {
-                player.chooseCardToDiscard();
+            	CardChoosingDialogBox chooser = new CardChoosingDialogBox(player);
                 gameCardAction += " and failed";
             }
 

@@ -41,7 +41,7 @@ public class GameCard10 extends GameCard {
             }
             else {
                 // Discard one Card
-            	player.chooseCardToDiscard();
+            	new CardChoosingDialogBox(player);
             	
             	//Need to figure out how to delete card from deck 
             	

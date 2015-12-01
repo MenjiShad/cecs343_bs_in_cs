@@ -48,7 +48,7 @@ public class GameCard37 extends GameCard {
                 gameCardAction += " for 3 Quality Points and 1 " + selection + " Chip";
             }
             else {
-            	player.chooseCardToDiscard();
+            	new CardChoosingDialogBox(player);
                 gameCardAction += " and failed";
             }
 
