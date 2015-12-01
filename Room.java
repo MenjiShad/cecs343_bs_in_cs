@@ -20,7 +20,6 @@ public class Room {
         xPosition = x;
         yPosition = y;
         this.listOfAdjacentRooms = adjacentRooms;
-//        setListOfAdjacentRooms(adjacentRooms);
     }
 
     public int getRoomNumber() {
