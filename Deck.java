@@ -74,6 +74,24 @@ public class Deck {
             listOfRooms.get(9), listOfRooms.get(10),
             listOfRooms.get(6)};
         Room[] validRoomsGC39 = {listOfRooms.get(2)};
+        Room[] validRoomsGC40 = {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC41 = {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC42 = {listOfRooms.get(17)};
+        Room[] validRoomsGC43 = {listOfRooms.get(11)};
+        Room[] validRoomsGC44 = {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC45= {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC46 = {listOfRooms.get(3), listOfRooms.get(2),
+                listOfRooms.get(5), listOfRooms.get(7),
+                listOfRooms.get(8), listOfRooms.get(9)};
+        Room[] validRoomsGC47 = {listOfRooms.get(3), listOfRooms.get(2),
+                listOfRooms.get(5), listOfRooms.get(7),
+                listOfRooms.get(8), listOfRooms.get(9)};
+        Room[] validRoomsGC48 = {listOfRooms.get(3), listOfRooms.get(2),
+                listOfRooms.get(5), listOfRooms.get(7),
+                listOfRooms.get(8), listOfRooms.get(9)};
+        Room[] validRoomsGC49 = {listOfRooms.get(0)};
+        Room[] validRoomsGC50 = {listOfRooms.get(5)};
+        Room[] validRoomsGC51 = {listOfRooms.get(9)};
 
         //Creates game card images
         GameCard gameCard1 = new GameCard1("CECS 105", "src/cecs343_bs_in_cs/pictures/1.png", validRoomsGC1);
@@ -115,6 +133,18 @@ public class Deck {
         GameCard gameCard37 = new GameCard37("Make a Friend", "src/cecs343_bs_in_cs/pictures/37.png", validRoomsGC37);
         GameCard gameCard38 = new GameCard38("Enjoying Nature", "src/cecs343_bs_in_cs/pictures/38.png", validRoomsGC38);
         GameCard gameCard39 = new GameCard39("Student Parking", "src/cecs343_bs_in_cs/pictures/39.png", validRoomsGC39);
+        GameCard gameCard40 = new GameCard40("CECS 274", "src/cecs343_bs_in_cs/pictures/40.png", validRoomsGC40);
+        GameCard gameCard41 = new GameCard41("CECS 201", "src/cecs343_bs_in_cs/pictures/41.png", validRoomsGC41);
+        GameCard gameCard42 = new GameCard42("CECS 277", "src/cecs343_bs_in_cs/pictures/42.png", validRoomsGC42);
+        GameCard gameCard43 = new GameCard43("CECS 228", "src/cecs343_bs_in_cs/pictures/43.png", validRoomsGC43);
+        GameCard gameCard44 = new GameCard44("CECS 285", "src/cecs343_bs_in_cs/pictures/44.png", validRoomsGC44);
+        GameCard gameCard45 = new GameCard45("CECS 282", "src/cecs343_bs_in_cs/pictures/45.png", validRoomsGC45);
+        GameCard gameCard46 = new GameCard46("PHIL 270", "src/cecs343_bs_in_cs/pictures/46.png", validRoomsGC46);
+        GameCard gameCard47 = new GameCard47("ENGL 317", "src/cecs343_bs_in_cs/pictures/47.png", validRoomsGC47);
+        GameCard gameCard48 = new GameCard48("PHYS 152", "src/cecs343_bs_in_cs/pictures/48.png", validRoomsGC48);
+        GameCard gameCard49 = new GameCard42("Play Tennis", "src/cecs343_bs_in_cs/pictures/49.png", validRoomsGC49);
+        GameCard gameCard50 = new GameCard50("Workout!!!", "src/cecs343_bs_in_cs/pictures/50.png", validRoomsGC50);
+        GameCard gameCard51 = new GameCard51("Pay Tuition", "src/cecs343_bs_in_cs/pictures/51.png", validRoomsGC51);
 
         //Adds game card images to list of active cards
         listOfCards.add(gameCard1);
@@ -156,7 +186,9 @@ public class Deck {
         listOfCards.add(gameCard37);
         listOfCards.add(gameCard38);
         listOfCards.add(gameCard39);
-
+        
+        //Figure out how to add year 2 gamecards after total qp hits 60
+        //Figure out how to disable the specified cards
     }
 
     public void shuffle() {
@@ -179,8 +211,8 @@ public class Deck {
     }
     
     public void addToDiscard(GameCard card) {
-        listOfCards.remove(card);
         listOfDiscardedCards.add(card);
+        //listOfCards.remove(card);
     }
     
     public void shuffleDiscardDeck() {
