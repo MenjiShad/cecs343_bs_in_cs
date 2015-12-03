@@ -38,9 +38,7 @@ public class GameCard25 extends GameCard {
 				player.addCardToHand(GameModel.getInstance().getCardDeck());
 				gameCardAction += " for 5 Quality Points and 1 card";
 			} else {
-				// player.chooseCardToDiscard();
 				new CardChoosingDialogBox(player);
-				// chooser.showCardsToDiscard();
 				gameCardAction += " and failed";
 			}
 		} else {

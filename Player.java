@@ -92,7 +92,6 @@ public class Player {
 	 *            - GameCard to be discarded
 	 */
 	public void discardGameCard(GameCard card) {
-		// Remove specific card
 		GameModel.getInstance().getCardDeck().addToDiscard(card);
 		getHandOfCards().remove(card);
 	}
