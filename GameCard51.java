@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
-/**
- *    CECS 274 Play in ECS 302 or 308 Prereqs:none
- *    Get 2 Learning Chips
- */
-public class GameCard40 extends GameCard {
 
-	public GameCard40() {
+/**
+ * Pay Tuition Play in Bratwurst Hall Prereqs: none Get
+ * 1 learning chip and discard 1 card for another learning chip Fail: none
+ */
+public class GameCard51 extends GameCard {
+
+	public GameCard51() {
 	}
 
-	public GameCard40(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard51(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
 		learningPreReq = 0;
@@ -32,15 +33,16 @@ public class GameCard40 extends GameCard {
 		}
 
 		if (validRoom) {
-			// Check prereqs
-			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				gameCardAction += " for <reward>";
-			} else {
-				player.updateQP(INCORRECT_ROOM_QP_LOSS);
-				gameCardAction += " and failed";
-			}
+			player.updateSkillChip(2, 0, 0);
+			gameCardAction += " for 1 Learning Chip and discarded 1 GameCard for 1 Learning Chip";
+			// Prompt user to discard one card for 1 additional learning chip
+			new CardChoosingDialogBox(player);
 
+		} else {
+			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			gameCardAction += " and failed";
 		}
+
 	}
 
 	@Override
@@ -48,3 +50,4 @@ public class GameCard40 extends GameCard {
 		return gameCardAction;
 	}
 }
+

@@ -1,20 +1,21 @@
 package cecs343_bs_in_cs;
 
-/**
- *    CECS 274 Play in ECS 302 or 308 Prereqs:none
- *    Get 2 Learning Chips
- */
-public class GameCard40 extends GameCard {
 
-	public GameCard40() {
+/**
+ * CECS 282 Play in ECS 302 or 308 Prereqs: 6 Learning, 6 craft, 6 integrity Get
+ * 10 QP  Fail: Loose a gamecard
+ */
+public class GameCard45 extends GameCard {
+
+	public GameCard45() {
 	}
 
-	public GameCard40(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard45(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 0;
-		craftPreReq = 0;
-		integrityPreReq = 0;
+		learningPreReq = 6;
+		craftPreReq = 6;
+		integrityPreReq = 6;
 	}
 
 	@Override
@@ -34,13 +35,18 @@ public class GameCard40 extends GameCard {
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				gameCardAction += " for <reward>";
+				player.updateQP(10);
+				gameCardAction += " for 5 Quality Points";
 			} else {
-				player.updateQP(INCORRECT_ROOM_QP_LOSS);
+				new CardChoosingDialogBox(player);
 				gameCardAction += " and failed";
 			}
 
+		} else {
+			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			gameCardAction += " and failed";
 		}
+
 	}
 
 	@Override

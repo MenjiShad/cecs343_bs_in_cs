@@ -1,20 +1,21 @@
 package cecs343_bs_in_cs;
 
-/**
- *    CECS 274 Play in ECS 302 or 308 Prereqs:none
- *    Get 2 Learning Chips
- */
-public class GameCard40 extends GameCard {
 
-	public GameCard40() {
+/**
+ * Workout!!! Play in Stuent Recreation Prereqs: 2 Integrity Get
+ * 3 QP and chip of choice  Fail: Loose 1 quality points
+ */
+public class GameCard50 extends GameCard {
+
+	public GameCard50() {
 	}
 
-	public GameCard40(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard50(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
 		learningPreReq = 0;
 		craftPreReq = 0;
-		integrityPreReq = 0;
+		integrityPreReq = 2;
 	}
 
 	@Override
@@ -31,16 +32,28 @@ public class GameCard40 extends GameCard {
 			}
 		}
 
+		String selection;
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				gameCardAction += " for <reward>";
+				player.updateQP(3);
+				if (player.checkIfHumanPlayer()) {
+					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
+					selection = ccdb.getSelection();
+				} else {
+					selection = player.randomChipSelection(true, true, true);
+				}
+				gameCardAction += " for 3 Quality Points and 1 " + selection + " Chip";
 			} else {
-				player.updateQP(INCORRECT_ROOM_QP_LOSS);
+				player.updateQP(-1);
 				gameCardAction += " and failed";
 			}
 
+		} else {
+			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			gameCardAction += " and failed";
 		}
+
 	}
 
 	@Override
@@ -48,3 +61,4 @@ public class GameCard40 extends GameCard {
 		return gameCardAction;
 	}
 }
+

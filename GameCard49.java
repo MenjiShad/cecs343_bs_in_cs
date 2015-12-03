@@ -1,19 +1,20 @@
 package cecs343_bs_in_cs;
 
-/**
- *    CECS 274 Play in ECS 302 or 308 Prereqs:none
- *    Get 2 Learning Chips
- */
-public class GameCard40 extends GameCard {
 
-	public GameCard40() {
+/**
+ * Play Tennis Play in Geroge Allen Field Prereqs: 3 Learning, 3 Craft Get
+ * 5 QP  Fail: Go to student parking
+ */
+public class GameCard49 extends GameCard {
+
+	public GameCard49() {
 	}
 
-	public GameCard40(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard49(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 0;
-		craftPreReq = 0;
+		learningPreReq = 3;
+		craftPreReq = 3;
 		integrityPreReq = 0;
 	}
 
@@ -34,13 +35,18 @@ public class GameCard40 extends GameCard {
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				gameCardAction += " for <reward>";
+				player.updateQP(5);
+				gameCardAction += " for 5 Quality Points";
 			} else {
-				player.updateQP(INCORRECT_ROOM_QP_LOSS);
+				player.setCurrentRoom(GameModel.getListOfRooms().get(2));
 				gameCardAction += " and failed";
 			}
 
+		} else {
+			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			gameCardAction += " and failed";
 		}
+
 	}
 
 	@Override
@@ -48,3 +54,4 @@ public class GameCard40 extends GameCard {
 		return gameCardAction;
 	}
 }
+
