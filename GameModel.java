@@ -198,12 +198,14 @@ public class GameModel {
 		// The first card the AIPlayer encounters,
 		// whose valid Room matches the AI's, will be played by the AI
 		GameCard AIPlayedCard = null;
+		
+	Search:
 		for (int i = cardDeck.getListOfCards().size() - 1; i >= 0; i--) {
 			for (Room validRoom : cardDeck.getListOfCards().get(i).getValidRooms()) {
 				if (AIPlayer.getCurrentRoom().equals(validRoom)) {
 					AIPlayedCard = cardDeck.getListOfCards().get(i);
 					AIPlayer.playCard(AIPlayedCard);
-					break;
+					break Search; //breaks out of outer loop
 				}
 			}
 		}
