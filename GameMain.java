@@ -12,17 +12,17 @@ package cecs343_bs_in_cs;
  */
 public class GameMain {
 
-    // Master location to control the name of the game and the image file
-    private static final String gameName = "BS in CS";
+	// Master location to control the name of the game and the image file
+	private static final String gameName = "BS in CS";
 
-    // Image File Location
-    private static final String imageFileName = "src/cecs343_bs_in_cs/CSULBMap3.png";
+	// Image File Location
+	private static final String imageFileName = "src/cecs343_bs_in_cs/CSULBMap3.png";
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        GameModel model = GameModel.getInstance();
-        GameView view = new GameView(gameName, imageFileName, model);
-        
-        view.createGameFrame();   // Used to set up the frame
-    }
+		GameModel model = GameModel.getInstance();
+		GameView view = new GameView(gameName, imageFileName, model);
+
+		view.createGameFrame(); // Used to set up the frame
+	}
 }
