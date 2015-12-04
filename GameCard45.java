@@ -36,6 +36,7 @@ public class GameCard45 extends GameCard {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
 				player.updateQP(10);
+				GameModel.getInstance().addToTotalQP(10);
 				gameCardAction += " for 5 Quality Points";
 			} else {
 				new CardChoosingDialogBox(player);
@@ -44,6 +45,7 @@ public class GameCard45 extends GameCard {
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

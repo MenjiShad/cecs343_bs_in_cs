@@ -36,6 +36,7 @@ public class GameCard36 extends GameCard {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
 				player.updateQP(3);
+				GameModel.getInstance().addToTotalQP(3);
 				if (player.checkIfHumanPlayer()) {
 					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
 					selection = ccdb.getSelection();
@@ -45,11 +46,13 @@ public class GameCard36 extends GameCard {
 				gameCardAction += " for 3 Quality Points and 1 " + selection + " Chip";
 			} else {
 				player.updateQP(-1);
+				GameModel.getInstance().addToTotalQP(-1);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

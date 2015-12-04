@@ -33,6 +33,7 @@ public class GameCard39 extends GameCard {
 			gameCardAction += " for 1 Craft Chip and teleported to Lactation" + " Lounge";
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

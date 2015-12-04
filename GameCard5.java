@@ -31,6 +31,7 @@ public class GameCard5 extends GameCard {
 			gameCardAction += " for 1 Craft Chip";
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 	}

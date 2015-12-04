@@ -47,10 +47,12 @@ public class GameCard26 extends GameCard {
 				gameCardAction += " for 1 " + selection + " Chip";
 			} else {
 				player.updateQP(-2);
+				GameModel.getInstance().addToTotalQP(-2);
 				gameCardAction += " and failed";
 			}
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

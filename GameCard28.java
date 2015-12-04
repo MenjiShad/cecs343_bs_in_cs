@@ -43,12 +43,13 @@ public class GameCard28 extends GameCard {
 				}
 				gameCardAction += " for 1 " + selection + " Chip";
 			} else {
-				CardChoosingDialogBox chooser = new CardChoosingDialogBox(player);
+				new CardChoosingDialogBox(player);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
+			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

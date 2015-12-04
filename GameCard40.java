@@ -37,6 +37,7 @@ public class GameCard40 extends GameCard {
 				gameCardAction += " for <reward>";
 			} else {
 				player.updateQP(INCORRECT_ROOM_QP_LOSS);
+				GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 				gameCardAction += " and failed";
 			}
 
