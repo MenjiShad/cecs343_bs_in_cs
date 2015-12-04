@@ -17,6 +17,7 @@ public class GameModel {
 	private Player AIPlayer2;
 	private static List<Room> listOfRooms;
 	private Deck cardDeck;
+	private int totalQP;
 
 	private GameModel() {
 
@@ -30,6 +31,7 @@ public class GameModel {
 
 		// Initialize Players
 		createPlayers();
+		setTotalQP(0);
 	}
 
 	// Limit GameModel to a single instance
@@ -217,5 +219,34 @@ public class GameModel {
 			AIPlayer.playCard(AIPlayedCard);
 		}
 		return AIPlayedCard;
+	}
+	
+	public void setNewCards() {
+		HumanPlayer.removeHand();
+		Deck tempDeck = new Deck(listOfRooms);
+		tempDeck.addNewCards(listOfRooms);
+		tempDeck.removeOldCards();
+		//tempDeck.clearDiscard();
+		cardDeck = tempDeck;
+		
+		cardDeck.shuffle();
+		
+		System.out.println("Adding Hand");
+		for (int i = 0; i < 5; i++) {
+			HumanPlayer.addCardToHand(cardDeck);
+		}
+		
+	}
+	
+	public void addToTotalQP(int number) {
+		setTotalQP(getTotalQP() + number);
+	}
+
+	public int getTotalQP() {
+		return totalQP;
+	}
+
+	public void setTotalQP(int totalQP) {
+		this.totalQP = totalQP;
 	}
 }
