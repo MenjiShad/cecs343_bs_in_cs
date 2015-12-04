@@ -1,5 +1,6 @@
 package cecs343_bs_in_cs;
 
+import javax.jws.WebParam.Mode;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -32,6 +33,7 @@ public class GameView /* implements MouseListener */ {
 	private JTextArea currentPlayTextArea;
 	private GameCard currentViewedCard;
 	private boolean playedCard;
+	private boolean changedDeck = false;
 
 	// default constructor
 	public GameView() {
@@ -106,7 +108,9 @@ public class GameView /* implements MouseListener */ {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				System.out.println("Drawing 1 card to hand");
 				model.getPlayer(PlayerNumber.HUMAN).addCardToHand(model.getCardDeck());
+				currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0);
 				drawCardButton.setEnabled(false);
 				moveButton.setEnabled(true);
 				playCardButton.setEnabled(true);
@@ -161,6 +165,7 @@ public class GameView /* implements MouseListener */ {
 						.get(counter % (model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size())).getCardImage());
 				currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards()
 						.get(counter % (model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()));
+				System.out.println("Currently Viewed Card: " + currentViewedCard.getCardName());
 				counter++;
 
 			}
@@ -219,6 +224,15 @@ public class GameView /* implements MouseListener */ {
 				}
 				playedCard = false;
 				updateTurn();
+				updateGameBoard();
+				
+				if(model.getTotalQP() >= 60 && !changedDeck) {
+					System.out.println("Canging deck");
+					model.setNewCards();
+					changedDeck = true;
+					currentPlayTextArea.append("\nChangingDeck");
+				}
+			
 				updateGameBoard();
 			}
 		}
@@ -337,9 +351,9 @@ public class GameView /* implements MouseListener */ {
 				+ model.getPlayer(PlayerNumber.AI2).getIntegrityChips() + "\t "
 				+ model.getPlayer(PlayerNumber.AI2).getQualityPoints() + "\n\n" + "Cards in Deck:  "
 				+ model.getCardDeck().getListOfCards().size() + "\tDiscards out of play:  "
-				+ model.getCardDeck().getListOfDiscardedCards().size()
-				// For Debugging
-				+ "\tCards in hand:  " + model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size() + "\n\nYou are "
+				+ model.getCardDeck().getListOfDiscardedCards().size() + "\tCards in hand:  " 
+				+ model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size() + "\t Total QP: "
+				+ model.getTotalQP() + "\n\nYou are "
 				+ model.getPlayer(PlayerNumber.HUMAN).getStudentName() + " and you are in room "
 				+ model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom() + "\n"
 				+ model.getPlayer(PlayerNumber.AI1).getStudentName() + " is in room "
