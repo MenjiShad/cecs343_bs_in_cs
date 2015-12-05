@@ -1,19 +1,19 @@
 package cecs343_bs_in_cs;
 
 /**
- * CHEM111 Play in any building not ECS Prereq: 6 Craft Get 5 QP Fail: Go to
- * Student Parking
+ * CECS 228 Play in Computer Lab Prereqs: 5 Learning, 3 Craft Get
+ * 5 QP  Fail: Go to student parking
  */
-public class GameCard34 extends GameCard {
+public class GameCard43 extends GameCard {
 
-	public GameCard34() {
+	public GameCard43() {
 	}
 
-	public GameCard34(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard43(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 0;
-		craftPreReq = 6;
+		learningPreReq = 3;
+		craftPreReq = 3;
 		integrityPreReq = 0;
 	}
 
@@ -55,3 +55,4 @@ public class GameCard34 extends GameCard {
 		return gameCardAction;
 	}
 }
+

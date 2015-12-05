@@ -1,15 +1,16 @@
 package cecs343_bs_in_cs;
 
-/**
- * CHEM111 Play in any building not ECS Prereq: 6 Craft Get 5 QP Fail: Go to
- * Student Parking
- */
-public class GameCard34 extends GameCard {
 
-	public GameCard34() {
+/**
+ * PHIL 270 Play in any building not ECS Prereqs: 6 Craft Get
+ * 4 QP and chip of choice  Fail: Discard 1 gamecard
+ */
+public class GameCard46 extends GameCard {
+
+	public GameCard46() {
 	}
 
-	public GameCard34(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard46(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
 		learningPreReq = 0;
@@ -31,14 +32,21 @@ public class GameCard34 extends GameCard {
 			}
 		}
 
+		String selection;
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				player.updateQP(5);
-				GameModel.getInstance().addToTotalQP(5);
-				gameCardAction += " for 5 Quality Points";
+				player.updateQP(4);
+				GameModel.getInstance().addToTotalQP(4);
+				if (player.checkIfHumanPlayer()) {
+					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
+					selection = ccdb.getSelection();
+				} else {
+					selection = player.randomChipSelection(true, true, true);
+				}
+				gameCardAction += " for 4 Quality Points and 1 " + selection + " Chip";
 			} else {
-				player.setCurrentRoom(GameModel.getListOfRooms().get(2));
+				new CardChoosingDialogBox(player);
 				gameCardAction += " and failed";
 			}
 

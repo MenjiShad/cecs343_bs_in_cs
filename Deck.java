@@ -158,6 +158,68 @@ public class Deck {
         listOfCards.add(gameCard39);
 
     }
+    
+    public void addNewCards(List<Room> listOfRooms) {
+    	
+    	Room[] validRoomsGC40 = {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC41 = {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC42 = {listOfRooms.get(17)};
+        Room[] validRoomsGC43 = {listOfRooms.get(11)};
+        Room[] validRoomsGC44 = {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC45= {listOfRooms.get(14), listOfRooms.get(17)};
+        Room[] validRoomsGC46 = {listOfRooms.get(3), listOfRooms.get(2),
+                listOfRooms.get(5), listOfRooms.get(7),
+                listOfRooms.get(8), listOfRooms.get(9)};
+        Room[] validRoomsGC47 = {listOfRooms.get(3), listOfRooms.get(2),
+                listOfRooms.get(5), listOfRooms.get(7),
+                listOfRooms.get(8), listOfRooms.get(9)};
+        Room[] validRoomsGC48 = {listOfRooms.get(3), listOfRooms.get(2),
+                listOfRooms.get(5), listOfRooms.get(7),
+                listOfRooms.get(8), listOfRooms.get(9)};
+        Room[] validRoomsGC49 = {listOfRooms.get(0)};
+        Room[] validRoomsGC50 = {listOfRooms.get(5)};
+        Room[] validRoomsGC51 = {listOfRooms.get(9)};
+    	
+    	GameCard gameCard40 = new GameCard40("CECS 274", "src/cecs343_bs_in_cs/pictures/40.png", validRoomsGC40);
+        GameCard gameCard41 = new GameCard41("CECS 201", "src/cecs343_bs_in_cs/pictures/41.png", validRoomsGC41);
+        GameCard gameCard42 = new GameCard42("CECS 277", "src/cecs343_bs_in_cs/pictures/42.png", validRoomsGC42);
+        GameCard gameCard43 = new GameCard43("CECS 228", "src/cecs343_bs_in_cs/pictures/43.png", validRoomsGC43);
+        GameCard gameCard44 = new GameCard44("CECS 285", "src/cecs343_bs_in_cs/pictures/44.png", validRoomsGC44);
+        GameCard gameCard45 = new GameCard45("CECS 282", "src/cecs343_bs_in_cs/pictures/45.png", validRoomsGC45);
+        GameCard gameCard46 = new GameCard46("PHIL 270", "src/cecs343_bs_in_cs/pictures/46.png", validRoomsGC46);
+        GameCard gameCard47 = new GameCard47("ENGL 317", "src/cecs343_bs_in_cs/pictures/47.png", validRoomsGC47);
+        GameCard gameCard48 = new GameCard48("PHYS 152", "src/cecs343_bs_in_cs/pictures/48.png", validRoomsGC48);
+        GameCard gameCard49 = new GameCard42("Play Tennis", "src/cecs343_bs_in_cs/pictures/49.png", validRoomsGC49);
+        GameCard gameCard50 = new GameCard50("Workout!!!", "src/cecs343_bs_in_cs/pictures/50.png", validRoomsGC50);
+        GameCard gameCard51 = new GameCard51("Pay Tuition", "src/cecs343_bs_in_cs/pictures/51.png", validRoomsGC51);
+    	
+    	listOfCards.add(gameCard40);
+    	listOfCards.add(gameCard41);
+    	listOfCards.add(gameCard42);
+    	listOfCards.add(gameCard43);
+    	listOfCards.add(gameCard44);
+    	listOfCards.add(gameCard45);
+    	listOfCards.add(gameCard46);
+    	listOfCards.add(gameCard47);
+    	listOfCards.add(gameCard48);
+    	listOfCards.add(gameCard49);
+    	listOfCards.add(gameCard50);
+    	listOfCards.add(gameCard51);
+    	
+    }
+    
+    public void removeOldCards() {
+        listOfCards.remove(5);
+     	listOfCards.remove(2);
+     	listOfCards.remove(0);
+     	listOfCards.remove(16);
+     	listOfCards.remove(13);
+     	listOfCards.remove(15);
+     	listOfCards.remove(19);   
+     	listOfCards.remove(30);
+     	listOfCards.remove(31);
+     	listOfCards.remove(33);
+    }
 
     public void shuffle() {
         //Shuffle deck 
@@ -167,6 +229,7 @@ public class Deck {
     public GameCard drawCard() {
         GameCard card = listOfCards.get(listOfCards.size() - 1);
         listOfCards.remove(listOfCards.size() - 1);
+        System.out.println("Adding " + card.getCardName() + " to Hand");
         return card;
     }
 
@@ -179,10 +242,16 @@ public class Deck {
     }
     
     public void addToDiscard(GameCard card) {
-        listOfCards.remove(card);
         listOfDiscardedCards.add(card);
+        //listOfCards.remove(card);
     }
     
+    public void clearDiscard() {
+    	for(int i = 0; i < listOfDiscardedCards.size(); i++){
+    		listOfDiscardedCards.remove(i);
+		}
+    }
+     
     public void shuffleDiscardDeck() {
     	System.out.println("\n\nIn shufflediscardmethod\n\n");
         // Removes discarded cards from the top, going downward

@@ -1,8 +1,8 @@
 package cecs343_bs_in_cs;
 
 /**
- * Late for Class
- * Play in any space outside except Forbidden Parking 
+ * Late for Class 
+ * Play in any space outside except Forbidden Parking
  * Get 1 Craft and teleport to Lactation Lounge
  */
 public class GameCard13 extends GameCard {
@@ -34,6 +34,7 @@ public class GameCard13 extends GameCard {
             gameCardAction += " for 1 Craft Chip and teleported to the" + " Lactation Lounge";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
 

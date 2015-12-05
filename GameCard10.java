@@ -1,9 +1,11 @@
 package cecs343_bs_in_cs;
 
 /**
- * Goodbye Professor Play in Room of Retirement
- * Prereqs: 6 Learning, 6 Craft, 6 Integrity
- * Get 10 QP Fail: Lose 1 Game Card and leave in RoR
+ * Goodbye Professor
+ * Play in Room of Retirement
+ * Prereqs: 6 Learning, 6 Craft, 6 Integrity 
+ * Get 10 QP 
+ * Fail: Lose 1 Game Card and leave in RoR
  */
 public class GameCard10 extends GameCard {
 
@@ -36,15 +38,18 @@ public class GameCard10 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateQP(10);
+                GameModel.getInstance().addToTotalQP(10);
                 gameCardAction += " for 10 Quality Points";
             } else {
                 // Discard one Card
                 new CardChoosingDialogBox(player);
 
+				// Need to figure out how to delete card from deck
                 gameCardAction += " and failed";
             }
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
 
@@ -54,5 +59,4 @@ public class GameCard10 extends GameCard {
     public String toString() {
         return gameCardAction;
     }
-
 }

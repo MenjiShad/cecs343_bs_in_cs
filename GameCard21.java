@@ -39,6 +39,7 @@ public class GameCard21 extends GameCard {
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateSkillChip(0, 0, 1);
                 player.updateQP(5);
+                GameModel.getInstance().addToTotalQP(5);
                 gameCardAction += " for 5 Quality Points and 1 Integrity Chip";
             } else {
                 player.setCurrentRoom(GameModel.getListOfRooms().get(2));
@@ -46,6 +47,7 @@ public class GameCard21 extends GameCard {
             }
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
 
@@ -55,5 +57,4 @@ public class GameCard21 extends GameCard {
     public String toString() {
         return gameCardAction;
     }
-
 }

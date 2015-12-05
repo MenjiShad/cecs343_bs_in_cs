@@ -81,6 +81,11 @@ public class Player {
 		discardGameCard(card);
 		card.play(this);
 	}
+	
+	public void removeHand() {
+		System.out.println("Clearing Hand");
+		handOfCards.clear();
+	}
 
 	// public void discardGameCard() {
 	// //Open dialog box to allow player to discard
@@ -92,46 +97,13 @@ public class Player {
 	 *            - GameCard to be discarded
 	 */
 	public void discardGameCard(GameCard card) {
-		// Remove specific card
 		GameModel.getInstance().getCardDeck().addToDiscard(card);
 		getHandOfCards().remove(card);
 	}
 
-	/**
-	 * Dialog for choosing a card to discard Does not allow Human player to
-	 * choose for AI player
-	 *
-	 * @param
-	 */
-	public void chooseCardToDiscard() {
-
-		// Checks if human player
-		if (checkIfHumanPlayer()) {
-
-			JDialog.setDefaultLookAndFeelDecorated(true);
-			Object[] objectCards = new Object[getHandOfCards().size()];
-
-			for (int i = 0; i < getHandOfCards().size(); i++) {
-				objectCards[i] = getHandOfCards().get(i).getCardName();
-			}
-
-			Object selection = JOptionPane.showInputDialog(null, "Choose a card to discard", "Choice",
-					JOptionPane.QUESTION_MESSAGE, null, objectCards, getHandOfCards().get(0));
-
-			System.out.println("\n\nSELECTION: " + selection + "\n\n"); // Debugging
-
-			for (int i = 0; i < getHandOfCards().size(); i++) {
-
-				if (selection.equals(getHandOfCards().get(i).getCardName())) {
-					handOfCards.remove(getHandOfCards().get(i));
-				}
-			}
-		}
-	}
-
+	
 	public void addCardToHand(Deck cardDeck) {
 		handOfCards.add(cardDeck.drawCard());
-		// handOfCards.add(cardDeck.getListOfCards().get(24));
 	}
 
 	public ArrayList<GameCard> getHandOfCards() {

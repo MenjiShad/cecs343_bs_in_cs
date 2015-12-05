@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * The model class of the MVC scheme for the BS in CS game
- * Holds instances of the 3 players, the Rooms, and the Deck
+ * Holds instances of the 3 players, the Rooms, and the Deck 
  * Controls the AI, maintains connections between classes
  */
 public class GameModel {
@@ -18,6 +18,7 @@ public class GameModel {
     private Player AIPlayer2;
     private static List<Room> listOfRooms;
     private Deck cardDeck;
+    private int totalQP;
 
     private GameModel() {
 
@@ -31,6 +32,7 @@ public class GameModel {
 
         // Initialize Players
         createPlayers();
+        setTotalQP(0);
     }
 
     // Limit GameModel to a single instance
@@ -81,7 +83,7 @@ public class GameModel {
         List<Integer> listOfAdjacentRooms20 = Arrays.asList(15);
 
         // Creates each room along with their adjacent rooms
-        listOfRooms.add(new Room("George Allen Field", 0, 75, 100, listOfAdjacentRooms0));
+        listOfRooms.add(new Room("Geroge Allen Field", 0, 75, 100, listOfAdjacentRooms0));
         listOfRooms.add(new Room("Japanese Garden", 1, 500, 95, listOfAdjacentRooms1));
         listOfRooms.add(new Room("Student Parking", 2, 1085, 95, listOfAdjacentRooms2));
         listOfRooms.add(new Room("The Pyramid", 3, 470, 310, listOfAdjacentRooms3));
@@ -196,20 +198,22 @@ public class GameModel {
     }
 
     private GameCard AIPlay(Player AIPlayer) {
-		// The first card the AIPlayer encounters,
+	// The first card the AIPlayer encounters,
         // whose valid Room matches the AI's, will be played by the AI
         GameCard AIPlayedCard = null;
+
+        Search:
         for (int i = cardDeck.getListOfCards().size() - 1; i >= 0; i--) {
             for (Room validRoom : cardDeck.getListOfCards().get(i).getValidRooms()) {
                 if (AIPlayer.getCurrentRoom().equals(validRoom)) {
                     AIPlayedCard = cardDeck.getListOfCards().get(i);
                     AIPlayer.playCard(AIPlayedCard);
-                    break;
+                    break Search; //breaks out of outer loop
                 }
             }
         }
 
-		// If there are no GameCards that match the AI's Room,
+	// If there are no GameCards that match the AI's Room,
         // play the top of the deck
         if (AIPlayedCard == null) {
             AIPlayedCard = cardDeck.getListOfCards().get(cardDeck.getListOfCards().size() - 1);
@@ -217,4 +221,34 @@ public class GameModel {
         }
         return AIPlayedCard;
     }
+
+    public void setNewCards() {
+        HumanPlayer.removeHand();
+        Deck tempDeck = new Deck(listOfRooms);
+        tempDeck.addNewCards(listOfRooms);
+        tempDeck.removeOldCards();
+        //tempDeck.clearDiscard();
+        cardDeck = tempDeck;
+
+        cardDeck.shuffle();
+
+        System.out.println("Adding Hand");
+        for (int i = 0; i < 5; i++) {
+            HumanPlayer.addCardToHand(cardDeck);
+        }
+
+    }
+
+    public void addToTotalQP(int number) {
+        setTotalQP(getTotalQP() + number);
+    }
+
+    public int getTotalQP() {
+        return totalQP;
+    }
+
+    public void setTotalQP(int totalQP) {
+        this.totalQP = totalQP;
+    }
+
 }

@@ -1,19 +1,19 @@
 package cecs343_bs_in_cs;
 
 /**
- * CHEM111 Play in any building not ECS Prereq: 6 Craft Get 5 QP Fail: Go to
- * Student Parking
+ * CECS 201 Play in ECS 302 or 308 Prereqs: 5 Learning Get
+ * 5 QP  Fail: Loose 3 quality points
  */
-public class GameCard34 extends GameCard {
+public class GameCard41 extends GameCard {
 
-	public GameCard34() {
+	public GameCard41() {
 	}
 
-	public GameCard34(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard41(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 0;
-		craftPreReq = 6;
+		learningPreReq = 5;
+		craftPreReq = 0;
 		integrityPreReq = 0;
 	}
 
@@ -38,7 +38,8 @@ public class GameCard34 extends GameCard {
 				GameModel.getInstance().addToTotalQP(5);
 				gameCardAction += " for 5 Quality Points";
 			} else {
-				player.setCurrentRoom(GameModel.getListOfRooms().get(2));
+				player.updateQP(-3);
+				GameModel.getInstance().addToTotalQP(-3);
 				gameCardAction += " and failed";
 			}
 

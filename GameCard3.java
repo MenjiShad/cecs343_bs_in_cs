@@ -33,6 +33,7 @@ public class GameCard3 extends GameCard {
             gameCardAction += " for 1 <chip> Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
 
@@ -42,5 +43,4 @@ public class GameCard3 extends GameCard {
     public String toString() {
         return gameCardAction;
     }
-
 }

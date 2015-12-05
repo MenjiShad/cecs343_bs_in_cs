@@ -1,5 +1,6 @@
 package cecs343_bs_in_cs;
 
+import javax.jws.WebParam.Mode;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -32,6 +33,7 @@ public class GameView {
     private JTextArea currentPlayTextArea;
     private GameCard currentViewedCard;
     private boolean playedCard;
+    private boolean changedDeck = false;
 
     // default constructor
     public GameView() {
@@ -39,7 +41,7 @@ public class GameView {
         playedCard = false;
     }
 
-	// constructor that takes in the title of the frame and the
+    // constructor that takes in the title of the frame and the
     // file name of the board image
     public GameView(String title, String imageFileName, GameModel model) {
         frameTitle = title;
@@ -106,7 +108,9 @@ public class GameView {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                System.out.println("Drawing 1 card to hand");
                 model.getPlayer(PlayerNumber.HUMAN).addCardToHand(model.getCardDeck());
+                currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0);
                 drawCardButton.setEnabled(false);
                 moveButton.setEnabled(true);
                 playCardButton.setEnabled(true);
@@ -123,8 +127,6 @@ public class GameView {
             // Move the player from one room to another on button press
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                // Add handling for the case where no room is selected
                 Room newRoom = adjacentRoomsList.getSelectedValue();
                 model.getPlayer(PlayerNumber.HUMAN).setCurrentRoom(newRoom);
                 updateGameBoard();
@@ -141,9 +143,10 @@ public class GameView {
         moveButton.addActionListener(new MoveActionListener());
         moveButtonPanel.add(moveButton);
 
+        
+        gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0).getCardImage(),
+                JLabel.CENTER);
         // Cycle cards to choose from
-        gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN)
-                .getHandOfCards().get(0).getCardImage(), JLabel.CENTER);
         final class CycleCardActionListener implements MouseListener {
 
             private int counter = 1;
@@ -158,22 +161,23 @@ public class GameView {
                         .get(counter % (model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size())).getCardImage());
                 currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards()
                         .get(counter % (model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size()));
+                System.out.println("Currently Viewed Card: " + currentViewedCard.getCardName());
                 counter++;
             }
-           
+
             public void mousePressed(MouseEvent e) {}
             public void mouseReleased(MouseEvent e) {}
             public void mouseEntered(MouseEvent e) {}
             public void mouseExited(MouseEvent e) {}
         }
-        gameCardLabel.addMouseListener(new CycleCardActionListener());	
+        gameCardLabel.addMouseListener(new CycleCardActionListener());
+		
 
         // Play Card action listener
         final class PlayCardActionListener implements ActionListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 model.getPlayer(PlayerNumber.HUMAN).playCard(currentViewedCard);
                 updateCurrentPlay(currentViewedCard);
                 playCardButton.setEnabled(false);
@@ -188,6 +192,15 @@ public class GameView {
                 }
                 playedCard = false;
                 updateTurn();
+                updateGameBoard();
+
+                if (model.getTotalQP() >= 60 && !changedDeck) {
+                    System.out.println("Canging deck");
+                    model.setNewCards();
+                    changedDeck = true;
+                    currentPlayTextArea.append("\nChangingDeck");
+                }
+
                 updateGameBoard();
             }
         }
@@ -306,8 +319,9 @@ public class GameView {
                 + model.getPlayer(PlayerNumber.AI2).getIntegrityChips() + "\t "
                 + model.getPlayer(PlayerNumber.AI2).getQualityPoints() + "\n\n" + "Cards in Deck:  "
                 + model.getCardDeck().getListOfCards().size() + "\tDiscards out of play:  "
-                + model.getCardDeck().getListOfDiscardedCards().size()
-                + "\tCards in hand:  " + model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size() + "\n\nYou are "
+                + model.getCardDeck().getListOfDiscardedCards().size() + "\tCards in hand:  "
+                + model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().size() + "\t Total QP: "
+                + model.getTotalQP() + "\n\nYou are "
                 + model.getPlayer(PlayerNumber.HUMAN).getStudentName() + " and you are in room "
                 + model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom() + "\n"
                 + model.getPlayer(PlayerNumber.AI1).getStudentName() + " is in room "

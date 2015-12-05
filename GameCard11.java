@@ -30,7 +30,7 @@ public class GameCard11 extends GameCard {
 
         String selection;
         if (validRoom) {
-			// Add choosing dialog box if human
+            // Add choosing dialog box if human
             // Else, AI random selects
             if (player.checkIfHumanPlayer()) {
                 ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, false, true);
@@ -42,6 +42,7 @@ public class GameCard11 extends GameCard {
             gameCardAction += " for 1 " + selection + " Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
 
@@ -51,4 +52,5 @@ public class GameCard11 extends GameCard {
     public String toString() {
         return gameCardAction;
     }
+
 }

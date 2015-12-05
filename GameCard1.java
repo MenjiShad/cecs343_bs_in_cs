@@ -1,8 +1,8 @@
 package cecs343_bs_in_cs;
 
 /**
- * CECS105 Game Card
- * Play in ECS 302 or 308 
+ * CECS105 Game Card 
+ * Play in ECS 302 or 308
  * Earn 1 Learning Chip
  */
 public class GameCard1 extends GameCard {
@@ -33,6 +33,7 @@ public class GameCard1 extends GameCard {
             gameCardAction += " for 1 Learning Chip";
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
 
@@ -42,5 +43,4 @@ public class GameCard1 extends GameCard {
     public String toString() {
         return gameCardAction;
     }
-
 }

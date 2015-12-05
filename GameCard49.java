@@ -1,19 +1,20 @@
 package cecs343_bs_in_cs;
 
-/**
- * CHEM111 Play in any building not ECS Prereq: 6 Craft Get 5 QP Fail: Go to
- * Student Parking
- */
-public class GameCard34 extends GameCard {
 
-	public GameCard34() {
+/**
+ * Play Tennis Play in Geroge Allen Field Prereqs: 3 Learning, 3 Craft Get
+ * 5 QP  Fail: Go to student parking
+ */
+public class GameCard49 extends GameCard {
+
+	public GameCard49() {
 	}
 
-	public GameCard34(String newName, String imageFileName, Room[] validRooms) {
+	public GameCard49(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 0;
-		craftPreReq = 6;
+		learningPreReq = 3;
+		craftPreReq = 3;
 		integrityPreReq = 0;
 	}
 
@@ -55,3 +56,4 @@ public class GameCard34 extends GameCard {
 		return gameCardAction;
 	}
 }
+

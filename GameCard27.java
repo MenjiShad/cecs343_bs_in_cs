@@ -39,6 +39,7 @@ public class GameCard27 extends GameCard {
             // Check prereqs
             if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
                 player.updateQP(5);
+                GameModel.getInstance().addToTotalQP(5);
 
                 if (player.checkIfHumanPlayer()) {
                     ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
@@ -56,9 +57,9 @@ public class GameCard27 extends GameCard {
 
         } else {
             player.updateQP(INCORRECT_ROOM_QP_LOSS);
+            GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
             gameCardAction += " and failed";
         }
-
     }
 
     @Override
