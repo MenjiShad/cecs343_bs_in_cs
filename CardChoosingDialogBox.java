@@ -1,13 +1,11 @@
 package cecs343_bs_in_cs;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
 public class CardChoosingDialogBox extends JDialog {
 
-    private JPanel dialogPanel;
     private JPanel masterPanel = new JPanel();
     private ArrayList<JLabel> images = new ArrayList<>();
     private ArrayList<JPanel> buttonPanels = new ArrayList<>();

@@ -161,24 +161,26 @@ public class Deck {
     
     public void addNewCards(List<Room> listOfRooms) {
     	
-    	Room[] validRoomsGC40 = {listOfRooms.get(14), listOfRooms.get(17)};
-        Room[] validRoomsGC41 = {listOfRooms.get(14), listOfRooms.get(17)};
-        Room[] validRoomsGC42 = {listOfRooms.get(17)};
-        Room[] validRoomsGC43 = {listOfRooms.get(11)};
-        Room[] validRoomsGC44 = {listOfRooms.get(14), listOfRooms.get(17)};
-        Room[] validRoomsGC45= {listOfRooms.get(14), listOfRooms.get(17)};
-        Room[] validRoomsGC46 = {listOfRooms.get(3), listOfRooms.get(2),
-                listOfRooms.get(5), listOfRooms.get(7),
-                listOfRooms.get(8), listOfRooms.get(9)};
-        Room[] validRoomsGC47 = {listOfRooms.get(3), listOfRooms.get(2),
-                listOfRooms.get(5), listOfRooms.get(7),
-                listOfRooms.get(8), listOfRooms.get(9)};
-        Room[] validRoomsGC48 = {listOfRooms.get(3), listOfRooms.get(2),
-                listOfRooms.get(5), listOfRooms.get(7),
-                listOfRooms.get(8), listOfRooms.get(9)};
-        Room[] validRoomsGC49 = {listOfRooms.get(0)};
-        Room[] validRoomsGC50 = {listOfRooms.get(5)};
-        Room[] validRoomsGC51 = {listOfRooms.get(9)};
+    	Room[] validRoomsGC40 = {listOfRooms.get(14), listOfRooms.get(17), listOfRooms.get(11)};
+        Room[] validRoomsGC41 = {listOfRooms.get(14), listOfRooms.get(17), listOfRooms.get(11)};
+        Room[] validRoomsGC42 = {listOfRooms.get(11), listOfRooms.get(12),
+                listOfRooms.get(13), listOfRooms.get(14),
+                listOfRooms.get(15), listOfRooms.get(16),
+                listOfRooms.get(17), listOfRooms.get(18),
+                listOfRooms.get(19)};
+        Room[] validRoomsGC43 = {listOfRooms.get(14), listOfRooms.get(17), listOfRooms.get(11)};
+        Room[] validRoomsGC44 = {listOfRooms.get(18), listOfRooms.get(1)};
+        Room[] validRoomsGC45 = {listOfRooms.get(11), listOfRooms.get(12),
+                listOfRooms.get(13), listOfRooms.get(14),
+                listOfRooms.get(15), listOfRooms.get(16),
+                listOfRooms.get(17), listOfRooms.get(18),
+                listOfRooms.get(19)};
+        Room[] validRoomsGC46 = {listOfRooms.get(7), listOfRooms.get(8)};
+        Room[] validRoomsGC47 = {listOfRooms.get(8)};
+        Room[] validRoomsGC48 = {listOfRooms.get(7), listOfRooms.get(8)};
+        Room[] validRoomsGC49 = {listOfRooms.get(3)};
+        Room[] validRoomsGC50 = {listOfRooms.get(2), listOfRooms.get(6)};
+        Room[] validRoomsGC51 = {listOfRooms.get(5)};
     	
     	GameCard gameCard40 = new GameCard40("CECS 274", "src/cecs343_bs_in_cs/pictures/40.png", validRoomsGC40);
         GameCard gameCard41 = new GameCard41("CECS 201", "src/cecs343_bs_in_cs/pictures/41.png", validRoomsGC41);
@@ -189,9 +191,9 @@ public class Deck {
         GameCard gameCard46 = new GameCard46("PHIL 270", "src/cecs343_bs_in_cs/pictures/46.png", validRoomsGC46);
         GameCard gameCard47 = new GameCard47("ENGL 317", "src/cecs343_bs_in_cs/pictures/47.png", validRoomsGC47);
         GameCard gameCard48 = new GameCard48("PHYS 152", "src/cecs343_bs_in_cs/pictures/48.png", validRoomsGC48);
-        GameCard gameCard49 = new GameCard42("Play Tennis", "src/cecs343_bs_in_cs/pictures/49.png", validRoomsGC49);
-        GameCard gameCard50 = new GameCard50("Workout!!!", "src/cecs343_bs_in_cs/pictures/50.png", validRoomsGC50);
-        GameCard gameCard51 = new GameCard51("Pay Tuition", "src/cecs343_bs_in_cs/pictures/51.png", validRoomsGC51);
+        GameCard gameCard49 = new GameCard42("LBSU vs UCI", "src/cecs343_bs_in_cs/pictures/49.png", validRoomsGC49);
+        GameCard gameCard50 = new GameCard50("Car Pool", "src/cecs343_bs_in_cs/pictures/50.png", validRoomsGC50);
+        GameCard gameCard51 = new GameCard51("Have a Swim", "src/cecs343_bs_in_cs/pictures/51.png", validRoomsGC51);
     	
     	listOfCards.add(gameCard40);
     	listOfCards.add(gameCard41);
