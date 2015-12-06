@@ -1,7 +1,8 @@
 package cecs343_bs_in_cs;
 
 /**
- *    CECS 274 Play in ECS 302 or 308 Prereqs:none
+ *    CECS 274 Play in ECS 302 or 308 or Lab
+ *    Prereqs: 7 Learning
  *    Get 2 Learning Chips
  */
 public class GameCard40 extends GameCard {
@@ -12,7 +13,7 @@ public class GameCard40 extends GameCard {
 	public GameCard40(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 0;
+		learningPreReq = 7;
 		craftPreReq = 0;
 		integrityPreReq = 0;
 	}
@@ -34,14 +35,18 @@ public class GameCard40 extends GameCard {
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				gameCardAction += " for <reward>";
+				player.updateQP(5);
+				player.addCardToHand(GameModel.getInstance().getCardDeck());
+				gameCardAction += " for 5 Quality Points and 1 GameCard";
 			} else {
-				player.updateQP(INCORRECT_ROOM_QP_LOSS);
-				GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
+				player.updateQP(-3);
 				gameCardAction += " and failed";
 			}
-
-		}
+			
+		}else {
+				player.updateQP(INCORRECT_ROOM_QP_LOSS);
+				gameCardAction += " and failed";
+			}
 	}
 
 	@Override

@@ -2,8 +2,10 @@ package cecs343_bs_in_cs;
 
 
 /**
- * Play Tennis Play in Geroge Allen Field Prereqs: 3 Learning, 3 Craft Get
- * 5 QP  Fail: Go to student parking
+ * LBSU vs UCI Play in The Pyramid 
+ * Prereqs: none
+ * Get a chip of your choice  
+ * Fail: none
  */
 public class GameCard49 extends GameCard {
 
@@ -13,8 +15,8 @@ public class GameCard49 extends GameCard {
 	public GameCard49(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 3;
-		craftPreReq = 3;
+		learningPreReq = 0;
+		craftPreReq = 0;
 		integrityPreReq = 0;
 	}
 
@@ -32,20 +34,22 @@ public class GameCard49 extends GameCard {
 			}
 		}
 
+		String selection;
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				player.updateQP(5);
-				GameModel.getInstance().addToTotalQP(5);
-				gameCardAction += " for 5 Quality Points";
-			} else {
-				player.setCurrentRoom(GameModel.getListOfRooms().get(2));
-				gameCardAction += " and failed";
+				if (player.checkIfHumanPlayer()) {
+					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
+					selection = ccdb.getSelection();
+				} else {
+					selection = player.randomChipSelection(true, true, true);
+				}
+
+				gameCardAction += " for 1 " + selection + " Chip";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

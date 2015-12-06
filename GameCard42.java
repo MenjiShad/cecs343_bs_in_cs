@@ -1,8 +1,10 @@
 package cecs343_bs_in_cs;
 
 /**
- * CECS 201 Play in ECS 308  Prereqs: 5 Learning Get
- * 5 QP  Fail: Loose 3 quality points and a gamecard
+ * CECS 201 Play in any room in ECS  
+ * Prereqs: 8 Learning, 8 Craft, 8 Integrity
+ * Get 5 QP  
+ * Fail: Loose 2 quality points and a gamecard
  */
 public class GameCard42 extends GameCard {
 
@@ -12,9 +14,9 @@ public class GameCard42 extends GameCard {
 	public GameCard42(String newName, String imageFileName, Room[] validRooms) {
 		super(newName, imageFileName, validRooms);
 
-		learningPreReq = 5;
-		craftPreReq = 0;
-		integrityPreReq = 0;
+		learningPreReq = 8;
+		craftPreReq = 8;
+		integrityPreReq = 8;
 	}
 
 	@Override
@@ -35,18 +37,15 @@ public class GameCard42 extends GameCard {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
 				player.updateQP(5);
-				GameModel.getInstance().addToTotalQP(5);
 				gameCardAction += " for 5 Quality Points";
 			} else {
-				player.updateQP(-3);
-				GameModel.getInstance().addToTotalQP(-3);
+				player.updateQP(-2);
 				new CardChoosingDialogBox(player);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

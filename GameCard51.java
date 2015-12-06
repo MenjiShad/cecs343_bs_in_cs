@@ -2,8 +2,10 @@ package cecs343_bs_in_cs;
 
 
 /**
- * Pay Tuition Play in Bratwurst Hall Prereqs: none Get
- * 1 learning chip and discard 1 card for another learning chip Fail: none
+ * Have a Swim Play in Student Rec 
+ * Prereqs: none 
+ * Get A chip of choice 
+ * Fail: none
  */
 public class GameCard51 extends GameCard {
 
@@ -32,15 +34,22 @@ public class GameCard51 extends GameCard {
 			}
 		}
 
+		String selection;
 		if (validRoom) {
-			player.updateSkillChip(2, 0, 0);
-			gameCardAction += " for 1 Learning Chip and discarded 1 GameCard for 1 Learning Chip";
-			// Prompt user to discard one card for 1 additional learning chip
-			new CardChoosingDialogBox(player);
+			// Check prereqs
+			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
+				if (player.checkIfHumanPlayer()) {
+					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
+					selection = ccdb.getSelection();
+				} else {
+					selection = player.randomChipSelection(true, true, true);
+				}
+
+				gameCardAction += " for 1 " + selection + " Chip";
+			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

@@ -2,8 +2,9 @@ package cecs343_bs_in_cs;
 
 
 /**
- * CECS 282 Play in ECS 302 or 308 Prereqs: 6 Learning, 6 craft, 6 integrity Get
- * 10 QP  Fail: Loose a gamecard
+ * CECS 282 Play in any room in ECS 
+ * Prereqs: 8 Learning, 8 craft, 8 integrity 
+ * Get 5 QP  Fail: Loose 2 QP and  a GameCard
  */
 public class GameCard45 extends GameCard {
 
@@ -35,17 +36,16 @@ public class GameCard45 extends GameCard {
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				player.updateQP(10);
-				GameModel.getInstance().addToTotalQP(10);
+				player.updateQP(5);
 				gameCardAction += " for 5 Quality Points";
 			} else {
+				player.updateQP(-2);
 				new CardChoosingDialogBox(player);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

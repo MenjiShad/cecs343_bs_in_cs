@@ -2,8 +2,10 @@ package cecs343_bs_in_cs;
 
 
 /**
- * Workout!!! Play in Stuent Recreation Prereqs: 2 Integrity Get
- * 3 QP and chip of choice  Fail: Loose 1 quality points
+ * Car Pool Play in either parking lot
+ * Prereqs: 5 Integrity 
+ * Get 3 QP and 1 GameCard  
+ * Fail: Loose 2 quality points
  */
 public class GameCard50 extends GameCard {
 
@@ -15,7 +17,7 @@ public class GameCard50 extends GameCard {
 
 		learningPreReq = 0;
 		craftPreReq = 0;
-		integrityPreReq = 2;
+		integrityPreReq = 5;
 	}
 
 	@Override
@@ -32,28 +34,19 @@ public class GameCard50 extends GameCard {
 			}
 		}
 
-		String selection;
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
 				player.updateQP(3);
-				GameModel.getInstance().addToTotalQP(3);
-				if (player.checkIfHumanPlayer()) {
-					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
-					selection = ccdb.getSelection();
-				} else {
-					selection = player.randomChipSelection(true, true, true);
-				}
-				gameCardAction += " for 3 Quality Points and 1 " + selection + " Chip";
+				new CardChoosingDialogBox(player);
+				gameCardAction += " for 3 Quality Points and 1 GameCard";
 			} else {
-				player.updateQP(-1);
-				GameModel.getInstance().addToTotalQP(-1);
+				player.updateQP(-2);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

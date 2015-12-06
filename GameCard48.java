@@ -2,8 +2,10 @@ package cecs343_bs_in_cs;
 
 
 /**
- * PHYS 152 Play in any building not ECS Prereqs: 4 Integrity Get
- * 10 QP and chip of choice  Fail: Loose 3 quality points and a gamecard
+ * PHYS 152 Play in LA 5 or Library 
+ * Prereqs: 7 Integrity Get
+ * 5 QP and chip of choice  
+ * Fail: Loose a GameCard
  */
 public class GameCard48 extends GameCard {
 
@@ -15,7 +17,7 @@ public class GameCard48 extends GameCard {
 
 		learningPreReq = 0;
 		craftPreReq = 0;
-		integrityPreReq = 4;
+		integrityPreReq = 7;
 	}
 
 	@Override
@@ -36,8 +38,7 @@ public class GameCard48 extends GameCard {
 		if (validRoom) {
 			// Check prereqs
 			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
-				player.updateQP(10);
-				GameModel.getInstance().addToTotalQP(10);
+				player.updateQP(5);
 				if (player.checkIfHumanPlayer()) {
 					ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
 					selection = ccdb.getSelection();
@@ -45,17 +46,15 @@ public class GameCard48 extends GameCard {
 					selection = player.randomChipSelection(true, true, true);
 				}
 
-				gameCardAction += " for 10 Quality Points and 1 " + selection + " Chip";
+				gameCardAction += " for 5 Quality Points and 1 " + selection + " Chip";
 			} else {
-				player.updateQP(-3);
-				GameModel.getInstance().addToTotalQP(-3);
+
 				new CardChoosingDialogBox(player);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

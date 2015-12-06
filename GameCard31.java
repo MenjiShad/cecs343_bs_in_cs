@@ -39,13 +39,11 @@ public class GameCard31 extends GameCard {
 				gameCardAction += " for 1 Learning Chip and 1 card";
 			} else {
 				player.updateQP(-2);
-				GameModel.getInstance().addToTotalQP(-2);
 				gameCardAction += " and failed";
 			}
 
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

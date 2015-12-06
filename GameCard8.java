@@ -38,7 +38,6 @@ public class GameCard8 extends GameCard {
 			new CardChoosingDialogBox(player);
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 

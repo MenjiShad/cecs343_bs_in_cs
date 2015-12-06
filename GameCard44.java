@@ -1,8 +1,10 @@
 package cecs343_bs_in_cs;
 
 /**
- * CECS 285 Play in ECS 302 or 308 Prereqs: 5 Learning Get
- * 5 QP  Fail: Loose 3 quality points and a gamecard
+ * CECS 285 Play in EAT Room or Japanese Garden 
+ * Prereqs: 6 Learning \
+ * Get 5 QP and Chip of your choice  
+ * Fail: Loose 3 quality points
  */
 public class GameCard44 extends GameCard {
 
@@ -31,22 +33,21 @@ public class GameCard44 extends GameCard {
 			}
 		}
 
+		String selection;
 		if (validRoom) {
-			// Check prereqs
-			if (checkPreReqs(player, learningPreReq, craftPreReq, integrityPreReq)) {
+			// Add choosing dialog box if human
+			// Else, AI random selects
+			if (player.checkIfHumanPlayer()) {
 				player.updateQP(5);
-				GameModel.getInstance().addToTotalQP(5);
-				gameCardAction += " for 5 Quality Points";
+				ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, false, true);
+				selection = ccdb.getSelection();
 			} else {
-				player.updateQP(-3);
-				GameModel.getInstance().addToTotalQP(-3);
-				new CardChoosingDialogBox(player);
-				gameCardAction += " and failed";
+				selection = player.randomChipSelection(true, false, true);
 			}
 
+			gameCardAction += " for 5 Quality Points and  1 " + selection + " Chip";
 		} else {
 			player.updateQP(INCORRECT_ROOM_QP_LOSS);
-			GameModel.getInstance().addToTotalQP(INCORRECT_ROOM_QP_LOSS);
 			gameCardAction += " and failed";
 		}
 
