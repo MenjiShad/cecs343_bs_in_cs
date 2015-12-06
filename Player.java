@@ -67,6 +67,7 @@ public class Player {
 
 	public void updateQP(int pointUpdate) {
 		qualityPoint += pointUpdate;
+		GameModel.getInstance().addToTotalQP(pointUpdate);
 	}
 
 	// Think about passing in String gameCardAction and then
