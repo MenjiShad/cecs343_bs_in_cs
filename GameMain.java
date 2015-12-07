@@ -20,6 +20,7 @@ public class GameMain {
 
 	public static void main(String[] args) {
 
+		//Creates Game Model
 		GameModel model = GameModel.getInstance();
 		GameView view = new GameView(gameName, imageFileName, model);
 

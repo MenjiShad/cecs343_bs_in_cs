@@ -24,31 +24,79 @@ public abstract class GameCard {
 	protected int learningPreReq, craftPreReq, integrityPreReq;
 	protected static final int INCORRECT_ROOM_QP_LOSS = -2;
 
+	/**
+	 * Default Constructor
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public GameCard() {
 	}
 
+	/**
+	 * Non-Default Constructor
+	 *
+	 * @param newName - Game Card name
+	 * 		  imageFileName - image files name
+	 * 		  validRooms - list of valid rooms to play in
+	 * 				 
+	 */
 	public GameCard(String newName, String imageFileName, Room[] validRooms) {
 		gameCardName = newName;
 		gameCardImage = new ImageIcon(imageFileName);
 		listOfValidRooms = new ArrayList<Room>(Arrays.asList(validRooms));
 	}
 
+	/**
+	 * Returns the list of valid rooms
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public ArrayList<Room> getValidRooms() {
 		return listOfValidRooms;
 	}
 
+	/**
+	 * Returns the gameCards image 
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public ImageIcon getCardImage() {
 		return gameCardImage;
 	}
 
+	/**
+	 * Method is used to check if the player has the correct prerequisites
+	 *
+	 * @param player - the current player
+	 * 		  learning - the learning value
+	 * 		  craft - the craft value
+	 * 		  integrity - the integrity value
+	 * 				 
+	 */
 	protected boolean checkPreReqs(Player player, int learning, int craft, int integrity) {
 		return (player.getLearningChips() >= learning && player.getCraftChips() >= craft
 				&& player.getIntegrityChips() >= integrity);
 	}
 
+	/**
+	 * Abstract method for the derived GameCards
+	 *
+	 * @param player - the player playing the GameCard
+	 * 				 
+	 */
 	public abstract void play(Player player);
 
-	// For comparing game card names
+	
+	/**
+	 * Returns a string of the Game Cards Name
+	 * Method used for comparing game card names
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public String getCardName() {
 		return gameCardName;
 

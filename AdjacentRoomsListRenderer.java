@@ -13,7 +13,9 @@ import javax.swing.DefaultListCellRenderer;
  */
 public class AdjacentRoomsListRenderer extends DefaultListCellRenderer {
 
-    public AdjacentRoomsListRenderer() {
+	private static final long serialVersionUID = 1L;
+
+	public AdjacentRoomsListRenderer() {
         setOpaque(true);
     }
     

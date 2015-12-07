@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class ScrollablePicture extends GameBoardLabel implements Scrollable {
 
+	private static final long serialVersionUID = 1L;
 	private int maxUnitIncrement = 1;
 
 	public ScrollablePicture(ImageIcon i, int m, GameModel model) {

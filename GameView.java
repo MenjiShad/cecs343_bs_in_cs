@@ -1,6 +1,5 @@
 package cecs343_bs_in_cs;
 
-import javax.jws.WebParam.Mode;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +10,7 @@ import javax.swing.border.Border;
  *
  * This class is responsible for the display of the game board
  */
-public class GameView /* implements MouseListener */ {
+public class GameView {
 
 	// instance variables
 	private JFrame gameFrame;
@@ -35,14 +34,25 @@ public class GameView /* implements MouseListener */ {
 	private boolean playedCard;
 	private boolean changedDeck = false;
 
-	// default constructor
+	/**
+	 * Default Constructor
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public GameView() {
 		moveCount = 0;
 		playedCard = false;
 	}
 
-	// constructor that takes in the title of the frame and the
-	// file name of the board image
+	/**
+	 * Non-Default Constructor
+	 *
+	 * @param title - the frame title of the GameBoard
+	 * 		  imageFileName - the file name of the GameBoard picture
+	 * 		  model - the Game's Model
+	 * 				 
+	 */
 	public GameView(String title, String imageFileName, GameModel model) {
 		frameTitle = title;
 		this.imageFileName = imageFileName;
@@ -147,9 +157,8 @@ public class GameView /* implements MouseListener */ {
 
 		gameCardLabel = new JLabel("", model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0).getCardImage(),
 				JLabel.CENTER);
-		// Cycle cards to choose from
-		// Still have to figure out how to delete card from screen if the player
-		// plays the card
+		
+		// Cycle cards to choose from and show them on the GameBoard
 		final class CycleCardActionListener implements MouseListener {
 
 			private int counter = 1;
@@ -158,7 +167,7 @@ public class GameView /* implements MouseListener */ {
 
 				currentViewedCard = model.getPlayer(PlayerNumber.HUMAN).getHandOfCards().get(0);
 			}
-
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gameCardLabel.setIcon(model.getPlayer(PlayerNumber.HUMAN).getHandOfCards()
@@ -169,7 +178,8 @@ public class GameView /* implements MouseListener */ {
 				counter++;
 
 			}
-
+			
+			//Methods not used 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -203,13 +213,7 @@ public class GameView /* implements MouseListener */ {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Figure out how to pass GameCard value into here
-
-				// Debug
-				// System.out.println(currentViewedCard);
-				// Still have to figure out how to discard the card on the
-				// screen
-				// before the player is allowed to play the card again
+				
 				System.out.println("Playing Card: " + currentViewedCard.getCardName());
 				model.getPlayer(PlayerNumber.HUMAN).playCard(currentViewedCard);
 				updateCurrentPlay(currentViewedCard);
@@ -227,6 +231,7 @@ public class GameView /* implements MouseListener */ {
 				updateTurn();
 				updateGameBoard();
 				
+				// If the totalQP reaches 60, change the deck to year 2
 				if(model.getTotalQP() >= 60 && !changedDeck) {
 					System.out.println("Canging deck");
 					model.setNewCards();
@@ -254,7 +259,8 @@ public class GameView /* implements MouseListener */ {
 		listAndButtonPanel.setLayout(listAndButtonPanelLayout);
 		listAndButtonPanel.setPreferredSize(
 				new Dimension((int) (controlPanelSize.width * controlPanelWidthMultipler), controlPanelSize.height));
-
+		
+		// Create size of the game card panel
 		gameCardPanel.setPreferredSize(
 				new Dimension((int) (controlPanelSize.width * controlPanelWidthMultipler), controlPanelSize.height));
 
@@ -314,6 +320,12 @@ public class GameView /* implements MouseListener */ {
 		gameFrame.setVisible(true);
 	}
 
+	/**
+	 * Displays Adjecent Rooms for the human players current room
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public void DisplayAdjacentRooms() {
 
 		// Create the JList here
@@ -324,7 +336,7 @@ public class GameView /* implements MouseListener */ {
 
 			int adjacentRoomNumber = model.getPlayer(PlayerNumber.HUMAN).getCurrentRoom().getListOfAdjacentRooms()
 					.get(i);
-			listModel.addElement(model.getListOfRooms().get(adjacentRoomNumber));
+			listModel.addElement(GameModel.getListOfRooms().get(adjacentRoomNumber));
 		}
 
 		// Create JList of adjacent Rooms
@@ -336,6 +348,12 @@ public class GameView /* implements MouseListener */ {
 		adjacentRoomsList.setVisibleRowCount(3);
 	}
 
+	/**
+	 * Updates the information panel 
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public void updateInformationPanel() {
 		informationTextArea.setText("\tLearning\tCraft\tIntegrity\tQuality Points" + "\n"
 				+ model.getPlayer(PlayerNumber.HUMAN).getStudentName() + "\t "
@@ -365,11 +383,23 @@ public class GameView /* implements MouseListener */ {
 				+ model.getPlayer(PlayerNumber.AI2).getCurrentRoom());
 	}
 
+	/**
+	 * Updates the current play
+	 *
+	 * @param card
+	 * 			  -players GameCard
+	 * 				 
+	 */
 	public void updateCurrentPlay(GameCard card) {
 		currentPlayTextArea.append("\n" + card.toString());
 	}
 
-	// Method used to control the turn-taking
+	/**
+	 * Method used to control the turn-taking
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public void updateTurn() {
 
 		// Reset move counter
@@ -384,6 +414,12 @@ public class GameView /* implements MouseListener */ {
 		checkDeckEmpty();
 	}
 
+	/**
+	 * Method used to check if the Deck is empty
+	 *
+	 * @param None
+	 * 				 
+	 */
 	private void checkDeckEmpty() {
 		// Shuffle discarded deck and add them to active deck
 		if (model.getCardDeck().getListOfCards().isEmpty()) {
@@ -391,6 +427,12 @@ public class GameView /* implements MouseListener */ {
 		}
 	}
 
+	/**
+	 * Method used to update the GameBoard
+	 *
+	 * @param None
+	 * 				 
+	 */
 	public void updateGameBoard() {
 		// Create rooms and displays them on the list
 		DisplayAdjacentRooms();

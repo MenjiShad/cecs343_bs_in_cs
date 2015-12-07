@@ -4,26 +4,69 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Author: James Dinh and Zachary Berg
  *
- * @author James
+ * This class is responsible for the display of the players on the Game Board
  */
 public class GameBoardLabel extends JLabel {
 
-    // instance variables
+	// instance variables
+	private static final long serialVersionUID = 1L;
     private ImageIcon image;
     private static GameModel model;
 
-    // default constructor
+    /**
+	 * Default Constructor
+	 *
+	 * @param None
+	 * 				 
+	 */
     public GameBoardLabel() {
-        image = null;
+        setImage(null);
     }
-
+    
+    /**
+	 * Non-Default Constructor
+	 * Creates a Game Board
+	 *
+	 * @param listOfRooms
+	 * 					 - a list of all the Rooms 
+	 * 				 
+	 */
     public GameBoardLabel(ImageIcon i, GameModel model) {
         super(i);
-        image = i;
-        this.model = model;
+        setImage(i);
+        GameBoardLabel.model = model;
     }
 
+    /**
+   	 * Gets the Image of the Game Board
+   	 *
+   	 * @param None
+   	 * 				 
+   	 */
+	public ImageIcon getImage() {
+		return image;
+	}
+
+	 /**
+	 * Sets the image of the Game Board
+	 *
+	 * @param image
+	 * 				- Game Board Image
+	 * 				 
+	 */
+	public void setImage(ImageIcon image) {
+		this.image = image;
+	}
+	
+	 /**
+	 * This method paints the players name on the Game Board
+	 *
+	 * @param g
+	 * 			- graphics component
+	 * 				 
+	 */
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

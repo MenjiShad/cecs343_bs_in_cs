@@ -8,8 +8,17 @@ public class Deck {
     private ArrayList<GameCard> listOfDiscardedCards;
 	//private List<GameCard> listOfDisabledCards;
 
+	/**
+	 * Non-Default Constructor
+	 * Creates a list of cards and discarded cards
+	 *
+	 * @param listOfRooms
+	 * 					 - a list of all the Rooms 
+	 * 				 
+	 */
     public Deck(List<Room> listOfRooms) {
 
+    	//Initialize ArrayLists
         listOfCards = new ArrayList<>(40);
         listOfDiscardedCards = new ArrayList<>(40);
 
@@ -159,6 +168,12 @@ public class Deck {
 
     }
     
+	/**
+	 * Method for adding year 2 cards to deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public void addNewCards(List<Room> listOfRooms) {
     	
     	Room[] validRoomsGC40 = {listOfRooms.get(14), listOfRooms.get(17), listOfRooms.get(11)};
@@ -210,7 +225,14 @@ public class Deck {
     	
     }
     
+	/**
+	 * Method for deleting some year 1 cards from deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public void removeOldCards() {
+    	
         listOfCards.remove(5);
      	listOfCards.remove(2);
      	listOfCards.remove(0);
@@ -223,11 +245,23 @@ public class Deck {
      	listOfCards.remove(33);
     }
 
+	/**
+	 * Method used to shuffle the deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public void shuffle() {
         //Shuffle deck 
         Collections.shuffle(listOfCards, new Random(System.nanoTime()));
     }
 
+	/**
+	 * Returns a GameCard to draw from deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public GameCard drawCard() {
         GameCard card = listOfCards.get(listOfCards.size() - 1);
         listOfCards.remove(listOfCards.size() - 1);
@@ -235,25 +269,56 @@ public class Deck {
         return card;
     }
 
+	/**
+	 * Returs the list of all the cards in the deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public ArrayList<GameCard> getListOfCards() {
         return listOfCards;
     }
 
+	/**
+	 * Returns a list of all the discarded cards in the deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public ArrayList<GameCard> getListOfDiscardedCards() {
         return listOfDiscardedCards;
     }
     
+	/**
+	 * Adds a GameCard to the discarded deck
+	 *
+	 * @param card
+	 * 			  - GameCard being discarded
+	 * 				 
+	 */
     public void addToDiscard(GameCard card) {
         listOfDiscardedCards.add(card);
-        //listOfCards.remove(card);
     }
     
+	/**
+	 * Method used to clear the discarded deck
+	 *
+	 * @param None
+	 * 				 
+	 */
     public void clearDiscard() {
     	for(int i = 0; i < listOfDiscardedCards.size(); i++){
     		listOfDiscardedCards.remove(i);
 		}
     }
      
+	/**
+	 * Method used to shuffle the discarded deck
+	 * 	when the deck runs out of cards
+	 *
+	 * @param None
+	 * 				 
+	 */
     public void shuffleDiscardDeck() {
     	System.out.println("\n\nIn shufflediscardmethod\n\n");
         // Removes discarded cards from the top, going downward

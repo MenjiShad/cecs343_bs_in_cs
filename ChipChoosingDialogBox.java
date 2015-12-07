@@ -12,8 +12,9 @@ import javax.swing.JPanel;
  * the user to select their "chip of choice"
  */
 public class ChipChoosingDialogBox extends JDialog {
-    
-    private JPanel dialogPanel;
+
+	private static final long serialVersionUID = 1L;
+	private JPanel dialogPanel;
     private JButton learningButton;
     private JButton craftButton;
     private JButton integrityButton;

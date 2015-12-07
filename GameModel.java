@@ -19,22 +19,31 @@ public class GameModel {
 	private Deck cardDeck;
 	private int totalQP;
 
+	/**
+	 * Default Constructor
+	 *
+	 * @param None
+	 */
 	private GameModel() {
 
 		// Initialize Rooms
 		listOfRooms = new ArrayList<>();
 		createRooms();
 
-		// Initalize Deck
+		// Initialize Deck
 		cardDeck = new Deck(listOfRooms);
 		cardDeck.shuffle();
 
 		// Initialize Players
 		createPlayers();
-		setTotalQP(80);
+		setTotalQP(0);
 	}
 
-	// Limit GameModel to a single instance
+	/**
+	 * Limits the GameModel to a single instance
+	 *
+	 * @param None
+	 */
 	public static GameModel getInstance() {
 		if (model == null) {
 			model = new GameModel();
@@ -42,6 +51,12 @@ public class GameModel {
 		return model;
 	}
 
+	/**
+	 * Returns the current player
+	 *
+	 * @param pNumber
+	 * 				-the players number
+	 */
 	public Player getPlayer(PlayerNumber pNumber) {
 		if (pNumber == PlayerNumber.HUMAN)
 			return HumanPlayer;
@@ -55,6 +70,11 @@ public class GameModel {
 		return listOfRooms;
 	}
 
+	/**
+	 * Creates the Rooms of the gameboard and initializes them
+	 *
+	 * @param None
+	 */
 	private void createRooms() {
 
 		// List of adjacent room numbers for each room
@@ -104,6 +124,11 @@ public class GameModel {
 		listOfRooms.add(new Room("Lactation Lounge", 20, 1210, 1425, listOfAdjacentRooms20));
 	}
 
+	/**
+	 * Creates the Human and two AI players
+	 *
+	 * @param None
+	 */
 	private void createPlayers() {
 		// Initialize players
 		int initialLearning;
@@ -141,6 +166,11 @@ public class GameModel {
 		}
 	}
 
+	/**
+	 * Returns a GameCard from the Deck
+	 *
+	 * @param None
+	 */
 	public GameCard drawCardFromDeck() {
 		return cardDeck.drawCard();
 	}
@@ -165,15 +195,86 @@ public class GameModel {
 		}
 	}
 
+	/**
+	 * Returns the entire Deck
+	 *
+	 * @param None
+	 */
 	public Deck getCardDeck() {
 		return cardDeck;
 	}
+	
+	/**
+	 * sets new cards for the Deck
+	 *
+	 * @param None
+	 * 				 
+	 */
+	public void setNewCards() {
+		HumanPlayer.removeHand();
+		Deck tempDeck = new Deck(listOfRooms);
+		tempDeck.addNewCards(listOfRooms);
+		tempDeck.removeOldCards();
+		cardDeck = tempDeck;
+		
+		cardDeck.shuffle();
+		
+		System.out.println("Adding Hand");
+		for (int i = 0; i < 5; i++) {
+			HumanPlayer.addCardToHand(cardDeck);
+		}
+		
+	}
+	
+	/**
+	 * Adds to the games total qp of all players
+	 *
+	 * @param number
+	 * 				-the qp being added or subtracted
+	 * 				 
+	 */
+	public void addToTotalQP(int number) {
+		setTotalQP(getTotalQP() + number);
+	}
 
+	/**
+	 * Returns the total qp of all players
+	 *
+	 * @param None
+	 * 				 
+	 */
+	public int getTotalQP() {
+		return totalQP;
+	}
+
+	/**
+	 * Sets the initial total qp
+	 *
+	 * @param totalQP
+	 * 				 -the total qp
+	 * 				 
+	 */
+	public void setTotalQP(int totalQP) {
+		this.totalQP = totalQP;
+	}
+	
+	/**
+	 * Returns the GameCard of the AI turn
+	 *
+	 * @param AIPLayer
+	 * 				  - the AI player
+	 */
 	public GameCard AITurn(Player AIPlayer) {
 		AIMove(AIPlayer);
 		return AIPlay(AIPlayer);
 	}
 
+	/**
+	 * Moves the AI player
+	 *
+	 * @param AIPLayer
+	 * 				  - the AI player
+	 */
 	private void AIMove(Player AIPlayer) {
 		Random rng = new Random(System.currentTimeMillis());
 		int moveLimit = 3;
@@ -187,6 +288,13 @@ public class GameModel {
 		}
 	}
 
+	/**
+	 * Moves the AI player randomly
+	 *
+	 * @param AIPLayer  - the AI player
+	 * 		  rng 		- a random number 
+	 * 				 
+	 */
 	private void AIRandomRoomMove(Player AIPlayer, Random rng) {
 		// Randomly select one of the adjacent Rooms
 		int randAdjRoomSelect = rng.nextInt(AIPlayer.getCurrentRoom().getListOfAdjacentRooms().size());
@@ -196,6 +304,12 @@ public class GameModel {
 				listOfRooms.get(AIPlayer.getCurrentRoom().getListOfAdjacentRooms().get(randAdjRoomSelect)));
 	}
 
+	/**
+	 * Returns the GameCard the AI plays
+	 *
+	 * @param AIPLayer  - the AI player
+	 * 				 
+	 */
 	private GameCard AIPlay(Player AIPlayer) {
 		// The first card the AIPlayer encounters,
 		// whose valid Room matches the AI's, will be played by the AI
@@ -219,34 +333,5 @@ public class GameModel {
 			AIPlayer.playCard(AIPlayedCard);
 		}
 		return AIPlayedCard;
-	}
-	
-	public void setNewCards() {
-		HumanPlayer.removeHand();
-		Deck tempDeck = new Deck(listOfRooms);
-		tempDeck.addNewCards(listOfRooms);
-		tempDeck.removeOldCards();
-		//tempDeck.clearDiscard();
-		cardDeck = tempDeck;
-		
-		cardDeck.shuffle();
-		
-		System.out.println("Adding Hand");
-		for (int i = 0; i < 5; i++) {
-			HumanPlayer.addCardToHand(cardDeck);
-		}
-		
-	}
-	
-	public void addToTotalQP(int number) {
-		setTotalQP(getTotalQP() + number);
-	}
-
-	public int getTotalQP() {
-		return totalQP;
-	}
-
-	public void setTotalQP(int totalQP) {
-		this.totalQP = totalQP;
 	}
 }

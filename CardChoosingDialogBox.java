@@ -6,7 +6,8 @@ import javax.swing.*;
 
 public class CardChoosingDialogBox extends JDialog {
 
-    private JPanel masterPanel = new JPanel();
+	private static final long serialVersionUID = 1L;
+	private JPanel masterPanel = new JPanel();
     private ArrayList<JLabel> images = new ArrayList<>();
     private ArrayList<JPanel> buttonPanels = new ArrayList<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
@@ -14,6 +15,13 @@ public class CardChoosingDialogBox extends JDialog {
     private static final int DIALOG_BOX_HEIGHT = 400;
     private Player currentPlayer;
 
+    /**
+	 * Non-Default Constructor
+	 *
+	 * @param human
+	 * 			   - the human player
+	 * 				 
+	 */
     public CardChoosingDialogBox(Player human) {
     	
     	//Checks if human player
@@ -37,6 +45,7 @@ public class CardChoosingDialogBox extends JDialog {
 	
 	        }
 
+	        //Action listener for the buttons
 	        final class ButtonListener implements ActionListener {
 	
 	            @Override
