@@ -125,8 +125,7 @@ public class Player {
 	/**
 	 * Method to update the players quality points
 	 *
-	 * @param pointUpdate
-	 * 					 - the qp value to add or subtract
+	 * @param pointUpdate - the qp value to add or subtract
 	 * 				 
 	 */
 	public void updateQP(int pointUpdate) {
@@ -143,15 +142,16 @@ public class Player {
 	 * 				 
 	 */
 	public void checkQPForSkillChip() {
-		if(qualityPoint % 15 == 0) {
+		if(qualityPoint % 15 == 0 && qualityPoint > 0) {
 			
 			//Creates a dialog box for selecting a chip
-			ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
+			
 			if(checkIfHumanPlayer()) {
+                            ChipChoosingDialogBox ccdb = new ChipChoosingDialogBox(true, true, true);
 				ccdb.getSelection();
 			}
 			else {
-				randomChipSelection(true, true, true);
+                            randomChipSelection(true, true, true);
 			}
 		}
 	

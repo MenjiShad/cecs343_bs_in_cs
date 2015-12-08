@@ -220,7 +220,7 @@ public class GameView {
 				playCardButton.setEnabled(false);
 				moveButton.setEnabled(false);
 				drawCardButton.setEnabled(true);
-
+                                
 				// Updates the current card viewed
 				playedCard = true;
 				if (playedCard) {
@@ -233,7 +233,7 @@ public class GameView {
 				
 				// If the totalQP reaches 60, change the deck to year 2
 				if(model.getTotalQP() >= 60 && !changedDeck) {
-					System.out.println("Canging deck");
+					System.out.println("Changing deck");
 					model.setNewCards();
 					changedDeck = true;
 					currentPlayTextArea.append("\nChangingDeck");
@@ -401,7 +401,6 @@ public class GameView {
 	 * 				 
 	 */
 	public void updateTurn() {
-
 		// Reset move counter
 		moveCount = 0;
 
@@ -412,6 +411,9 @@ public class GameView {
 		checkDeckEmpty();
 		updateCurrentPlay(model.AITurn(model.getPlayer(PlayerNumber.AI2)));
 		checkDeckEmpty();
+                if (model.checkGameEnd()) {
+                    model.endGame(this);
+                }
 	}
 
 	/**
@@ -439,4 +441,8 @@ public class GameView {
 		gameBoardLabel.repaint();
 		updateInformationPanel();
 	}
+        
+        public void disposeBoard() {
+            gameFrame.dispose();
+        }
 }

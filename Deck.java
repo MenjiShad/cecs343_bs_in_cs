@@ -297,6 +297,7 @@ public class Deck {
 	 * 				 
 	 */
     public void addToDiscard(GameCard card) {
+        listOfCards.remove(card);
         listOfDiscardedCards.add(card);
     }
     
